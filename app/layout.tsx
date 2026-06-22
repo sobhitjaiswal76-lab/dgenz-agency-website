@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     'Google Business Profile Management',
     'DGEN Z',
     'Sobhit Jaiswal'
-  ]
+  ],
+  verification: {
+    google: 'YegouRUe2XdV_AFJ2LY16poSaiui8vyBLAo_BoQ8nII',
+  }
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
