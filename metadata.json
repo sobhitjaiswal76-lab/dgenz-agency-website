@@ -1,0 +1,6 @@
+{
+  "name": "DGEN Z",
+  "description": "Ultra-premium futuristic 3D digital agency website for premium design, websites, marketing & automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
