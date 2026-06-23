@@ -88,14 +88,13 @@ const jsonLd = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <head>
+      <head />
+      <body suppressHydrationWarning className="bg-[#040406] text-white">
         <script
           id="json-ld-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body suppressHydrationWarning className="bg-[#040406] text-white">
         <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
