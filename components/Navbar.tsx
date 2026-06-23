@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -30,13 +31,9 @@ export default function Navbar() {
           <div className="absolute inset-x-12 bottom-0 h-[1.3px] bg-gradient-to-r from-transparent via-crimson/50 to-transparent" />
 
           {/* Business Logo */}
-          <Link href="/" className="inline-flex items-center gap-1.5 font-sans font-black tracking-widest text-lg md:text-xl text-white group outline-none">
-            <span className="relative">
-              DGEN
-              <span className="text-crimson font-extrabold group-hover:text-neon-green transition-colors"> Z</span>
-              <span className="absolute -top-1 -right-3.5 w-1.5 h-1.5 rounded-full bg-crimson animate-ping" />
-            </span>
-            <span className="text-[10px] font-mono text-gray-500 tracking-normal hover:text-white transition-colors pl-1 uppercase border-l border-zinc-700 hidden sm:inline ml-1">
+          <Link href="/" className="inline-flex items-center gap-1 group outline-none">
+            <Logo size="md" showSubtitle={true} glow={true} />
+            <span className="text-[9px] font-mono text-gray-500 tracking-normal hover:text-white transition-colors pl-2.5 uppercase border-l border-zinc-800 hidden sm:inline ml-2 pt-0.5 h-6">
               SOBHIT JAISWAL
             </span>
           </Link>
@@ -136,8 +133,9 @@ export default function Navbar() {
                 Start Project <Sparkles className="w-4 h-4 text-rose-300" />
               </Link>
 
-              <div className="text-center font-mono text-[9px] text-gray-500 uppercase tracking-widest">
-                DGEN Z • PREMIUM DIGITAL MATRIX
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Logo size="sm" showSubtitle={false} glow={false} className="opacity-60" />
+                <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-[0.2em]">PREMIUM DIGITAL MATRIX</span>
               </div>
             </div>
           </motion.div>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Phone, Mail, MapPin, Instagram, Compass, Award, ArrowUpRight, Lock } from "lucide-react";
 import LeadAdmin from "./LeadAdmin";
+import Logo from "./Logo";
 
 export default function Footer() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -20,8 +21,8 @@ export default function Footer() {
           
           {/* Main Info Column */}
           <div className="space-y-5 col-span-1 md:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-1.5 font-sans font-black tracking-widest text-xl text-white outline-none">
-              DGEN<span className="text-crimson font-extrabold"> Z</span>
+            <Link href="/" className="inline-flex items-center group outline-none">
+              <Logo size="md" showSubtitle={true} glow={true} />
             </Link>
             <p className="text-gray-400 font-sans text-xs leading-relaxed text-balance">
               Futuristic, luxury tech branding and visual engineering studio. We build conversion-ready, premium digital assets that operate 24x7 to scale local and international businesses.
