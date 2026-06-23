@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Database, Shield, X, Eye, Trash2, Calendar, DollarSign, Briefcase, Phone, MessageSquare, Award } from "lucide-react";
+import { Database, Shield, X, Eye, Trash2, Calendar, TrendingUp, Briefcase, Phone, MessageSquare, Award } from "lucide-react";
 
 interface Lead {
   id: string;
@@ -31,7 +31,7 @@ const sampleLeads: Lead[] = [
     businessName: "Kolkata Spice Hut Cafe",
     businessType: "Restaurant / Cafe",
     services: ["Website Development", "Google Business Profile Management", "Instagram Growth Packages"],
-    budget: "Mid Strategic Package ($1,000 - $2,500)",
+    budget: "Mid Market Strategic Scale Tier",
     message: "Need beautiful online food ordering website and ranking #1 in Park Street Kolkata area.",
     timestamp: "22/06/2026, 09:30:15",
     aiProposal: "Pre-configured elite growth roadmap for Rohit Sharma was compiled successfully."
@@ -43,7 +43,7 @@ const sampleLeads: Lead[] = [
     businessName: "Sen Fashion House",
     businessType: "Local Boutique / E-commerce",
     services: ["Startup Branding Package", "Logo & Packaging Design"],
-    budget: "Starter Conversion Boost ($300 - $600)",
+    budget: "Starter Conversion Boost Tier",
     message: "Launching private premium packaging box and brand identity redesign next month.",
     timestamp: "21/06/2026, 17:45:00",
     aiProposal: "Pre-configured luxury boutique branding strategy was generated successfully."
@@ -119,10 +119,11 @@ export default function LeadAdmin({ isOpen, onClose }: LeadAdminProps) {
   const totalLeads = leads.length;
   
   const parseBudgetToValue = (budgetStr: string) => {
-    if (budgetStr.includes("$300")) return 450;
-    if (budgetStr.includes("$1,000")) return 1750;
-    if (budgetStr.includes("$3,000")) return 4000;
-    if (budgetStr.includes("$6,000")) return 7500;
+    const s = budgetStr.toLowerCase();
+    if (s.includes("starter")) return 350;
+    if (s.includes("mid")) return 1500;
+    if (s.includes("high")) return 3500;
+    if (s.includes("master")) return 6500;
     return 1000;
   };
 
@@ -247,11 +248,11 @@ export default function LeadAdmin({ isOpen, onClose }: LeadAdminProps) {
 
               <div className="p-3 bg-black/20 glass rounded border border-white/5 flex items-center gap-3">
                 <div className="p-2 rounded bg-neon-green/10 text-neon-green neon-glow-green">
-                  <DollarSign className="w-5 h-5" />
+                  <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono text-gray-550 uppercase">Projected Pipeline Value</div>
-                  <div className="text-neon-green font-sans font-black text-xl">${totalPipelineRevenue.toLocaleString()}</div>
+                  <div className="text-[10px] font-mono text-gray-550 uppercase">Strategic Growth Index</div>
+                  <div className="text-neon-green font-sans font-black text-xl">{totalPipelineRevenue.toLocaleString()} Points</div>
                 </div>
               </div>
 

@@ -2,25 +2,26 @@
 
 import React from "react";
 import { Sparkles, MapPin, CheckCircle2, Phone, ArrowUpRight } from "lucide-react";
+import CustomQuoteCTA from "@/components/CustomQuoteCTA";
 
 export default function GoogleBusinessProfilePage() {
   const offerings = [
     {
       title: "GBP Authority Setup & Lock",
       time: "4 Days",
-      price: "Starting $100",
+      price: "Custom Pricing",
       desc: "Complete optimization of maps tags, categories structuring, review collection flows automation, and verification locking."
     },
     {
       title: "Kolkata Local Citation Blueprint",
       time: "6 Days",
-      price: "Starting $150",
+      price: "Tailored Packages",
       desc: "Deploying 120+ targeted local business listings, geotagged photos uploads, and neighborhood anchor keywords mapping."
     },
     {
       title: "Weekly Rankings Review Pack",
       time: "Monthly",
-      price: "Starting $80/mo",
+      price: "Request a Quote",
       desc: "Automated review harvest monitoring, targeted product showcase updates, and Maps keyword placement tracking reports."
     }
   ];
@@ -86,22 +87,7 @@ export default function GoogleBusinessProfilePage() {
       </div>
 
       {/* CTA Box */}
-      <div className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass relative overflow-hidden text-center max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-sans font-black text-white uppercase leading-none tracking-tight mb-4">
-          READY TO SECURE #1 IN YOUR LOCAL NEIGHBORHOOD?
-        </h2>
-        <p className="text-gray-400 text-xs md:text-sm font-sans leading-relaxed max-w-2xl mx-auto mb-6">
-          Schedule an audit of your current Google Business Profile representation to detect missing listing factors and outpace local competitors.
-        </p>
-        <a
-          href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20review%20my%20Google%20Business%2520Profile%20ranking."
-          target="_blank"
-          rel="no-referrer"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-sans font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-crimson/25 cursor-pointer"
-        >
-          Book Ranking Audit <Phone className="w-3.5 h-3.5" />
-        </a>
-      </div>
+      <CustomQuoteCTA />
 
     </div>
   );

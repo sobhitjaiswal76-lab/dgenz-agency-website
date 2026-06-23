@@ -2,6 +2,7 @@
 
 import React from "react";
 import { CheckCircle2, Award, Zap, HeartHandshake, Sparkles, Phone, FileText } from "lucide-react";
+import CustomQuoteCTA from "@/components/CustomQuoteCTA";
 
 export default function ServicesPage() {
   const categories = [
@@ -10,11 +11,11 @@ export default function ServicesPage() {
       desc: "Delivering visual authority that positions your brand as an elite market player. Target keywords: Logo Design Services, packaging designs Kolkata.",
       color: "from-crimson to-black",
       items: [
-        { name: "Sleek Vector Logo Design", price: "Starting $90", turn: "3 Days" },
-        { name: "Visual Identity & Branding Guides", price: "Starting $250", turn: "5 Days" },
-        { name: "High Conversion Poster/Banner Layouts", price: "Starting $40", turn: "2 Days" },
-        { name: "Creative Box & Jar Packaging Designs", price: "Starting $150", turn: "4 Days" },
-        { name: "Professional Standee & Flyer Creations", price: "Starting $60", turn: "2 Days" }
+        { name: "Sleek Vector Logo Design", price: "Custom Pricing", turn: "3 Days" },
+        { name: "Visual Identity & Branding Guides", price: "Tailored Packages", turn: "5 Days" },
+        { name: "High Conversion Poster/Banner Layouts", price: "Request a Quote", turn: "2 Days" },
+        { name: "Creative Box & Jar Packaging Designs", price: "Contact for Pricing", turn: "4 Days" },
+        { name: "Professional Standee & Flyer Creations", price: "Request a Quote", turn: "2 Days" }
       ]
     },
     {
@@ -22,11 +23,11 @@ export default function ServicesPage() {
       desc: "Coding fully customized Next.js engines optimized for fast load speeds and auto-capturing client leads. Target: Website Designer Kolkata.",
       color: "from-neon-green/40 to-black",
       items: [
-        { name: "Lead Generation Business Websites", price: "Starting $300", turn: "5 Days" },
-        { name: "Full E-Commerce Parallax Storefronts", price: "Starting $750", turn: "9 Days" },
-        { name: "Google Business Profile Rankings System", price: "Starting $100", turn: "4 Days" },
-        { name: "Server AI Chatbots & DM Automations", price: "Starting $200", turn: "6 Days" },
-        { name: "Custom Portfolio / SaaS Frameworks", price: "Starting $450", turn: "8 Days" }
+        { name: "Lead Generation Business Websites", price: "Custom Pricing", turn: "5 Days" },
+        { name: "Full E-Commerce Parallax Storefronts", price: "Tailored Packages", turn: "9 Days" },
+        { name: "Google Business Profile Rankings System", price: "Request a Quote", turn: "4 Days" },
+        { name: "Server AI Chatbots & DM Automations", price: "Custom Pricing", turn: "6 Days" },
+        { name: "Custom Portfolio / SaaS Frameworks", price: "Contact for Pricing", turn: "8 Days" }
       ]
     },
     {
@@ -34,10 +35,10 @@ export default function ServicesPage() {
       desc: "Structuring high ticket PowerPoint layouts and documentation blueprints aimed at raising seed capitals or locking down contracts.",
       color: "from-crimson/40 to-black",
       items: [
-        { name: "Series A / Seed Capital Pitch Decks", price: "Starting $350", turn: "6 Days" },
-        { name: "Professional Corporate PowerPoint Templates", price: "Starting $185", turn: "4 Days" },
-        { name: "Google Docs Layout Formatting & PDFs", price: "Starting $80", turn: "3 Days" },
-        { name: "Interactive Sales Slides & Summaries", price: "Starting $120", turn: "3 Days" }
+        { name: "Series A / Seed Capital Pitch Decks", price: "Custom Pricing", turn: "6 Days" },
+        { name: "Professional Corporate PowerPoint Templates", price: "Tailored Packages", turn: "4 Days" },
+        { name: "Google Docs Layout Formatting & PDFs", price: "Request a Quote", turn: "3 Days" },
+        { name: "Interactive Sales Slides & Summaries", price: "Contact for Pricing", turn: "3 Days" }
       ]
     }
   ];
@@ -130,6 +131,8 @@ export default function ServicesPage() {
           </div>
         ))}
       </div>
+
+      <CustomQuoteCTA />
 
     </div>
   );

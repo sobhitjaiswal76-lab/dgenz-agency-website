@@ -25,7 +25,7 @@ export default function LeadWizard() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [budget, setBudget] = useState("Mid Strategic ($1,000 - $3,000)");
+  const [budget, setBudget] = useState("Mid Market Strategic Scale Tier");
   const [loadingLog, setLoadingLog] = useState("");
   const [generatedProposal, setGeneratedProposal] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -398,10 +398,10 @@ export default function LeadWizard() {
                     onChange={(e) => setBudget(e.target.value)}
                     className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-sm text-white text-sm focus:border-crimson focus:ring-1 focus:ring-crimson transition-all outline-none cursor-pointer"
                   >
-                    <option>Starter Conversion Boost ($300 - $600)</option>
-                    <option>Mid Strategic Package ($1,000 - $2,500)</option>
-                    <option>High Growth Dominance ($3,000 - $5,000)</option>
-                    <option>Master Corporate Brand Facelift ($6,000+)</option>
+                    <option>Starter Conversion Boost Tier</option>
+                    <option>Mid Market Strategic Scale Tier</option>
+                    <option>High Growth Dominance Tier</option>
+                    <option>Master Corporate Brand Facelift Tier</option>
                   </select>
                 </div>
 

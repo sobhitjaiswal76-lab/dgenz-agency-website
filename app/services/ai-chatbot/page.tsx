@@ -2,25 +2,26 @@
 
 import React from "react";
 import { Sparkles, MessageSquare, CheckCircle2, Phone, ArrowUpRight } from "lucide-react";
+import CustomQuoteCTA from "@/components/CustomQuoteCTA";
 
 export default function AiChatbotPage() {
   const offerings = [
     {
       title: "Instagram DM AI Automations",
       time: "5 Days",
-      price: "Starting $150",
+      price: "Custom Pricing",
       desc: "Instant reply conversational triggers, automatic keyword targeting triggers, story mention responses integrations, and client info harvest flows."
     },
     {
       title: "WhatsApp Leads Qualifier Bot",
       time: "6 Days",
-      price: "Starting $250",
+      price: "Tailored Packages",
       desc: "Fully functional WhatsApp Business qualifying chatbots responding 24x7 to incoming prospect inquiries and saving pre-vetted leads details."
     },
     {
       title: "Website Live Assistant Widget",
       time: "8 Days",
-      price: "Starting $350",
+      price: "Request a Quote",
       desc: "Intelligent custom GPT web widgets trained specifically on your brand documents to answer complex pricing and catalog questions instantly."
     }
   ];
@@ -86,22 +87,7 @@ export default function AiChatbotPage() {
       </div>
 
       {/* CTA Box */}
-      <div className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass relative overflow-hidden text-center max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-sans font-black text-white uppercase leading-none tracking-tight mb-4">
-          WANT TO AUTOMATE CUSTOMER ACQUISITION?
-        </h2>
-        <p className="text-gray-400 text-xs md:text-sm font-sans leading-relaxed max-w-2xl mx-auto mb-6">
-          Integrate dynamic automated pipelines with direct CRM logs and real-time email triggers customized exactly for your active market requirements.
-        </p>
-        <a
-          href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20develop%20an%20AI%20Chatbot%20for%20my%22business."
-          target="_blank"
-          rel="no-referrer"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-sans font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-crimson/25 cursor-pointer"
-        >
-          Book AI Consultation <Phone className="w-3.5 h-3.5" />
-        </a>
-      </div>
+      <CustomQuoteCTA />
 
     </div>
   );

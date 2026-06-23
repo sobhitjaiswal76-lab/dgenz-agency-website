@@ -2,31 +2,32 @@
 
 import React from "react";
 import { Sparkles, Palette, CheckCircle2, Phone, ArrowUpRight } from "lucide-react";
+import CustomQuoteCTA from "@/components/CustomQuoteCTA";
 
 export default function GraphicDesignPage() {
   const offerings = [
     {
       title: "Sleek Vector Logo Design",
       time: "3 Days",
-      price: "Starting $90",
+      price: "Custom Pricing",
       desc: "Pixel-perfect scalable vector typography and brand iconography tailored to establish immediate visual trust."
     },
     {
       title: "Corporate Identity Guidelines",
       time: "5 Days",
-      price: "Starting $250",
+      price: "Tailored Packages",
       desc: "Complete branding blueprints including select font pairings, matte-black hex ranges, and system assets."
     },
     {
       title: "Marketing Poster Layouts",
       time: "2 Days",
-      price: "Starting $40",
+      price: "Request a Quote",
       desc: "High contrast social flyers, media banners, and roll-up standees optimized for offline or digital campaigns."
     },
     {
       title: "Premium Packaging & Labels",
       time: "4 Days",
-      price: "Starting $150",
+      price: "Contact for Pricing",
       desc: "Luxury structured container packaging, matte varnish label layouts, and artisanal product hot foil stampings."
     }
   ];
@@ -92,22 +93,7 @@ export default function GraphicDesignPage() {
       </div>
 
       {/* CTA Box */}
-      <div className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass relative overflow-hidden text-center max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-sans font-black text-white uppercase leading-none tracking-tight mb-4">
-          WANT TO RE-ENGINEER YOUR VISUAL IDENTITY?
-        </h2>
-        <p className="text-gray-400 text-xs md:text-sm font-sans leading-relaxed max-w-2xl mx-auto mb-6">
-          Get a fully custom identity layout package with custom typography, brand palette, and editable vector files delivered directly to your core repository.
-        </p>
-        <a
-          href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20discuss%20a%20full%20brand%20identity%20re-design."
-          target="_blank"
-          rel="no-referrer"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-sans font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-crimson/25 cursor-pointer"
-        >
-          Book Brand Consultation <Phone className="w-3.5 h-3.5" />
-        </a>
-      </div>
+      <CustomQuoteCTA />
 
     </div>
   );

@@ -41,8 +41,8 @@ export default function Home() {
       a: "Our normal delivery pipeline is exceptionally fast. Standard high-conversion business websites and branding packages are engineered, tested, and deployed in 3 to 7 business days, without sacrificing visual depth or PageSpeed metrics."
     },
     {
-      q: "What is your website development pricing structure?",
-      a: "We provide scalable investments. Our Starter plans begin around $300 - $600 for high converting landing pages, going up to highly customized premium custom enterprise architectures with real-time AI capabilities. Every package has zero hidden fees and comes with 1-on-1 direct support."
+      q: "What is your website development quote process?",
+      a: "Every brand has unique goals and challenges. We provide customized, ROI-centered proposals tailored specifically to your conversion goals, industry, and scale. Every custom roadmap comes with direct, 1-on-1 strategic support from Sobhit Jaiswal and transparent milestone-based deliverables with zero hidden costs."
     },
     {
       q: "Do you integrate AI chatbots and automated systems?",
