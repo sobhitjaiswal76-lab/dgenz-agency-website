@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Elite Social Media Marketing Kits | DGEN Z",
-  description: "Deploy premium Conversion Surge kits built by DGEN Z. Command premium prices on Instagram with custom layouts, structures, and story triggers.",
+  title: "Social Media Marketing & Digital Agency Kolkata | DGEN Z",
+  description: "Boost your local search authority and Instagram growth. DGEN Z provides elite digital marketing, local SEO, and social media marketing in Kolkata, India.",
   alternates: {
     canonical: "/marketing",
   },

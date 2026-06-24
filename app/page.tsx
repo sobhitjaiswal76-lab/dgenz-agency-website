@@ -33,24 +33,28 @@ export default function Home() {
   // Active FAQ data mapping pricing, timeline, digital capabilities
   const faqs = [
     {
-      q: "What makes DGEN Z different from standard web design agencies?",
-      a: "DGEN Z does not produce generic templates. We build modern digital assets backed by custom visual authority, conversion grids, and direct WhatsApp / SEO funnels. The owner Sobhit Jaiswal aligns every detail directly to increase client acquisitions and brand value, creating a lead-generating machine for your business."
+      q: "What services does DGEN Z offer?",
+      a: "DGEN Z offers premium graphic design (such as scalable vector logos, custom poster/banner designs, and luxury product packaging layouts), high-performance website development (fast custom Next.js engines, lead generation systems), and result-oriented social media marketing (Instagram growth setups, automated direct response triggers, and local search footprint optimization)."
     },
     {
-      q: "How fast is the turnaround delivery for custom websites and branding packages?",
-      a: "Our normal delivery pipeline is exceptionally fast. Standard high-conversion business websites and branding packages are engineered, tested, and deployed in 3 to 7 business days, without sacrificing visual depth or PageSpeed metrics."
+      q: "Does DGEN Z build business websites?",
+      a: "Yes, DGEN Z Digital Agency specializes in custom, high-speed business website development. We construct desktop-first and mobile-responsive websites, landing pages, and e-commerce storefronts coded in modern React and Next.js, fully optimized for fast Google PageSpeed ratings and maximum customer conversion."
     },
     {
-      q: "What is your website development quote process?",
-      a: "Every brand has unique goals and challenges. We provide customized, ROI-centered proposals tailored specifically to your conversion goals, industry, and scale. Every custom roadmap comes with direct, 1-on-1 strategic support from Sobhit Jaiswal and transparent milestone-based deliverables with zero hidden costs."
+      q: "Does DGEN Z provide social media marketing?",
+      a: "Yes, DGEN Z provides elite Social Media Marketing and growth strategy setup. We construct curated visual grid frameworks, dynamic daily story graphics, and automatic direct messaging triggers for Instagram and Facebook that capture pre-vetted customer leads instantly."
     },
     {
-      q: "Do you integrate AI chatbots and automated systems?",
-      a: "Yes. DGEN Z specializes in building custom business automations, automated Instagram replying triggers, Facebook growth structures, and server-side Gemini AI models that solve customer inquiries 24/7."
+      q: "Is DGEN Z available outside Kolkata?",
+      a: "Absolutely. While DGEN Z is proudly headquartered in Kolkata, West Bengal, India, we build custom digital assets and deploy automated client acquisition campaigns for clients, startups, and brands across India and worldwide."
     },
     {
-      q: "Will my business website rank well on Google search in Kolkata or global?",
-      a: "Absolutely. Every website we compile includes fully-integrated Google Schema markings, clean HTML meta blocks, fast mobile-first page rendering times, and complete setup of your Google Business Profile (GBP) to secure high local rankings."
+      q: "How can I contact DGEN Z?",
+      a: "You can contact DGEN Z Digital Agency directly by calling or messaging our founder Sobhit Jaiswal via instant WhatsApp at +91 96811 68381, or by emailing our team at creativedgenz32@gmail.com to schedule your free project consultation."
+    },
+    {
+      q: "Does DGEN Z provide branding solutions?",
+      a: "Yes, DGEN Z is a premium branding agency. We design sleek custom vector logos, construct exhaustive visual brand identity guides, corporate presentation templates, and custom product box packaging designs that position your business as an elite market player."
     }
   ];
 

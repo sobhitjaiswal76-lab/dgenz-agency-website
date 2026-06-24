@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Secure Your Growth Consultation | Contact DGEN Z",
-  description: "Connect with Sobhit Jaiswal and the elite DGEN Z engineering team. Let's design, optimize, and scale your brand authority starting today.",
+  title: "Contact DGEN Z | Digital Marketing & Website Design Kolkata",
+  description: "Get in touch with Sobhit Jaiswal and DGEN Z Digital Agency in Kolkata, India. Schedule your free consultation for premium website development and design services.",
   alternates: {
     canonical: "/contact",
   },

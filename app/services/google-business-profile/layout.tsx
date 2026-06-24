@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Google Business Profile Rankings Management | DGEN Z",
-  description: "Lock in #1 rank on Google Maps. We optimize business listings, execute local Kolkata citations, and establish neighborhood keyword dominance.",
+  title: "Google Business Profile Optimization & SEO Services Kolkata | DGEN Z",
+  description: "DGEN Z provides Google Business Profile management and local SEO services in Kolkata. Secure #1 local map rankings, increase phone leads, and lock listing authority with Sobhit Jaiswal.",
   alternates: {
     canonical: "/services/google-business-profile",
   },

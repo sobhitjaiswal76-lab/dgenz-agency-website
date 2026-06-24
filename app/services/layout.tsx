@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Elite Digital Services | DGEN Z — High-Ticket Conversions",
-  description: "Complete list of high-performance digital services by DGEN Z: professional websites, Google Local Search optimizations, branding, and agentic AI chatbot integrations.",
+  title: "Professional Website Development, Graphic Design & Marketing Services | DGEN Z",
+  description: "DGEN Z offers high-performance digital marketing, custom Next.js website development, graphic design, and local SEO services in Kolkata. Contact Sobhit Jaiswal for premium brand building.",
   alternates: {
     canonical: "/services",
   },
