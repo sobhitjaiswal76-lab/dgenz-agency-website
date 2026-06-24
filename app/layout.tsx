@@ -94,6 +94,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           id="json-ld-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          suppressHydrationWarning
         />
         <ClientWrapper>{children}</ClientWrapper>
       </body>

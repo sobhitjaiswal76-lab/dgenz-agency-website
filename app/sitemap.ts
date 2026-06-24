@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.APP_URL || 'https://dgenz-nu.vercel.app';
+  const baseUrl = 'https://dgenz-nu.vercel.app';
 
   return [
     {
