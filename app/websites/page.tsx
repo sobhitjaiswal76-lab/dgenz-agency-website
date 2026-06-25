@@ -20,13 +20,13 @@ export default function WebsitesPage() {
           <Monitor className="w-3.5 h-3.5 text-crimson" /> Web Engineering Studio
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
-          WEBSITES THAT WORK<br />
+          WEBSITE DEVELOPMENT COMPANY &<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            24×7 FOR YOUR BUSINESS
+            PROFESSIONAL WEB DESIGN KOLKATA
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
-          Stop losing clients to boring, slow, outdated templates. We design and deploy high-performance, responsive platforms from Kolkata that project premium visual authority and capture incoming traffic automatically.
+          Stop losing potential clients to slow, generic templates. At <strong className="text-white">DGEN Z Website Design Company</strong>, we engineer and deploy high-performance custom Next.js websites, e-commerce storefronts, and premium web design assets from Kolkata that project absolute visual authority, rank high on Google local search results, and capture incoming client traffic automatically.
         </p>
       </div>
 

@@ -53,13 +53,13 @@ export default function MarketingPage() {
           <TrendingUp className="w-3.5 h-3.5 text-crimson animate-pulse" /> Growth Marketing Lab
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
-          DIGITAL MARKETING DEEP FUSION<br />
+          DIGITAL MARKETING AGENCY KOLKATA &<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            ACQUIRE CLIENTS AUTOMATICALLY
+            LOCAL LEAD ACQUISITION SYSTEMS
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
-          Stop bleeding advertising cash on generic campaigns. We construct high converting, visual-authoritative marketing blueprints and Google Maps rankings optimized to attract high ticket local calls and inquiries.
+          Stop bleeding advertising cash on slow, low-converting campaigns. At <strong className="text-white">DGEN Z Digital Agency</strong>, founded by chief strategist <strong className="text-white">Sobhit Jaiswal</strong>, we construct premium, visual-authoritative marketing campaigns, high-impact Instagram content designs, and elite Google Business Profile optimizations to rank you #1 on local maps and scale client acquisitions automatically.
         </p>
       </div>
 
