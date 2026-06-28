@@ -4,40 +4,42 @@ import ClientWrapper from '../components/ClientWrapper';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dgenz-nu.vercel.app'),
-  title: 'DGEN Z | Digital Marketing, Graphic Design & Website Development Agency',
-  description: 'DGEN Z helps businesses grow through premium website development, graphic design, social media marketing, branding, SEO and AI-powered digital solutions. Based in Kolkata, serving clients worldwide.',
+  title: 'DGEN Z | Digital Marketing & Website Development | Kolkata',
+  description: 'DGEN Z by Sobhit Jaiswal delivers expert Digital Marketing, custom Website Development, Graphic Design, and Google Business Profile SEO. Get your free proposal now!',
   keywords: [
     'DGEN Z',
+    'DGENZ',
     'DGEN Z Agency',
     'DGEN Z Marketing Agency',
-    'DGEN Z Digital Agency',
-    'DGEN Z Kolkata',
-    'DGEN Z Website Development',
-    'DGEN Z Graphic Design',
-    'DGEN Z Social Media Marketing',
-    'DGEN Z Web Design Agency',
-    'Sobhit Jaiswal',
-    'DGEN Z For Designing',
-    'Digital Marketing Agency Kolkata',
+    'DGEN Z Digital Marketing',
+    'Digital Marketing Agency',
+    'Marketing Agency',
+    'Website Development',
+    'Website Development Company',
+    'Website Designer',
+    'Website Developer',
+    'Graphic Design Services',
+    'Logo Design',
+    'Google Business Profile',
+    'Google Business Profile Management',
+    'Local SEO',
+    'SEO Agency',
+    'AI Automation',
+    'Business Branding',
+    'Business Growth',
+    'Marketing Company',
     'Website Development Kolkata',
-    'Website Design Company Kolkata',
-    'Graphic Design Services Kolkata',
-    'Social Media Marketing Kolkata',
-    'Branding Agency Kolkata',
-    'AI Website Development',
-    'Business Website Development',
-    'Logo Design Services',
-    'Professional Website Design',
-    'SEO Services Kolkata',
-    'Marketing Agency India',
-    'Web Development Agency India'
+    'Digital Marketing Kolkata',
+    'Marketing Agency Kolkata',
+    'Graphic Designer Kolkata',
+    'Sobhit Jaiswal'
   ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'DGEN Z | Digital Marketing, Graphic Design & Website Development Agency',
-    description: 'DGEN Z helps businesses grow through premium website development, graphic design, social media marketing, branding, SEO and AI-powered digital solutions. Based in Kolkata, serving clients worldwide.',
+    title: 'DGEN Z | Digital Marketing & Website Development | Kolkata',
+    description: 'DGEN Z by Sobhit Jaiswal delivers expert Digital Marketing, custom Website Development, Graphic Design, and Google Business Profile SEO. Get your free proposal now!',
     url: 'https://dgenz-nu.vercel.app',
     siteName: 'DGEN Z',
     images: [
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'DGEN Z Digital Marketing & Website Development Agency',
+        alt: 'DGEN Z | Digital Marketing Agency, Website Development & Branding Kolkata',
       }
     ],
     locale: 'en_US',
@@ -53,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DGEN Z | Digital Marketing, Graphic Design & Website Development Agency',
-    description: 'DGEN Z helps businesses grow through premium website development, graphic design, social media marketing, branding, SEO and AI-powered digital solutions. Based in Kolkata, serving clients worldwide.',
+    title: 'DGEN Z | Digital Marketing & Website Development | Kolkata',
+    description: 'DGEN Z by Sobhit Jaiswal delivers expert Digital Marketing, custom Website Development, Graphic Design, and Google Business Profile SEO. Get your free proposal now!',
     images: ['/og-image.jpg'],
   },
   verification: {
@@ -72,7 +74,8 @@ const jsonLd = {
       "alternateName": [
         "DGEN Z Agency",
         "DGEN Z Marketing Agency",
-        "DGEN Z Digital Agency",
+        "DGEN Z Digital Marketing",
+        "DGENZ",
         "DGEN Z For Designing"
       ],
       "url": "https://dgenz-nu.vercel.app",
@@ -80,13 +83,13 @@ const jsonLd = {
         "@type": "ImageObject",
         "@id": "https://dgenz-nu.vercel.app/#logo",
         "url": "https://dgenz-nu.vercel.app/og-image.jpg",
-        "caption": "DGEN Z Digital Marketing & Website Development Agency"
+        "caption": "DGEN Z | Digital Marketing Agency, Website Development & Branding Kolkata"
       },
       "founder": {
         "@type": "Person",
         "@id": "https://dgenz-nu.vercel.app/#founder",
         "name": "Sobhit Jaiswal",
-        "jobTitle": "Director & Chief Brand Architect",
+        "jobTitle": "Founder, Digital Marketing Expert & Website Developer",
         "image": "https://dgenz-nu.vercel.app/og-image.jpg"
       },
       "contactPoint": {
@@ -106,7 +109,7 @@ const jsonLd = {
       "@id": "https://dgenz-nu.vercel.app/#website",
       "url": "https://dgenz-nu.vercel.app",
       "name": "DGEN Z",
-      "description": "DGEN Z helps businesses grow through premium website development, graphic design, social media marketing, branding, SEO and AI-powered digital solutions.",
+      "description": "DGEN Z by Sobhit Jaiswal delivers expert Digital Marketing, custom Website Development, Graphic Design, and Google Business Profile SEO. Get your free proposal now!",
       "publisher": {
         "@id": "https://dgenz-nu.vercel.app/#organization"
       },
@@ -119,7 +122,7 @@ const jsonLd = {
     {
       "@type": "ProfessionalService",
       "@id": "https://dgenz-nu.vercel.app/#service",
-      "name": "DGEN Z Digital Agency",
+      "name": "DGEN Z | Digital Marketing Agency & Website Development Kolkata",
       "image": "https://dgenz-nu.vercel.app/og-image.jpg",
       "url": "https://dgenz-nu.vercel.app",
       "telephone": "+91-9681168381",

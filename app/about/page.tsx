@@ -15,11 +15,11 @@ export default function AboutPage() {
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
           THE VISION BEHIND<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            DGEN Z BRAND LABS
+            DGEN Z DIGITAL MARKETING AGENCY
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
-          We are not a traditional service-listing agency. We coordinate visual systems, lead-traps, and high performance responsive web applications to elevate business margins.
+          We are a full-service digital marketing agency and website development company. We engineer custom web applications, graphic designs, local SEO systems, and Google Business Profile management campaigns that grow your business.
         </p>
       </div>
 

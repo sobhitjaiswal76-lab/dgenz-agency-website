@@ -70,7 +70,7 @@ export default function Home() {
     },
     {
       q: "What is your website development process?",
-      a: "Our website development process consists of four main sprints: Strategy Sizing, Matte Branding Forge, Next.js/React Coding, and Speed/SEO Audits with schema integrations."
+      a: "Our website development process consists of four main sprints: Strategy Sizing, Matte Branding & Logo Design, Next.js/React Coding, and Speed/SEO Audits with schema integrations."
     },
     {
       q: "Does DGEN Z design custom company logos and branding kits?",
@@ -120,7 +120,7 @@ export default function Home() {
       items: ["Poster & Banner Design", "Visual Logo Concepts", "Flyer & Standee Creations", "Premium Packaging Layouts", "Menu Cards & Digital Assets"]
     },
     {
-      title: "Digital Performance Forge",
+      title: "Website & Local SEO Solutions",
       items: ["Website Development", "Instagram Automation Triggers", "Google Business Profile Rankings", "AI Chatbot Engineering", "Social Growth Consultations"]
     },
     {
@@ -301,7 +301,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="inline-block text-neon-green font-mono text-xs uppercase tracking-widest font-bold neon-glow-green">
-              02 / HIGH-SPEED LEAD CAPTURING FORGES
+              02 / HIGH-SPEED LEAD CAPTURING ENGINES
             </div>
             <h2 className="text-3xl md:text-5xl font-sans font-black text-white leading-tight uppercase">
               PROFESSIONAL WEBSITE DESIGN & PERFORMANCE SYSTEMS
@@ -344,7 +344,7 @@ export default function Home() {
       </section>
 
 
-      {/* ----------------- 4. NEURAL CO-PILOT SUBMISSION IN-SITE ----------------- */}
+      {/* ----------------- 4. CUSTOM PROPOSAL BUILDER SUBMISSION IN-SITE ----------------- */}
       <section className="space-y-8 select-none" id="ai-blueprint">
         <div className="text-center space-y-3">
           <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold animate-pulse">
@@ -393,7 +393,7 @@ export default function Home() {
             MEET THE FOUNDER: SOBHIT JAISWAL
           </h3>
           <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
-            {"\"I didn't forge DGEN Z to be another passive, slow agency. I engineered this brand lab because corporate companies in India and growing startups are exhausted by low-performing, generic templates that fail to convert traffic. My primary directive is to bridge high-ticket aesthetic prestige with hyper-aggressive, Google-first search intent.\""}
+            {"\"I didn't forge DGEN Z to be another passive, slow agency. I engineered this digital marketing agency because corporate companies in India and growing startups are exhausted by low-performing, generic templates that fail to convert traffic. My primary directive is to bridge high-ticket aesthetic prestige with hyper-aggressive, Google-first search intent.\""}
           </p>
           <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
             {"Based at our tactical creative headquarters in Kolkata, West Bengal, we design visual assets that establish immediate elite status for your company. We believe that outstanding, responsive visual positioning paired with custom technical SEO is what allows you to command premium prices and turn every casual visitor into a lifetime client.\""}
@@ -449,10 +449,10 @@ export default function Home() {
       <section className="space-y-12 select-none" id="process">
         <div className="text-center space-y-3">
           <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            07 / THE FORCE DEVELOPMENT SPRINT
+            07 / THE STRATEGIC DEVELOPMENT SPRINT
           </div>
           <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-white">
-            THE FORCE DEVELOPMENT MATRIX
+            THE STRATEGIC DEVELOPMENT WORKFLOW
           </h2>
           <p className="max-w-2xl mx-auto text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
             We follow a rigorous, six-step digital delivery process to transform your standard business assets into absolute high-ticket revenue networks.
@@ -663,7 +663,7 @@ export default function Home() {
               LAUNCH ESTIMATE ENGINE
             </h4>
             <p className="text-gray-400 font-sans text-xs leading-relaxed max-w-md mx-auto">
-              Computing direct pricing points has never been simpler. Use our interactive neural co-pilot widget to build, configure, and submit your custom project proposal instantly.
+              Computing direct pricing points has never been simpler. Use our interactive custom proposal builder widget to build, configure, and submit your custom project proposal instantly.
             </p>
 
             <div className="pt-2">

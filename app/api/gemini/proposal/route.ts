@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    const prompt = `You are the chief brand strategist & director at DGEN Z, an ultra-premium, high-performance 3D digital agency.
+    const prompt = `You are the chief brand strategist and founder, Sobhit Jaiswal, of DGEN Z, a leading digital marketing agency and website development company based in Kolkata.
     A premium business has submitted their details for a custom growth and branding strategy.
     
     Here is the submission details:
@@ -32,9 +32,9 @@ export async function POST(req: NextRequest) {
     - Services Requested: ${services.join(', ')}
     - Budget Level: ${budget}
     - Specific Context: ${message || "Wants to maximize leads and brand authority."}
-
+ 
     Generate a captivating, immersive, and highly customized Marketing & Growth Strategy Proposal.
-    Use bold futuristic headings. Write with deep energy, emphasizing visual trust, luxury tech presentation, and lead-generating websites that work 24/7.
+    Use bold headings. Write with deep energy, emphasizing visual trust, expert presentation, and lead-generating websites that work 24/7.
     Format your output with clean and premium markdown (including visual separator lines or bold sections). Use these exact headings:
     
     ## 🌌 DIGITAL BRAND IDENTITY REVAMP
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     ## 🕒 ACTION PLAN (NEXT 14 DAYS)
     Two bold, high-ticket actions they need to execute immediately to capture warm customer interest.
     
-    Format the proposal with premium vocabulary, exciting the prospect to buy. End with a quote about modern digital power.`;
+    Format the proposal with premium vocabulary, exciting the prospect to buy. End with a quote about modern business growth and digital brand authority.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash",

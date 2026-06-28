@@ -37,7 +37,7 @@ export default function GoogleBusinessProfilePage() {
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none">
           GOOGLE BUSINESS PROFILE<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            MAPS SEARCH #1 LOCK
+            OPTIMIZATION & LOCAL SEO SERVICES
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">

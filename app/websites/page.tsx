@@ -6,7 +6,7 @@ import { Zap, Search, Phone, Monitor } from "lucide-react";
 export default function WebsitesPage() {
   const steps = [
     { t: "1. STRATEGY SIZING", d: "We map your specific target buyers' journey and structure wireframe screens for maximum conversions." },
-    { t: "2. MATTE BRANDING FORGE", d: "Custom vector UI designs built around high contrast dark themes, neon light sources, and glass elements." },
+    { t: "2. MATTE BRANDING & UI DESIGN", d: "Custom vector UI designs built around high contrast dark themes, neon light sources, and glass elements." },
     { t: "3. TS & NEXTJS DEVELOPMENT", d: "Hand-crafted Next.js 15 app router layouts compiled with zero bloat and standard mobile optimizations." },
     { t: "4. FULL SPEED & SEO AUDITS", d: "Google local search schema configurations, lightning-fast deployment scripts, and GBP spots lockings." }
   ];
@@ -66,7 +66,7 @@ export default function WebsitesPage() {
         ))}
       </div>
 
-      {/* Development Step Matrix */}
+      {/* Development Sprints */}
       <div className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-crimson via-crimson/70 to-neon-green opacity-60" />
         

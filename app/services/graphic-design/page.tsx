@@ -38,12 +38,12 @@ export default function GraphicDesignPage() {
       {/* Page Header */}
       <div className="text-left space-y-4 max-w-3xl">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-crimson/10 border border-crimson/30 text-crimson text-xs font-mono uppercase tracking-widest leading-none">
-          <Palette className="w-3.5 h-3.5 text-crimson animate-pulse" /> Graphic & Brand Forge
+          <Palette className="w-3.5 h-3.5 text-crimson animate-pulse" /> Graphic & Brand Design
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none">
-          PREMIUM GRAPHIC DESIGNS<br />
+          GRAPHIC DESIGN SERVICES<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            ELITE BRAND AUTHORITY
+            & LOGO DESIGN KOLKATA
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">

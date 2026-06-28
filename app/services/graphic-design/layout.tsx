@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Graphic Design Services & Logo Design Kolkata | DGEN Z For Designing",
-  description: "DGEN Z offers professional graphic design services in Kolkata. From sleek custom vector logos, high-ticket packaging design, to branding guidelines by Sobhit Jaiswal.",
+  title: "Graphic Design Services | DGEN Z",
+  description: "DGEN Z offers professional graphic design services, custom vector logo design, branding packages, and presentation decks. Book a free design audit with Sobhit Jaiswal.",
   alternates: {
     canonical: "/services/graphic-design",
   },

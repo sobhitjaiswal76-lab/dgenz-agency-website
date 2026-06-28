@@ -52,9 +52,9 @@ export default function ServicesPage() {
           <Sparkles className="w-3.5 h-3.5 text-crimson" /> Core Services Directory
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none">
-          ELITE SOLUTIONS<br />
+          DIGITAL MARKETING,<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            CATALOG MATRIX
+            WEBSITE DEVELOPMENT & BRANDING SERVICES
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">

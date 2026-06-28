@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Website Development & Design Company Kolkata | DGEN Z",
-  description: "Looking for a professional website design company in Kolkata? DGEN Z builds custom, high-speed, SEO-optimized business websites and Next.js applications.",
+  title: "Website Development Services | DGEN Z",
+  description: "DGEN Z builds custom, high-speed, SEO-optimized business websites, landing pages, and e-commerce platforms. Get your website development quote from Sobhit Jaiswal.",
   alternates: {
     canonical: "/websites",
   },

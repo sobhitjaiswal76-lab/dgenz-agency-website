@@ -14,9 +14,9 @@ export default function ContactPage() {
           <Sparkles className="w-3.5 h-3.5 text-crimson" /> Direct Communications Portal
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
-          START YOUR DIGITAL<br />
+          START YOUR STRATEGIC<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            POWER BLUEPRINT
+            DIGITAL AUDIT NOW
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
@@ -79,7 +79,7 @@ export default function ContactPage() {
           <div className="p-4 bg-black/10 glass rounded-sm border border-white/5 flex items-center gap-3">
             <Terminal className="w-5 h-5 text-crimson" />
             <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest">
-              PROPOSAL WIZARD: OPERATIONAL & READY TO SYNTHESIZE BLUEPRINTS
+              PROPOSAL BUILDER: OPERATIONAL & READY TO GENERATE CUSTOM STRATEGY
             </p>
           </div>
           <LeadWizard />

@@ -50,7 +50,7 @@ export default function MarketingPage() {
       {/* Page Header */}
       <div className="text-left space-y-4 max-w-3xl">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-crimson/10 border border-crimson/30 text-crimson text-xs font-mono uppercase tracking-widest leading-none">
-          <TrendingUp className="w-3.5 h-3.5 text-crimson animate-pulse" /> Growth Marketing Lab
+          <TrendingUp className="w-3.5 h-3.5 text-crimson animate-pulse" /> Growth Marketing Agency
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
           DIGITAL MARKETING AGENCY KOLKATA &<br />
@@ -59,7 +59,7 @@ export default function MarketingPage() {
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
-          Stop bleeding advertising cash on slow, low-converting campaigns. At <strong className="text-white">DGEN Z Digital Agency</strong>, founded by chief strategist <strong className="text-white">Sobhit Jaiswal</strong>, we construct premium, visual-authoritative marketing campaigns, high-impact Instagram content designs, and elite Google Business Profile optimizations to rank you #1 on local maps and scale client acquisitions automatically.
+          Stop bleeding advertising cash on slow, low-converting campaigns. At <strong className="text-white">DGEN Z Digital Marketing Agency</strong>, founded by chief strategist <strong className="text-white">Sobhit Jaiswal</strong>, we construct premium, visual-authoritative marketing campaigns, high-impact Instagram content designs, and elite Google Business Profile optimizations to rank you #1 on local maps and scale client acquisitions automatically.
         </p>
       </div>
 

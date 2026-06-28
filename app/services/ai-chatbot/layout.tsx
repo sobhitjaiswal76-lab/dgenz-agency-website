@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Website Development & Chatbot Automations | DGEN Z",
-  description: "DGEN Z builds intelligent custom AI chatbots, Instagram DM triggers, automated WhatsApp systems, and AI website development services. Contact Sobhit Jaiswal for smart business automation.",
+  title: "AI Automation Services | DGEN Z",
+  description: "DGEN Z builds custom AI chatbots, automated WhatsApp systems, Instagram DM automations, and AI website development services. Schedule a strategic consultation with Sobhit Jaiswal.",
   alternates: {
     canonical: "/services/ai-chatbot",
   },

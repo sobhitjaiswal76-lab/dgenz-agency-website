@@ -35,9 +35,9 @@ export default function AiChatbotPage() {
           <MessageSquare className="w-3.5 h-3.5 text-crimson animate-pulse" /> Agentic Automations
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none">
-          AI CHATBOT SERVICES<br />
+          AI AUTOMATION SERVICES &<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            CONVERSION ENGINES 24×7
+            CHATBOT CONVERSION ENGINES
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
