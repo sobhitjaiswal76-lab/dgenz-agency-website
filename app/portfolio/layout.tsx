@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Creative Work Portfolio & Design Showcase | DGEN Z",
-  description: "Discover the portfolio of DGEN Z, including premium Next.js website design, custom vector logos, branding assets, and automated marketing campaigns by Sobhit Jaiswal in Kolkata.",
+  title: "Portfolio | Website Design, Branding & Marketing Projects | DGEN Z",
+  description: "Discover our featured portfolio of custom website design, professional branding kits, creative graphic designs, and digital marketing results in Kolkata.",
   alternates: {
     canonical: "/portfolio",
   },

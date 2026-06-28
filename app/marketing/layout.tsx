@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Services | DGEN Z",
-  description: "DGEN Z provides high-impact digital marketing, social media marketing, local SEO, and lead generation services. Partner with Sobhit Jaiswal in Kolkata.",
+  title: "Digital Marketing Agency | SEO, Google Business Profile & Lead Generation | DGEN Z",
+  description: "Boost your search engine rankings and lead generation. DGEN Z provides expert local SEO, social media marketing, and Google Business Profile management in Kolkata.",
   alternates: {
     canonical: "/marketing",
   },

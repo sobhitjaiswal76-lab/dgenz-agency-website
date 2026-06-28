@@ -231,10 +231,10 @@ export default function LeadWizard() {
               <Sparkles className="w-3.5 h-3.5" /> Client Conversion & Proposal Machine
             </div>
             <h3 className="text-3xl md:text-4xl font-sans font-extrabold text-white tracking-tight leading-tight">
-              NEURAL BRAND <span className="text-crimson font-black drop-shadow-[0_0_8px_rgba(220,20,60,0.4)]">CO-PILOT</span>
+              CUSTOM STRATEGY <span className="text-crimson font-black drop-shadow-[0_0_8px_rgba(220,20,60,0.4)]">BUILDER</span>
             </h3>
             <p className="max-w-xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed">
-              {"Don't guess your marketing strategy. Feed our customized AI model your business details, and instantly generate an ultra-premium visual growth roadmap and custom package blueprint in real-time."}
+              {"Don't guess your marketing strategy. Feed our customized AI model your business details, and instantly generate a high-converting digital growth roadmap and custom package blueprint in real-time."}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left max-w-2xl mx-auto mt-6">
