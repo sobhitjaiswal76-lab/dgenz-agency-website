@@ -2,13 +2,14 @@
 
 import React from "react";
 import { TrendingUp, CheckCircle2, Phone } from "lucide-react";
+import CustomQuoteCTA from "@/components/CustomQuoteCTA";
 
 export default function MarketingPage() {
   const plans = [
     {
       name: "Local Search Dominance",
       sub: "Map Listing & GBP Optimizations",
-      price: "$100/mo",
+      price: "Custom Pricing",
       features: [
         "Google Business Profile (GBP) Creation & Setup",
         "Competitor zone citations and local backlinks",
@@ -20,7 +21,7 @@ export default function MarketingPage() {
     {
       name: "Instagram Growth Package",
       sub: "Organic Branding & Design Funnels",
-      price: "$199/mo",
+      price: "Tailored Packages",
       features: [
         "Curated visual matte black grid setups (9 posts)",
         "Daily automated story conversion graphics",
@@ -32,7 +33,7 @@ export default function MarketingPage() {
     {
       name: "The Complete Acquisition Engine",
       sub: "Full Visual Strategy & Performance",
-      price: "$349/mo",
+      price: "Request a Quote",
       features: [
         "All GBP rankings + Instagram growth solutions",
         "Monthly custom promo/banner design deliverables",
@@ -49,16 +50,16 @@ export default function MarketingPage() {
       {/* Page Header */}
       <div className="text-left space-y-4 max-w-3xl">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-crimson/10 border border-crimson/30 text-crimson text-xs font-mono uppercase tracking-widest leading-none">
-          <TrendingUp className="w-3.5 h-3.5 text-crimson animate-pulse" /> Growth Marketing Lab
+          <TrendingUp className="w-3.5 h-3.5 text-crimson animate-pulse" /> Growth Marketing Agency
         </span>
         <h1 className="text-4xl sm:text-6xl font-sans font-black text-white uppercase tracking-tight leading-none animate-fade-in">
-          DIGITAL MARKETING DEEP FUSION<br />
+          DIGITAL MARKETING AGENCY KOLKATA &<br />
           <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-            ACQUIRE CLIENTS AUTOMATICALLY
+            LOCAL LEAD ACQUISITION SYSTEMS
           </span>
         </h1>
         <p className="text-gray-400 font-sans text-sm sm:text-base leading-relaxed text-balance">
-          Stop bleeding advertising cash on generic campaigns. We construct high converting, visual-authoritative marketing blueprints and Google Maps rankings optimized to attract high ticket local calls and inquiries.
+          Stop bleeding advertising cash on slow, low-converting campaigns. At <strong className="text-white">DGEN Z Digital Marketing Agency</strong>, founded by chief strategist <strong className="text-white">Sobhit Jaiswal</strong>, we construct premium, visual-authoritative marketing campaigns, high-impact Instagram content designs, and elite Google Business Profile optimizations to rank you #1 on local maps and scale client acquisitions automatically.
         </p>
       </div>
 
@@ -100,18 +101,20 @@ export default function MarketingPage() {
 
               <div>
                 <a
-                  href={`https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20subscribe%20to%20the%20growth%20marketing%20plan%3A%20${encodeURIComponent(plan.name)}`}
+                  href={`https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%2520to%20discuss%20the%2520growth%2520marketing%2520plan%3A%20${encodeURIComponent(plan.name)}`}
                   target="_blank"
                   rel="no-referrer"
                   className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-sm bg-black/40 hover:bg-crimson hover:text-white text-gray-450 text-xs font-sans font-bold uppercase tracking-wider transition-all border border-white/10 hover:border-crimson cursor-pointer"
                 >
-                  Acquire Plan <Phone className="w-3.5 h-3.5 text-crimson group-hover:text-white" />
+                  Enquire Now <Phone className="w-3.5 h-3.5 text-crimson group-hover:text-white" />
                 </a>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      <CustomQuoteCTA />
 
     </div>
   );

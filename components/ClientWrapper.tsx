@@ -6,6 +6,7 @@ import Canvas3D from "./Canvas3D";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Terminal, ShieldAlert, Sparkles, PhoneCall } from "lucide-react";
+import Logo from "./Logo";
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -102,19 +103,18 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
             <div className="absolute w-[200px] h-[200px] md:w-[320px] md:h-[320px] rounded-full border border-red-500/10 animate-pulse" />
             <div className="absolute w-[280px] h-[280px] md:w-[450px] md:h-[450px] rounded-full border border-red-500/5 animate-ping" />
 
-            <div className="relative text-center space-y-5">
+            <div className="relative text-center space-y-6 flex flex-col items-center justify-center">
               {/* Pulsing Glowing Logo */}
-              <motion.h1
+              <motion.div
                 initial={{ scale: 0.94 }}
                 animate={{ scale: [0.94, 1.02, 0.94] }}
                 transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-                className="text-4xl md:text-6xl font-sans font-black tracking-[0.2em] text-white"
               >
-                DGEN<span className="text-red-500 text-shadow-red font-black"> Z</span>
-              </motion.h1>
+                <Logo size="xl" showSubtitle={true} glow={true} className="items-center" />
+              </motion.div>
 
               {/* Glowing Ambient light source below logo */}
-              <div className="w-16 h-1 bg-red-600 mx-auto rounded-full blur-[4px] animate-pulse" />
+              <div className="w-24 h-1.5 bg-crimson mx-auto rounded-full blur-[6px] animate-pulse" />
 
               {/* Loading Status line for high tech agency perception */}
               <div className="pt-8">

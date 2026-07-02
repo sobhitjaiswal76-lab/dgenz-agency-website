@@ -25,7 +25,7 @@ export default function LeadWizard() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [budget, setBudget] = useState("Mid Strategic ($1,000 - $3,000)");
+  const [budget, setBudget] = useState("Mid Market Strategic Scale Tier");
   const [loadingLog, setLoadingLog] = useState("");
   const [generatedProposal, setGeneratedProposal] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -231,10 +231,10 @@ export default function LeadWizard() {
               <Sparkles className="w-3.5 h-3.5" /> Client Conversion & Proposal Machine
             </div>
             <h3 className="text-3xl md:text-4xl font-sans font-extrabold text-white tracking-tight leading-tight">
-              NEURAL BRAND <span className="text-crimson font-black drop-shadow-[0_0_8px_rgba(220,20,60,0.4)]">CO-PILOT</span>
+              CUSTOM STRATEGY <span className="text-crimson font-black drop-shadow-[0_0_8px_rgba(220,20,60,0.4)]">BUILDER</span>
             </h3>
             <p className="max-w-xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed">
-              {"Don't guess your marketing strategy. Feed our customized AI model your business details, and instantly generate an ultra-premium visual growth roadmap and custom package blueprint in real-time."}
+              {"Don't guess your marketing strategy. Feed our customized AI model your business details, and instantly generate a high-converting digital growth roadmap and custom package blueprint in real-time."}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left max-w-2xl mx-auto mt-6">
@@ -398,10 +398,10 @@ export default function LeadWizard() {
                     onChange={(e) => setBudget(e.target.value)}
                     className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-sm text-white text-sm focus:border-crimson focus:ring-1 focus:ring-crimson transition-all outline-none cursor-pointer"
                   >
-                    <option>Starter Conversion Boost ($300 - $600)</option>
-                    <option>Mid Strategic Package ($1,000 - $2,500)</option>
-                    <option>High Growth Dominance ($3,000 - $5,000)</option>
-                    <option>Master Corporate Brand Facelift ($6,000+)</option>
+                    <option>Starter Conversion Boost Tier</option>
+                    <option>Mid Market Strategic Scale Tier</option>
+                    <option>High Growth Dominance Tier</option>
+                    <option>Master Corporate Brand Facelift Tier</option>
                   </select>
                 </div>
 
