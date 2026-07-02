@@ -3,9 +3,6 @@ import './globals.css'; // Global styles
 import ClientWrapper from '../components/ClientWrapper';
 
 export const metadata: Metadata = {
-  title: "DGEN Z | Digital Marketing Agency & Website Development Company",
-  description: "DGEN Z is a Digital Marketing Agency in Kolkata founded by Sobhit Jaiswal. We provide Website Development,Digital Marketing,Graphic Design,Branding,SEO,Google Business Profile Optimization and AI Automation services.",
-,
   metadataBase: new URL('https://dgenz-nu.vercel.app'),
   title: {
     default: "DGEN Z | Digital Marketing Agency & Website Development Company",
