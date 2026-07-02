@@ -3,17 +3,27 @@ import './globals.css'; // Global styles
 import ClientWrapper from '../components/ClientWrapper';
 
 export const metadata: Metadata = {
-  title: 'DGEN Z — ULTRA PREMIUM 3D DIGITAL AGENCY | SOBHIT JAISWAL',
-  description: 'Ultra-premium futuristic 3D digital agency by Sobhit Jaiswal in Kolkata, India. Expert website designer, Google Business Profile management, Instagram branding & lead generation solutions.',
+  title: "DGEN Z | Digital Marketing Agency & Website Development Company",
+  description: "DGEN Z is a Digital Marketing Agency in Kolkata founded by Sobhit Jaiswal. We provide Website Development,Digital Marketing,Graphic Design,Branding,SEO,Google Business Profile Optimization and AI Automation services.",
+,
   keywords: [
-    'Website Designer Kolkata',
-    'Digital Marketing Agency Kolkata',
-    'Social Media Marketing Kolkata',
-    'Business Website Development',
-    'Logo Design Services',
-    'Google Business Profile Management',
-    'DGEN Z',
-    'Sobhit Jaiswal'
+    "DGEN Z",
+    "DGENZ",
+    "Digital Marketing Agency",
+    "Website Development Company",
+    "Website Design",
+    "Website Development Kolkata",
+    "Website Designer Kolkata",
+    "Graphic Design Services",
+    "Logo Design",
+    "Branding Agency",
+    "SEO Services",
+    "Google Business Profile",
+    "Google Business Profile Optimization",
+    "AI Automation",
+    "Marketing Agency Kolkata",
+    "Business Website Development",
+    "Sobhit Jaiswal"
   ]
 };
 
