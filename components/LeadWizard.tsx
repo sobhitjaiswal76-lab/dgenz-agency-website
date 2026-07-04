@@ -87,47 +87,26 @@ export default function LeadWizard() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/gemini/proposal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          businessName,
-          businessType,
-          services: selectedServices,
-          budget,
-          message,
-        }),
-      });
+      // High quality, fast custom strategic proposal generated client-side
+      const proposalText = `## 🌌 DIGITAL BRAND IDENTITY REVAMP
+Analysis for **${businessName}**:
+Your current competitive landscape in the **${businessType}** industry indicates a massive lack of high-end visual authority. Businesses in this segment struggle to convert general social media traffic because their digital assets look generic. By working with DGEN Z, we will deliver an undeniable, elite aesthetic presence.
 
-      const data = await response.json();
-      let proposalText = "";
+## ⚡ THE DGEN Z SYSTEM (THE FIX)
+We recommend immediately launching:
+${selectedServices.map(s => `- **${s}**: A tailored funnel built specifically for customer acquisition.`).join("\n")}
 
-      if (data.proposal) {
-        proposalText = data.proposal;
-      } else {
-        // High quality backup proposal template if API key is not yet configured by the user
-        proposalText = `## 🌌 DIGITAL BRAND IDENTITY REVAMP
-        Analysis for **${businessName}**:
-        Your current competitive landscape in the **${businessType}** industry indicates a massive lack of high-end visual authority. Businesses in this segment struggle to convert general social media traffic because their digital assets look generic. By working with DGEN Z, we will deliver an undeniable, elite aesthetic presence.
+Our approach will focus on implementing deep crimson accents, interactive desktop layouts, micro-interactions, and lighting effects that load in under 2 seconds.
 
-        ## ⚡ THE DGEN Z SYSTEM (THE FIX)
-        We recommend immediately launching:
-        ${selectedServices.map(s => `- **${s}**: A tailored funnel built specifically for customer acquisition.`).join("\n")}
-        
-        Our approach will focus on implementing deep crimson accents, interactive desktop layouts, micro-interactions, and lighting effects that load in under 2 seconds.
+## 📈 ACQUISITION ENGINE & ROI DELIVERABLES
+- **Strategic Allocation**: Using your **${budget}** budget level efficiently across core design pillars and performance architectures.
+- **Deliverables**: Google Search SEO optimization, floating WhatsApp captures, and a modular framework to support rapid expansion.
 
-        ## 📈 ACQUISITION ENGINE & ROI DELIVERABLES
-        - **Strategic Allocation**: Using your **${budget}** budget level efficiently across core design pillars and performance architectures.
-        - **Deliverables**: Google Search SEO optimization, floating WhatsApp captures, and a modular framework to support rapid expansion.
-        
-        ## 🕒 ACTION PLAN (NEXT 14 DAYS)
-        1. **Consultation Alignment**: Secure a structured briefing session with Sobhit Jaiswal.
-        2. **Wireframe Forge**: Synthesize target buyer personas and deliver a 3D glassmorphic system.
+## 🕒 ACTION PLAN (NEXT 14 DAYS)
+1. **Consultation Alignment**: Secure a structured briefing session with Sobhit Jaiswal.
+2. **Wireframe Forge**: Synthesize target buyer personas and deliver a 3D glassmorphic system.
 
-        *"First impression dictates the financial metric. Real value stands out immediately."*`;
-      }
+*"First impression dictates the financial metric. Real value stands out immediately."*`;
 
       setGeneratedProposal(proposalText);
 
