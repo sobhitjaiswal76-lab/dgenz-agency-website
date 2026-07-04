@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Terminal, ShieldAlert, Sparkles, PhoneCall } from "lucide-react";
 import Logo from "./Logo";
+import VeerChatbot from "./VeerChatbot";
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -148,7 +149,10 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
 
             <Footer />
 
-            {/* 4. PERSISTENT FLOATING WHATSAPP CHAT BULLET */}
+            {/* 4. PERSISTENT VEER.1 AI CHATBOT */}
+            <VeerChatbot />
+
+            {/* 5. PERSISTENT FLOATING WHATSAPP CHAT BULLET */}
             <a
               href={floatingWhatsAppLink}
               target="_blank"
