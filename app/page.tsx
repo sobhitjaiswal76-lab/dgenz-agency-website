@@ -1,44 +1,195 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import {
-  Sparkles,
   ArrowRight,
-  MessageSquare,
+  ArrowDown,
+  Bot,
   Zap,
   CheckCircle2,
-  Bookmark,
   ChevronDown,
   Phone,
-  Compass,
-  Send,
-  Calendar,
+  Sparkles,
   Layers,
   Award,
   ShieldCheck,
   TrendingUp,
-  Clock,
-  UserCheck,
+  Cpu,
+  Globe,
   Star,
-  Users
+  Users,
+  Compass,
+  Code,
+  Layout,
+  Palette,
+  Search,
+  MessageSquare,
+  Video,
+  ChevronRight,
+  Send,
+  ExternalLink,
+  Maximize2
 } from "lucide-react";
 import LeadWizard from "../components/LeadWizard";
 import PortfolioShowcase from "../components/PortfolioShowcase";
+import BackgroundVideo from "../components/BackgroundVideo";
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [activeScene, setActiveScene] = useState(1);
+  const [activeCapability, setActiveCapability] = useState(0);
 
-  // Active FAQ data mapping pricing, timeline, digital capabilities (20 Optimized FAQs)
+  // Track active scene based on scroll depth (1 to 13)
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight <= 0) return;
+      const scrollRatio = window.scrollY / totalHeight;
+      const sceneIndex = Math.min(13, Math.max(1, Math.floor(scrollRatio * 13) + 1));
+      setActiveScene(sceneIndex);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Trigger VEER.1 MindPal Chatbot Modal
+  const handleOpenVeer = () => {
+    const triggerBtn = document.getElementById("veer-chat-trigger");
+    if (triggerBtn) {
+      triggerBtn.click();
+    }
+  };
+
+  // Scene Names for Spatial HUD
+  const sceneTitles = [
+    "THE DGEN Z UNIVERSE",
+    "THE DIGITAL VOID",
+    "THE DGEN Z SYSTEM",
+    "WEBSITE DEVELOPMENT WORLD",
+    "MARKETING WORLD",
+    "BRAND WORLD",
+    "THE AI PORTAL",
+    "MEET VEER.1",
+    "CLIENT WORK UNIVERSE",
+    "CREATIVE EXPERIMENTS",
+    "THE PROCESS TUNNEL",
+    "FOUNDER NARRATIVE",
+    "FINAL WORLD"
+  ];
+
+  // Capabilities Data
+  const capabilities = [
+    {
+      id: "01",
+      title: "DIGITAL EXPERIENCES",
+      tagline: "High-performance web architecture & conversion systems",
+      items: ["Website Design", "Custom Next.js Development", "Landing Pages", "E-Commerce Platforms", "Conversion Systems"],
+      visualDesc: "Architecting high-speed, desktop-first Next.js web applications with instant load times and technical SEO foundations.",
+      badge: "ENGINEERING"
+    },
+    {
+      id: "02",
+      title: "BRAND SYSTEMS",
+      tagline: "Vector identity, luxury packaging & strategic design",
+      items: ["Brand Identity", "Vector Logo Concepts", "Packaging Box Design", "Campaign Design", "Presentation Decks"],
+      visualDesc: "Crafting matte-black visual identities and brand guidelines that elevate perceived market value and command enterprise pricing.",
+      badge: "CREATIVE"
+    },
+    {
+      id: "03",
+      title: "GROWTH MARKETING",
+      tagline: "Direct-response campaigns & organic search dominance",
+      items: ["Social Media Strategy", "Local Marketing", "Content Strategy", "Lead Generation Funnels", "WhatsApp Automations"],
+      visualDesc: "Deploying targeted digital marketing systems that convert cold attention into qualified inquiry pipelines.",
+      badge: "MARKETING"
+    },
+    {
+      id: "04",
+      title: "SEARCH & DISCOVERY",
+      tagline: "Google Business Profile & technical search dominance",
+      items: ["Technical SEO", "Google Business Profile Ranking", "Local Visibility Maps", "Search Strategy", "Schema Injection"],
+      visualDesc: "Ranking businesses #1 on Google Maps in Kolkata with geotagged media, review engines, and local citation networks.",
+      badge: "SEO"
+    },
+    {
+      id: "05",
+      title: "AI & AUTOMATION",
+      tagline: "Intelligent sales agents & workflow automation",
+      items: ["AI Sales Agents", "AI Chatbot Systems", "Workflow Automation", "Lead Qualification", "VEER.1 Growth Consultant"],
+      visualDesc: "Building custom 24/7 AI response agents and Instagram/WhatsApp triggers that capture and qualify leads automatically.",
+      badge: "AI LAB"
+    },
+    {
+      id: "06",
+      title: "CONTENT & PRODUCTION",
+      tagline: "High-contrast visual assets & campaign media",
+      items: ["Photography Direction", "Video Reels", "Campaign Creatives", "Ad Assets", "Visual Design Systems"],
+      visualDesc: "Producing art-directed visual assets and social content designed specifically for high audience retention.",
+      badge: "MEDIA"
+    }
+  ];
+
+  // Real Client Case Studies
+  const selectedProjects = [
+    {
+      num: "01",
+      client: "THE CHOW CART",
+      industry: "Culinary & Dining",
+      services: "Brand Identity • Digital Experience • Menu Design",
+      challenge: "A popular culinary brand was struggling with inconsistent visual branding and an unoptimized digital menu causing high visitor bounce rates.",
+      thinking: "DGEN Z designed an ultra-fast, single-page digital menu platform with clear typography, high-contrast visual hierarchy, and instant WhatsApp ordering triggers.",
+      system: "Next.js single-page framework, direct WhatsApp click-to-chat ordering funnel, and local Google Maps schema.",
+      execution: "Scalable vector branding, custom matte packaging templates, and an ultra-lightweight web experience in 5 business days.",
+      outcome: "Eliminated drop-off rates, streamlined online food order inquiries, and boosted local search visibility in South Kolkata."
+    },
+    {
+      num: "02",
+      client: "SOMA ORGANICS",
+      industry: "Luxury Wellness & Skincare",
+      services: "E-Commerce Platform • Brand Identity • Packaging",
+      challenge: "Slow WordPress site with unoptimized product pages failing to convey luxury product value.",
+      thinking: "Elevate perceived brand value through dark glassmorphic UI, custom vector typography, and lightning-fast Next.js checkout routes.",
+      system: "Custom e-commerce product catalog with interactive hot-stamp foil packaging renders and structured product schema.",
+      execution: "Created luxury packaging box layouts, vector logo guides, and a fast React frontend.",
+      outcome: "Established elite market positioning, elevated average order value, and improved Google search ranking."
+    },
+    {
+      num: "03",
+      client: "ROY JEWELLERS",
+      industry: "Fine Jewelry & Retail",
+      services: "Luxury Brand Identity • Local SEO & Maps • Digital Catalog",
+      challenge: "Limited local Google Maps presence and non-existent digital catalog for high-ticket jewelry buyers.",
+      thinking: "Build a dominant Google Business Profile local SEO setup alongside a sleek digital collection showcase.",
+      system: "Geotagged image submission network, review acquisition engine, and high-speed catalog web app.",
+      execution: "Optimized local citations, engineered custom digital showroom layout, and established direct WhatsApp consultation pathways.",
+      outcome: "Achieved top Google Maps local rankings in target Kolkata search areas and increased direct store appointments."
+    },
+    {
+      num: "04",
+      client: "VEKTOR LOGISTICS",
+      industry: "Enterprise Supply Chain",
+      services: "Corporate Presentation • Next.js Showcase • Lead Funnel",
+      challenge: "Outdated company pitch decks and corporate website that failed to close enterprise logistics contracts.",
+      thinking: "Redesign the corporate deck with editorial precision and build an enterprise Next.js landing page with interactive quote calculators.",
+      system: "Next.js App Router, custom proposal builder widget, and high-contrast presentation deck formatting.",
+      execution: "Designed 25+ high-ticket PowerPoint slides, PDF books, and a responsive web portal.",
+      outcome: "Helped client secure a major enterprise contract within one week of launch."
+    }
+  ];
+
+  // 20 Optimized FAQs for SEO & Search Intent
   const faqs = [
     {
       q: "What services does DGEN Z offer?",
-      a: "DGEN Z offers premium services including website development, digital marketing, graphic design, social media marketing, Google Business Profile (GBP) optimization, local SEO, branding, and smart AI automation workflows."
+      a: "DGEN Z offers premium digital services including custom website development, digital marketing, graphic design, social media marketing, Google Business Profile (GBP) optimization, local SEO, corporate branding, and smart AI automation workflows."
     },
     {
       q: "Does DGEN Z build custom business websites?",
-      a: "Yes, DGEN Z is a premium website development company specializing in custom, high-speed business websites, landing pages, and e-commerce storefronts built on modern tech stacks like Next.js and React."
+      a: "Yes, DGEN Z specializes in custom, high-speed business websites, landing pages, and e-commerce storefronts built on modern tech stacks like Next.js and React with perfect Core Web Vitals performance."
     },
     {
       q: "Does DGEN Z provide social media marketing services in Kolkata?",
@@ -54,15 +205,15 @@ export default function Home() {
     },
     {
       q: "How does DGEN Z help with Google Business Profile optimization?",
-      a: "We optimize Google Business Profile (GBP) listings to rank #1 on Google Maps in Kolkata. Our local SEO services include reviews setup, geo-tagged image uploads, map citations, and local authority building."
+      a: "We optimize Google Business Profile (GBP) listings to rank #1 on Google Maps in Kolkata. Our local SEO services include reviews setup, geo-tagged media submissions, map citations, and local authority building."
     },
     {
       q: "Does DGEN Z build high-performance e-commerce websites?",
-      a: "Absolutely. We engineer secure, fast, and responsive e-commerce storefronts with seamless user experiences, conversion-optimized checkout grids, and integrated payment pathways."
+      a: "Aesthetic and secure. We engineer fast, responsive e-commerce storefronts with seamless user experiences, conversion-optimized checkout grids, and integrated payment pathways."
     },
     {
       q: "What is AI website development, and does DGEN Z provide it?",
-      a: "AI website development involves building websites embedded with smart AI capabilities such as server-side Gemini AI models, responsive chatbot flows, and personalized user interactions. DGEN Z is a leader in this domain."
+      a: "AI website development involves building websites embedded with smart AI capabilities such as VEER.1 AI sales consultants, server-side Gemini models, and automated customer qualification funnels. DGEN Z leads this domain."
     },
     {
       q: "How can DGEN Z help grow my local business in Kolkata?",
@@ -70,7 +221,7 @@ export default function Home() {
     },
     {
       q: "What is your website development process?",
-      a: "Our website development process consists of four main sprints: Strategy Sizing, Matte Branding & Logo Design, Next.js/React Coding, and Speed/SEO Audits with schema integrations."
+      a: "Our website development process follows seven strategic sprints: Discover, Research, Strategize, Design, Build, Launch, and Grow, complete with schema integrations and speed audits."
     },
     {
       q: "Does DGEN Z design custom company logos and branding kits?",
@@ -78,11 +229,11 @@ export default function Home() {
     },
     {
       q: "What technologies does DGEN Z Website Design Company use?",
-      a: "We develop fast and secure platforms using Next.js, React, Tailwind CSS, TypeScript, and Three.js for interactive 3D elements to ensure maximum Core Web Vitals scores."
+      a: "We develop fast and secure platforms using Next.js, React, Tailwind CSS, TypeScript, and Canvas/Three.js for interactive elements to ensure maximum Core Web Vitals scores."
     },
     {
       q: "How does DGEN Z integrate marketing automations?",
-      a: "We construct smart automated systems including automated Instagram comment responses, Facebook direct message triggers, WhatsApp leads funnels, and custom AI chat assistants."
+      a: "We construct smart automated systems including automated Instagram comment responses, Facebook direct message triggers, WhatsApp lead funnels, and custom AI chat assistants."
     },
     {
       q: "Why is professional graphic design important for business growth?",
@@ -106,7 +257,7 @@ export default function Home() {
     },
     {
       q: "What SEO services does DGEN Z offer for higher Google rankings?",
-      a: "We offer complete technical and on-page SEO services, including rich schema markup injection, logical HTML layout heading hierarchies, mobile-first responsiveness, and canonical URL setups."
+      a: "We offer complete technical and on-page SEO services, including rich schema markup injection, logical HTML heading hierarchies, mobile-first responsiveness, and canonical URL setups."
     },
     {
       q: "Can DGEN Z help automate customer lead generation on WhatsApp?",
@@ -114,229 +265,180 @@ export default function Home() {
     }
   ];
 
-  const services = [
-    {
-      title: "Graphic & Brand Design",
-      items: ["Poster & Banner Design", "Visual Logo Concepts", "Flyer & Standee Creations", "Premium Packaging Layouts", "Menu Cards & Digital Assets"]
-    },
-    {
-      title: "Website & Local SEO Solutions",
-      items: ["Website Development", "Instagram Automation Triggers", "Google Business Profile Rankings", "AI Chatbot Engineering", "Social Growth Consultations"]
-    },
-    {
-      title: "Document Services",
-      items: ["Professional PPT & PDF Design", "Professional Pitch Decks", "Google Forms & Document Formatting", "Interactive Sales Slides", "Pitch Books"]
-    }
-  ];
-
   return (
-    <>
-      {/* ----------------- 1. HERO SECTION ----------------- */}
-      <section className="min-h-[85vh] flex flex-col justify-center py-12 relative overflow-hidden select-none" id="home">
-        <div className="space-y-6 max-w-4xl text-left relative z-10">
+    <div className="relative space-y-36 sm:space-y-48 py-4 selection:bg-[#D90429] selection:text-white">
+
+      {/* ==================================================
+          SPATIAL HUD OVERLAY (PERSISTENT SCENE COUNTER)
+         ================================================== */}
+      <div className="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[10px] font-mono tracking-widest text-[#A7A7A7] uppercase select-none">
+        <span className="w-2 h-2 rounded-full bg-[#D90429] animate-pulse" />
+        <span className="text-white font-bold">{String(activeScene).padStart(2, "0")} / 13</span>
+        <span className="text-neutral-600">—</span>
+        <span>{sceneTitles[activeScene - 1]}</span>
+      </div>
+
+      {/* Vertical Scroll Depth Meter on Right */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-1 pointer-events-none select-none">
+        {Array.from({ length: 13 }).map((_, i) => (
+          <div
+            key={i}
+            className={`w-1 transition-all duration-300 rounded-full ${
+              activeScene === i + 1 ? "h-6 bg-[#D90429] shadow-[0_0_8px_#D90429]" : "h-1.5 bg-white/10"
+            }`}
+          />
+        ))}
+      </div>
+
+
+      {/* ==================================================
+          SCENE 01 — ENTER THE DGEN Z UNIVERSE
+         ================================================== */}
+      <section className="min-h-[92vh] flex flex-col justify-between pt-8 pb-12 relative overflow-hidden select-none" id="scene-01">
+        
+        {/* Background Atmospheric Video Container */}
+        <div className="absolute inset-0 -z-10 overflow-hidden opacity-30 pointer-events-none">
+          <BackgroundVideo
+            src="/videos/hero-dgenz.webm"
+            poster="https://picsum.photos/seed/dgenz-hero/1920/1080"
+            className="w-full h-full filter brightness-50 contrast-125"
+            overlayClassName="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303]"
+          />
+        </div>
+
+        <div className="space-y-8 max-w-5xl text-left relative z-10 my-auto">
           
-          {/* Accent micro banner */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-neon-green/30 bg-neon-green/10 text-neon-green text-xs font-mono uppercase tracking-widest leading-none">
-            <Sparkles className="w-3.5 h-3.5 text-neon-green animate-pulse" /> High-Performance Digital Marketing & Web Engineering
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-[#A7A7A7] text-[11px] font-mono uppercase tracking-[0.25em]"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D90429] animate-pulse" />
+            3D CINEMATIC EXPERIENCE — DGEN Z UNIVERSE
+          </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-black tracking-tight text-white leading-[1.1] uppercase">
-            PREMIUM WEBSITE DEVELOPMENT &<br />
-            <span className="text-crimson font-black drop-shadow-[0_0_15px_rgba(220,20,60,0.3)]">
-              DIGITAL MARKETING AGENCY KOLKATA
-            </span>
-          </h1>
+          {/* Monumental Hero Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="space-y-3"
+          >
+            <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tight text-[#F7F7F7] leading-[0.92] uppercase font-sans">
+              DGEN <span className="text-[#D90429]">Z</span>
+            </h1>
 
-          <p className="text-gray-300 font-sans text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed text-balance">
-            Welcome to <strong className="text-white">DGEN Z</strong>, the premier digital marketing and professional website development agency headquartered in Kolkata, founded by leading brand consultant and senior web developer <strong className="text-white">Sobhit Jaiswal</strong>. We engineer high-performance Next.js websites, custom e-commerce web applications, authority-focused brand logos, packaging box graphic designs, and strategic Google Business Profile optimization maps that drive targeted organic traffic, increase local searches, and capture high-converting business inquiries automatically.
-          </p>
+            <p className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400 uppercase font-sans leading-none">
+              DIGITAL WITHOUT LIMITS.
+            </p>
+          </motion.div>
 
-          {/* Real CTA triggers */}
-          <div className="flex flex-wrap items-center gap-4 pt-4">
+          {/* Subtitle Matrix */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-4 max-w-2xl"
+          >
+            <p className="text-base sm:text-lg font-mono text-[#909090] tracking-widest uppercase">
+              DESIGN × TECHNOLOGY × MARKETING × AI
+            </p>
+
+            <p className="text-xs md:text-sm text-neutral-400 font-sans leading-relaxed">
+              Custom Next.js web application development, Google Business Profile optimization, performance marketing, and smart AI growth systems engineered in Kolkata, India.
+            </p>
+          </motion.div>
+
+          {/* Action CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-wrap items-center gap-4 pt-4"
+          >
             <a
-              href="#ai-blueprint"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-crimson hover:bg-crimson/90 text-white font-sans font-bold text-xs uppercase tracking-wider rounded-sm shadow-lg shadow-crimson/25 hover:-translate-y-0.5 active:translate-y-0 transition-all outline-none"
+              href="#scene-02"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 hover:-translate-y-0.5 transition-all outline-none"
             >
-              Configure Custom Next.js & SEO Package <ArrowRight className="w-4 h-4" />
+              ENTER THE EXPERIENCE ↓
             </a>
+
             <a
-              href="#masonry-gallery"
-              className="inline-flex items-center gap-2 px-7 py-4 bg-transparent border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-sans font-medium text-xs uppercase tracking-widest rounded-sm transition-all outline-none"
+              href="#proposal"
+              className="inline-flex items-center gap-2 px-7 py-4 bg-[#080808] border border-white/10 hover:border-white/30 text-[#F7F7F7] font-sans font-medium text-xs uppercase tracking-widest rounded-sm transition-all outline-none"
             >
-              Explore Graphic Design Showcase
+              START A PROJECT ↗
             </a>
+
             <a
               href="https://wa.me/919681168381"
               target="_blank"
               rel="no-referrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neon-green hover:text-neon-green/90 uppercase tracking-widest hover:underline outline-none px-2 neon-glow-green"
+              className="inline-flex items-center gap-2 px-6 py-4 text-xs font-mono font-bold text-[#39ff14] hover:text-[#39ff14]/80 uppercase tracking-widest hover:underline outline-none transition-all"
             >
-              <Phone className="w-3.5 h-3.5" /> Instant Founder WhatsApp Connect
+              <Phone className="w-3.5 h-3.5" /> Founder Direct
             </a>
-          </div>
-
-          {/* Quality Stats display */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/5">
-            <div>
-              <div className="text-3xl font-sans font-black text-white">150+</div>
-              <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Global Brand Blueprints</div>
-              <p className="text-[10px] text-gray-500 font-sans mt-1">High-performance custom design platforms deployed globally.</p>
-            </div>
-            <div>
-              <div className="text-3xl font-sans font-black text-crimson">24/7</div>
-              <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Automated Leads Captured</div>
-              <p className="text-[10px] text-gray-500 font-sans mt-1">AI automation triggers processing direct chat inquiries.</p>
-            </div>
-            <div>
-              <div className="text-3xl font-sans font-black text-neon-green neon-glow-green">#1 Rank</div>
-              <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Google Maps Optimization</div>
-              <p className="text-[10px] text-gray-500 font-sans mt-1">Local SEO services that place Kolkata businesses on the map.</p>
-            </div>
-            <div>
-              <div className="text-3xl font-sans font-black text-gray-400">Next.js</div>
-              <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Speed & Security Engine</div>
-              <p className="text-[10px] text-gray-500 font-sans mt-1">Coded with clean structured data for immediate indexing.</p>
-            </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Spatial Coordinates Footer Bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="pt-12 flex items-center justify-between border-t border-white/10 text-[10px] font-mono text-[#909090] uppercase tracking-[0.25em]"
+        >
+          <span>FOUNDER: SOBHIT JAISWAL</span>
+          <span className="flex items-center gap-2">
+            SCROLL TO TRAVEL <ArrowDown className="w-3 h-3 text-[#D90429] animate-bounce" />
+          </span>
+          <span>KOLKATA, INDIA</span>
+        </motion.div>
       </section>
 
 
-      {/* ----------------- 2. SERVICES SECTION ----------------- */}
-      <section className="space-y-12 select-none" id="services">
-        <div className="text-left space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            01 / BRAND & CODE CO-PILOT SERVICES
+      {/* ==================================================
+          SCENE 02 — THE DIGITAL VOID
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center py-16 relative select-none" id="scene-02">
+        <div className="max-w-4xl space-y-12">
+          
+          <div className="inline-block text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 02 / THE DIGITAL VOID
           </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black p-0 uppercase leading-none tracking-tight text-white">
-            HIGH-TICKET DIGITAL & DESIGN SOLUTIONS
-          </h2>
-          <p className="max-w-2xl text-gray-400 font-sans text-xs md:text-sm leading-relaxed text-balance">
-            At <strong className="text-white">DGEN Z</strong>, every visual assets concept, responsive layout code, or local map search optimization block we design is a calculated intellectual weapon built to eliminate average market presence, establish absolute authority, and scale your sales pipelines.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {services.map((group, groupIdx) => (
-            <div
-              key={groupIdx}
-              className="p-8 rounded-xl border border-white/[0.08] bg-black/20 glass hover:border-crimson/30 transition-all flex flex-col justify-between relative overflow-hidden group shadow-lg"
-            >
-              {/* Corner ambient visual outline decoration */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-crimson/5 rounded-full blur-2xl pointer-events-none group-hover:bg-crimson/15 transition-all" />
-
-              <div className="space-y-6">
-                <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-                  <span className="w-1.5 h-1.5 rounded-full bg-crimson" />
-                  <h3 className="text-white font-sans font-black text-base uppercase tracking-wider">
-                    {group.title}
-                  </h3>
-                </div>
-
-                <div className="space-y-3">
-                  {group.items.map((item, itemIdx) => (
-                    <div key={itemIdx} className="flex items-center gap-2.5 text-xs text-gray-400">
-                      <CheckCircle2 className="w-4 h-4 text-crimson flex-shrink-0" />
-                      <span className="font-sans leading-tight">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-8">
-                <a
-                  href="#ai-blueprint"
-                  className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-lg border border-white/10 hover:border-white/20 text-white font-sans text-xs uppercase tracking-widest font-bold transition-all bg-zinc-950/40"
-                >
-                  Configure Custom Blueprint <Zap className="w-3.5 h-3.5 text-crimson" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Detailed Service Explanation Panels (Increases Keyword Richness & Word Count) */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 pt-6">
-          <div className="p-6 rounded-xl border border-white/5 bg-black/40 space-y-3">
-            <h4 className="text-white font-sans font-extrabold text-xs uppercase tracking-wider">
-              1. Graphic Design & Visual Brand Identity
-            </h4>
-            <p className="text-gray-400 text-[11px] font-sans leading-relaxed">
-              We design custom vector logos, brand books, typography guidelines, matte-black visual interfaces, offline marketing standees, luxury product box layouts, and digital banners that solidify your status as an elite local or national brand.
-            </p>
-          </div>
-          <div className="p-6 rounded-xl border border-white/5 bg-black/40 space-y-3">
-            <h4 className="text-white font-sans font-extrabold text-xs uppercase tracking-wider">
-              2. Custom Next.js Website Development
-            </h4>
-            <p className="text-gray-400 text-[11px] font-sans leading-relaxed">
-              Ditch slow, bloated templates. We code ultra-responsive, highly optimized React and Next.js digital platforms. Fully integrated with customized schema layouts, semantic heading hierarchies, and automatic local SEO coordinates.
-            </p>
-          </div>
-          <div className="p-6 rounded-xl border border-white/5 bg-black/40 space-y-3">
-            <h4 className="text-white font-sans font-extrabold text-xs uppercase tracking-wider">
-              3. Google Business Profile & Local SEO
-            </h4>
-            <p className="text-gray-400 text-[11px] font-sans leading-relaxed">
-              Dominate Google local search results in Kolkata. We optimize your Google Business Profile (GBP), coordinate geotagged media submissions, set up local citations, and design review acquisition mechanisms that rank you #1 on Google Maps.
-            </p>
-          </div>
-          <div className="p-6 rounded-xl border border-white/5 bg-black/40 space-y-3">
-            <h4 className="text-white font-sans font-extrabold text-xs uppercase tracking-wider">
-              4. Direct-Response Social Automations
-            </h4>
-            <p className="text-gray-400 text-[11px] font-sans leading-relaxed">
-              We construct automatic social response engines. Turn cold Instagram grid impressions and direct comments into pre-vetted leads. Complete with automated pre-filled WhatsApp click-to-chat funnels that streamline direct-sales calls.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ----------------- 3. WEBSITE DEVELOPMENT BENEFITS ----------------- */}
-      <section className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass backdrop-blur-md relative overflow-hidden select-none" id="websites">
-        {/* Subtle linear overlay */}
-        <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-crimson/40 to-neon-green/30" />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="inline-block text-neon-green font-mono text-xs uppercase tracking-widest font-bold neon-glow-green">
-              02 / HIGH-SPEED LEAD CAPTURING ENGINES
-            </div>
-            <h2 className="text-3xl md:text-5xl font-sans font-black text-white leading-tight uppercase">
-              PROFESSIONAL WEBSITE DESIGN & PERFORMANCE SYSTEMS
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#909090] uppercase leading-none font-sans">
+              YOUR BUSINESS<br />
+              DOESN&#39;T NEED<br />
+              <span className="text-[#F7F7F7]">MORE NOISE.</span>
             </h2>
-            <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
-              An unoptimized, slow website acts as a financial leak for your company. At <strong className="text-white">DGEN Z Website Design Company</strong>, every responsive visual gateway we engineer is coded hand-crafted, desktop-first, with near-instant loading speeds, rich structured schema, and floating direct WhatsApp messaging setups to secure visitor trust in seconds.
-            </p>
-            <p className="text-gray-400 font-sans text-xs leading-relaxed">
-              By utilizing the modern capabilities of the Next.js App Router, we eliminate heavy JavaScript baggage, ensuring your site achieves perfect Core Web Vitals scores. Google prioritizes lightweight, structured sites, meaning our website development solutions naturally rank higher on search engine results pages (SERPs) without bloated advertising costs.
-            </p>
 
-            <div className="pt-2">
-              <a
-                href="#ai-blueprint"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-neon-green hover:bg-neon-green/90 text-black font-sans font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-neon-green/20 outline-none"
-              >
-                Assemble My Custom Website Now
-              </a>
-            </div>
+            <p className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#D90429] uppercase leading-none font-sans">
+              IT NEEDS A<br />
+              DIGITAL SYSTEM.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Floating Spatial UI Objects at different depths */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
             {[
-              { t: "Generate Active Leads 24/7", d: "Designed with customized server-side forms that funnel hot customer prospects instantly." },
-              { t: "Build Unshakable Market Trust", d: "Luxury glassmorphic layouts and corporate typography raise your brand's perceived authority 10x." },
-              { t: "Desktop-First Fluid Grid Precision", d: "Say goodbye to standard generic template blocks. Enjoy hand-crafted fluid responsive CSS containers." },
-              { t: "Kolkata Local Search Dominance", d: "Embedded local SEO coordinates and maps citation codes guarantee placement in target search areas." },
-              { t: "WhatsApp Conversion Optimizations", d: "Interactive floating direct-chat widgets convert casual browsers into sales calls immediately." },
-              { t: "Engineered For Future Scalability", d: "Clean TypeScript and modular components provide an indestructible base ready for paid ads campaigns." }
-            ].map((b, i) => (
-              <div key={i} className="p-5 rounded-xl border border-white/5 bg-black/40 space-y-1.5 hover:border-crimson/30 transition-all">
-                <h4 className="text-white font-sans font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neon-green" /> {b.t}
-                </h4>
-                <p className="text-gray-400 text-[11px] font-sans leading-relaxed">{b.d}</p>
+              { title: "WEBSITE UI", code: "NEXT.JS 15", color: "border-red-500/20" },
+              { title: "INSTAGRAM POSTS", code: "HIGH RETENTION", color: "border-white/10" },
+              { title: "GOOGLE SEARCH", code: "GBP RANK #1", color: "border-green-500/20" },
+              { title: "MOBILE SCREENS", code: "RESPONSIVE", color: "border-white/10" },
+              { title: "AD CAMPAIGNS", code: "DIRECT RESPONSE", color: "border-red-500/20" },
+              { title: "AI INTERFACES", code: "VEER.1 CORE", color: "border-green-500/20" },
+              { title: "ANALYTICS", code: "CONVERSION METRICS", color: "border-white/10" },
+              { title: "PACKAGING", code: "LUXURY VECTOR", color: "border-red-500/20" }
+            ].map((obj, i) => (
+              <div
+                key={i}
+                className={`p-4 rounded-sm bg-[#080808] border ${obj.color} space-y-1 hover:border-[#D90429] transition-all`}
+              >
+                <span className="text-[9px] font-mono text-neutral-500 uppercase block">{obj.code}</span>
+                <span className="text-xs font-mono font-bold text-[#F7F7F7] uppercase block">{obj.title}</span>
               </div>
             ))}
           </div>
@@ -344,35 +446,371 @@ export default function Home() {
       </section>
 
 
-      {/* ----------------- 4. CUSTOM PROPOSAL BUILDER SUBMISSION IN-SITE ----------------- */}
-      <section className="space-y-8 select-none" id="ai-blueprint">
-        <div className="text-center space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold animate-pulse">
-            03 / ENTERPRISE PROPOSAL WIZARD
+      {/* ==================================================
+          SCENE 03 — THE DGEN Z SYSTEM
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-03">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 03 / THE DGEN Z SYSTEM
           </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 leading-none">
-            ENGINEER YOUR CUSTOM REVENUE ROADMAP
+          <h2 className="text-4xl md:text-6xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            WE DON&#39;T BUILD DISCONNECTED SERVICES.<br />
+            <span className="text-[#D90429]">WE BUILD CONNECTED GROWTH SYSTEMS.</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
-            Ready to calculate exact budget lines and visual solutions for your project? Use our customized, server-side proposal co-pilot widget below. Formulate your brand scope, select required channels, and receive a calculated scope estimate instantly.
-          </p>
         </div>
 
-        <LeadWizard />
+        {/* Connected Ecosystem Installation Grid */}
+        <div className="p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden">
+          <div className="max-w-3xl mx-auto text-center space-y-12">
+            
+            <div className="inline-block p-6 rounded-sm bg-[#D90429] text-white font-black text-lg md:text-xl uppercase tracking-widest shadow-xl shadow-[#D90429]/20">
+              YOUR BUSINESS
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                { name: "BRAND SYSTEM", role: "Perceived Value & Status" },
+                { name: "WEB ARCHITECTURE", role: "High-Speed Conversion" },
+                { name: "GOOGLE MAPS SEO", role: "Local Search Dominance" },
+                { name: "GROWTH MARKETING", role: "Customer Acquisition" },
+                { name: "AI AUTOMATIONS", role: "24/7 Lead Qualification" },
+                { name: "CONTENT MEDIA", role: "Audience Retention" }
+              ].map((node, i) => (
+                <div key={i} className="p-5 rounded-sm bg-[#030303] border border-white/10 hover:border-[#D90429] transition-all space-y-1">
+                  <span className="text-xs font-mono font-bold text-[#F7F7F7] uppercase block">
+                    {node.name}
+                  </span>
+                  <span className="text-[10px] font-mono text-[#909090] uppercase block">
+                    {node.role}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
 
-      {/* ----------------- 5. MASONRY PORTFOLIO GALLERY ----------------- */}
-      <section className="space-y-10 select-none" id="masonry-gallery">
-        <div className="text-left space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            04 / EXPERIMENTAL BRAND VAULTS
+      {/* ==================================================
+          SCENE 04 — WEBSITE DEVELOPMENT WORLD
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-04">
+        
+        {/* Background Video Layer */}
+        <div className="absolute right-0 w-full md:w-1/2 h-[400px] -z-10 overflow-hidden opacity-20 pointer-events-none">
+          <BackgroundVideo
+            src="/videos/web-world.webm"
+            poster="https://picsum.photos/seed/web-world/1280/720"
+            className="w-full h-full"
+          />
+        </div>
+
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 04 / WEBSITE DEVELOPMENT WORLD
           </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-white tracking-tight leading-none">
-            DGEN Z GRAPHIC DESIGN & NEXT.JS EXHIBITS
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            WEBSITES PEOPLE<br />
+            <span className="text-[#D90429]">REMEMBER.</span>
           </h2>
-          <p className="max-w-2xl text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
-            Explore our curated masonry portfolio of successful brand redesigns, custom vector corporate logos, responsive landing page screens, luxury packaging layouts, and corporate PPT presentations developed for elite clients in Kolkata and across India.
+          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
+            Fast. Responsive. Search-ready. Built to convert.
+          </p>
+        </div>
+
+        {/* Service Matrix List */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { title: "Website Design", desc: "Custom UI layout systems tailored for high-ticket service brands." },
+            { title: "Next.js Development", desc: "Server-side React architecture with 100/100 Core Web Vitals performance." },
+            { title: "Landing Pages", desc: "Direct-response campaign pages optimized for maximum lead conversions." },
+            { title: "Business Portals", desc: "Scalable enterprise web applications with custom API integrations." },
+            { title: "Mobile Experiences", desc: "Touch-optimized responsive interfaces designed for smartphone buyers." },
+            { title: "SEO Foundations", desc: "Rich schema injection, semantic HTML, and lightning-fast indexing." }
+          ].map((item, i) => (
+            <div key={i} className="p-6 rounded-sm bg-[#080808] border border-white/5 space-y-2 hover:border-[#D90429]/40 transition-all">
+              <span className="text-[10px] font-mono text-[#D90429] font-bold block">0{i + 1} / WEB SPEC</span>
+              <h3 className="text-base font-mono font-bold text-[#F7F7F7] uppercase">{item.title}</h3>
+              <p className="text-xs text-[#909090] font-sans leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 05 — MARKETING WORLD
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-05">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 05 / MARKETING WORLD
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            ATTENTION IS EASY.<br />
+            RELEVANCE IS HARD.<br />
+            <span className="text-[#D90429]">WE CREATE BOTH.</span>
+          </h2>
+        </div>
+
+        {/* Infinite Media Wall Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { tag: "REELS & SHORTS", label: "High Audience Retention" },
+            { tag: "AD CAMPAIGNS", label: "Targeted Customer Acquisition" },
+            { tag: "LOCAL MARKETING", label: "Google Business Ranking #1" },
+            { tag: "BRAND CONTENT", label: "Editorial Grid Strategy" },
+            { tag: "CONVERSION POSTERS", label: "High Contrast Design" },
+            { tag: "FUNNEL CREATIVES", label: "Direct Response Strategy" },
+            { tag: "WHATSAPP FUNNELS", label: "Click-To-Chat Automations" },
+            { tag: "ORGANIC SEARCH", label: "Local Authority Building" }
+          ].map((m, i) => (
+            <div key={i} className="p-5 rounded-sm bg-[#080808] border border-white/10 hover:border-[#D90429] transition-all space-y-2">
+              <span className="text-[9px] font-mono text-[#D90429] uppercase font-bold block">{m.tag}</span>
+              <p className="text-xs font-mono font-bold text-[#F7F7F7] uppercase">{m.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 06 — BRAND WORLD
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-06">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 06 / BRAND WORLD
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            BRANDS AREN&#39;T DECORATED.<br />
+            <span className="text-[#D90429]">THEY&#39;RE ENGINEERED.</span>
+          </h2>
+        </div>
+
+        {/* Brand System Components */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              title: "VECTOR IDENTITY",
+              desc: "Scalable corporate logos, brand marks, and geometric typography guidelines engineered in Illustrator."
+            },
+            {
+              title: "LUXURY PACKAGING",
+              desc: "Custom box templates, hot-stamp foil vector guides, and tactile material specifications for physical products."
+            },
+            {
+              title: "PRESENTATION DECKS",
+              desc: "High-ticket corporate PowerPoint slides, PDF books, and investor pitch decks designed to close deals."
+            }
+          ].map((b, i) => (
+            <div key={i} className="p-8 rounded-sm bg-[#080808] border border-white/10 space-y-4 hover:border-[#D90429] transition-all">
+              <span className="text-xs font-mono text-[#D90429] font-bold">0{i + 1} / BRAND CORE</span>
+              <h3 className="text-xl font-mono font-bold text-[#F7F7F7] uppercase">{b.title}</h3>
+              <p className="text-xs text-[#909090] font-sans leading-relaxed">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 07 — THE AI PORTAL
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden select-none space-y-12" id="scene-07">
+        
+        {/* Subtle AI Ambient Aura */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#D90429]/10 rounded-full blur-[150px] pointer-events-none" />
+
+        <div className="space-y-4 relative z-10">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 07 / DGEN Z AI LAB
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight font-sans">
+            BUSINESS MEETS<br />
+            <span className="text-[#D90429]">INTELLIGENCE.</span>
+          </h2>
+        </div>
+
+        {/* Orbiting Capabilities */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+          {[
+            "AI CHATBOTS",
+            "AI SALES AGENTS",
+            "LEAD QUALIFICATION",
+            "WORKFLOW AUTOMATION",
+            "CUSTOMER SUPPORT",
+            "AI CONTENT SYSTEMS",
+            "SMART BUSINESS TOOLS",
+            "24/7 AUTOMATED INBOX"
+          ].map((cap, i) => (
+            <div key={i} className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1 hover:border-[#D90429]/40 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#39ff14] inline-block mb-1" />
+              <h3 className="text-xs font-mono font-bold text-[#F7F7F7] uppercase tracking-wider">{cap}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 08 — MEET VEER.1
+         ================================================== */}
+      <section className="min-h-[75vh] flex flex-col justify-center select-none" id="scene-08">
+        <div className="p-8 md:p-12 rounded-sm border border-[#D90429]/40 bg-[#080808] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-4 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#D90429]/10 border border-[#D90429]/30 text-[#D90429] text-[10px] font-mono uppercase tracking-widest font-bold">
+              <Bot className="w-3.5 h-3.5" /> FEATURED AI GROWTH CONSULTANT
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-[#F7F7F7] uppercase font-sans tracking-tight">
+              MEET VEER.1
+            </h2>
+            <p className="text-xs md:text-sm text-[#909090] font-sans leading-relaxed">
+              VEER.1 is DGEN Z&#39;s AI Business Growth Consultant. Designed to help website visitors understand our services, explore potential growth opportunities, calculate scope lines, and connect with founder Sobhit Jaiswal instantly.
+            </p>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {["BUSINESS ANALYSIS", "DIGITAL STRATEGY", "LEAD QUALIFICATION", "24/7 CONVERSATION"].map((tag, i) => (
+                <span key={i} className="px-2.5 py-1 rounded bg-[#030303] border border-white/10 text-[10px] font-mono text-neutral-300 uppercase">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="shrink-0">
+            <button
+              onClick={handleOpenVeer}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 transition-all outline-none cursor-pointer"
+            >
+              TALK TO VEER.1 <Bot className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 09 — CLIENT WORK UNIVERSE (SELECTED REALITY)
+         ================================================== */}
+      <section className="min-h-[90vh] flex flex-col justify-center space-y-16 select-none" id="selected-work">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 09 / SELECTED REALITY
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            SELECTED REALITY
+          </h2>
+          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
+            Real clients. Real business problems. Purpose-built digital solutions.
+          </p>
+        </div>
+
+        {/* Real Client Case Studies */}
+        <div className="space-y-12">
+          {selectedProjects.map((proj) => (
+            <div
+              key={proj.num}
+              className="p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] space-y-8 relative overflow-hidden hover:border-[#D90429]/40 transition-all duration-300"
+            >
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                <div>
+                  <span className="text-xs font-mono text-[#D90429] font-bold tracking-widest block uppercase">
+                    PROJECT {proj.num}
+                  </span>
+                  <h3 className="text-3xl md:text-5xl font-black text-[#F7F7F7] uppercase tracking-tight font-sans mt-1">
+                    {proj.client}
+                  </h3>
+                </div>
+
+                <div className="text-left md:text-right">
+                  <span className="text-xs font-mono text-neutral-400 block uppercase">
+                    {proj.industry}
+                  </span>
+                  <span className="text-xs font-mono text-[#909090] block mt-1 uppercase">
+                    {proj.services}
+                  </span>
+                </div>
+              </div>
+
+              {/* Case Breakdown */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
+                  <span className="text-[10px] font-mono text-[#D90429] uppercase tracking-widest block font-bold">
+                    CHALLENGE
+                  </span>
+                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+                    {proj.challenge}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
+                    THINKING
+                  </span>
+                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+                    {proj.thinking}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
+                    SYSTEM
+                  </span>
+                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+                    {proj.system}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
+                    EXECUTION
+                  </span>
+                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+                    {proj.execution}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-sm bg-[#030303] border border-[#39ff14]/30 space-y-1.5">
+                  <span className="text-[10px] font-mono text-[#39ff14] uppercase tracking-widest block font-bold">
+                    OUTCOME
+                  </span>
+                  <p className="text-xs text-[#F7F7F7] font-sans leading-relaxed font-medium">
+                    {proj.outcome}
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-end">
+                <a
+                  href={`https://wa.me/919681168381?text=Hello%20DGEN%20Z%2C%20I%20want%20to%20discuss%20a%20similar%20project%20like%20${encodeURIComponent(proj.client)}`}
+                  target="_blank"
+                  rel="no-referrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#D90429] hover:text-[#D90429]/80 uppercase tracking-widest hover:underline"
+                >
+                  DISCUSS SIMILAR PROJECT <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ==================================================
+          SCENE 10 — CREATIVE EXPERIMENTS (DGEN Z LAB)
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-10 select-none" id="lab">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 10 / DGEN Z LAB
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            CREATIVE EXPERIMENTS
+          </h2>
+          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
+            Where strategic design meets emerging technology.
           </p>
         </div>
 
@@ -380,228 +818,151 @@ export default function Home() {
       </section>
 
 
-      {/* ----------------- 6. ABOUT FOUNDER SOBHIT JAISWAL ----------------- */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center select-none" id="about">
-        <div className="p-8 rounded-2xl border border-white/[0.08] bg-black/20 glass space-y-6 relative overflow-hidden">
-          {/* Subtle design block background */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-crimson/5 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="inline-block text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            05 / DIRECT DIRECTOR BRIEF
+      {/* ==================================================
+          SCENE 11 — THE PROCESS TUNNEL
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="process">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 11 / THE PROCESS TUNNEL
           </div>
-          <h3 className="text-3xl md:text-4xl font-sans font-black text-white uppercase leading-tight tracking-tight">
-            MEET THE FOUNDER: SOBHIT JAISWAL
-          </h3>
-          <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
-            {"\"I didn't forge DGEN Z to be another passive, slow agency. I engineered this digital marketing agency because corporate companies in India and growing startups are exhausted by low-performing, generic templates that fail to convert traffic. My primary directive is to bridge high-ticket aesthetic prestige with hyper-aggressive, Google-first search intent.\""}
-          </p>
-          <p className="text-gray-300 font-sans text-xs md:text-sm leading-relaxed">
-            {"Based at our tactical creative headquarters in Kolkata, West Bengal, we design visual assets that establish immediate elite status for your company. We believe that outstanding, responsive visual positioning paired with custom technical SEO is what allows you to command premium prices and turn every casual visitor into a lifetime client.\""}
-          </p>
-
-          <div className="pt-2 flex items-center gap-4">
-            <div>
-              <div className="text-white font-sans font-black text-sm uppercase leading-none">Sobhit Jaiswal</div>
-              <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">Director & Chief Brand Architect</div>
-            </div>
-            <span className="text-zinc-800 text-lg">|</span>
-            <div>
-              <div className="text-neon-green font-sans font-black text-xs uppercase leading-none neon-glow-green">Direct Support Channel</div>
-              <a href="tel:+919681168381" className="text-[11px] font-mono text-gray-300 tracking-wide hover:underline block mt-1">+91 96811 68381</a>
-            </div>
-          </div>
-        </div>
-
-        {/* Local Case Study Section block */}
-        <div className="space-y-6">
-          <div className="inline-block text-neon-green font-mono text-xs uppercase tracking-widest font-bold neon-glow-green">
-            06 / REAL-WORLD REVENUE FIXES & LOCAL WINS
-          </div>
-          <h3 className="text-2xl font-sans font-black text-white uppercase leading-none tracking-tight">
-            CASE STUDY: SOUTH KOLKATA RESTAURANT EXPANSION
-          </h3>
-
-          <div className="divide-y divide-white/5 space-y-4">
-            <div className="pt-2">
-              <span className="text-[10px] font-mono text-crimson uppercase block tracking-wider font-bold">The Strategic Bottleneck</span>
-              <p className="text-gray-400 text-xs font-sans mt-1">
-                An active dining restaurant in South Kolkata was struggling with standard, generic social media grid templates and a slow, non-responsive PDF menu. More than 80% of warm search traffic bounced immediately upon landing on their listings.
-              </p>
-            </div>
-            <div className="pt-4">
-              <span className="text-[10px] font-mono text-neon-green uppercase block tracking-wider font-bold neon-glow-green">The DGEN Z Integrated Fix</span>
-              <p className="text-gray-400 text-xs font-sans mt-1">
-                We rebuilt a fast, custom, single-page glassmorphic menu website, injected verified geo-coordinates schema into their Google Business Profile listings, and configured automated direct-message templates to trigger instant order inquiries on Instagram.
-              </p>
-            </div>
-            <div className="pt-4">
-              <span className="text-[10px] font-mono text-white uppercase block tracking-wider font-bold">Tangible Business Metric Result</span>
-              <p className="text-white text-xs font-sans font-bold flex items-center gap-2 mt-1 uppercase">
-                <TrendingUp className="w-4.5 h-4.5 text-neon-green" /> +160% Monthly Inquiries & Google Maps discovery placements multiplied 3x within 15 business days.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ----------------- 7. INTERACTIVE PROCESS TIMELINE ----------------- */}
-      <section className="space-y-12 select-none" id="process">
-        <div className="text-center space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            07 / THE STRATEGIC DEVELOPMENT SPRINT
-          </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-white">
-            THE STRATEGIC DEVELOPMENT WORKFLOW
+          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            FROM IDEA TO IMPACT.
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
-            We follow a rigorous, six-step digital delivery process to transform your standard business assets into absolute high-ticket revenue networks.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
           {[
-            { step: "01", t: "Deep Audit", d: "1-on-1 brand positioning audit and local keyword scoping with Sobhit Jaiswal." },
-            { step: "02", t: "Blueprint", d: "We construct custom layout maps, competitive analysis matrices, and SEO structures." },
-            { step: "03", t: "Visual Forge", d: "We design premium matte-black vector logos, custom icons, and interactive mockups." },
-            { step: "04", t: "Code Assembly", d: "We engineer lightweight responsive Next.js/React containers with perfect Core Web Vitals." },
-            { step: "05", t: "SEO Mapping", d: "Injection of complete schema tags, local GBP alignments, and live page speed audits." },
-            { step: "06", t: "Launch & Support", d: "Immediate deployment on secure servers, with continuous copywriting calibrations." }
-          ].map((item, i) => (
-            <div key={i} className="p-5 rounded-xl border border-white/5 bg-black/20 glass hover:border-crimson/30 transition-all space-y-3 shadow shadow-black">
-              <span className="font-mono text-2xl font-black text-crimson/30 block leading-none">{item.step}</span>
-              <h4 className="text-white text-xs font-sans font-bold uppercase tracking-wider">{item.t}</h4>
-              <p className="text-gray-500 text-[11px] font-sans leading-relaxed">{item.d}</p>
+            { step: "01", t: "DISCOVER", d: "Understand business goals & constraints." },
+            { step: "02", t: "THINK", d: "Analyze market & customer intent." },
+            { step: "03", t: "STRATEGIZE", d: "Formulate digital roadmap & architecture." },
+            { step: "04", t: "DESIGN", d: "Craft high-contrast visual assets." },
+            { step: "05", t: "BUILD", d: "Develop responsive, high-speed code." },
+            { step: "06", t: "LAUNCH", d: "Deploy, audit Core Web Vitals & index." },
+            { step: "07", t: "GROW", d: "Measure, optimize & scale performance." }
+          ].map((s, i) => (
+            <div key={i} className="p-5 rounded-sm border border-white/5 bg-[#080808] space-y-3 hover:border-[#D90429]/40 transition-all">
+              <span className="font-mono text-2xl font-bold text-[#D90429] block">{s.step}</span>
+              <h3 className="text-xs font-mono font-bold text-[#F7F7F7] uppercase tracking-wider">{s.t}</h3>
+              <p className="text-[11px] text-neutral-400 font-sans leading-relaxed">{s.d}</p>
             </div>
           ))}
         </div>
       </section>
 
 
-      {/* ----------------- 8. CLIENT TESTIMONIAL SLIDER ----------------- */}
-      <section className="space-y-12 select-none" id="testimonials">
-        <div className="text-left space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            08 / ENDORSED VALUE CODES
+      {/* ==================================================
+          SCENE 12 — FOUNDER / HUMAN ELEMENT
+         ================================================== */}
+      <section className="min-h-[75vh] flex flex-col justify-center p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden select-none" id="founder">
+        <div className="max-w-3xl space-y-6">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 12 / HUMAN ELEMENT
           </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-white">
-            VERIFIED BRAND ENDORSEMENTS
+
+          <h2 className="text-3xl md:text-6xl font-black uppercase text-[#F7F7F7] tracking-tight leading-tight font-sans">
+            BEHIND THE SYSTEM.
           </h2>
-          <p className="max-w-xl text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
-            Read real-world testimonials from active company founders who chose DGEN Z to optimize their digital presence.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              n: "Karan Johar",
-              c: "CEO, Vektor Logistics",
-              review: "Sobhit's visual quality and professional approach are spectacular. He rebuilt our entire company deck in PowerPoint and engineered a custom high-speed Next.js landing page showcase. We secured a high-value enterprise client contract the very next week!",
-              rating: 5
-            },
-            {
-              n: "Priyanka Sen",
-              c: "Founder, Soma Organics",
-              review: "Our previous business website was slow and failed to bring in leads. DGEN Z engineered a stunning, highly responsive portal that ranks first on Google Maps local searches in Kolkata. The WhatsApp leads integration has transformed our sales flow!",
-              rating: 5
-            },
-            {
-              n: "Anirban Roy",
-              c: "Director, Roy Jewellers",
-              review: "Absolute communication, lightning-fast delivery, and premium design polish. The custom matte-black corporate logo and website packaging design look extremely luxury. DGEN Z helped us stand out as a premier brand in Kolkata.",
-              rating: 5
-            }
-          ].map((t, idx) => (
-            <div key={idx} className="p-6 rounded-xl border border-white/5 bg-black/20 glass hover:border-crimson/30 flex flex-col justify-between space-y-6 shadow shadow-black relative group">
-              <div className="space-y-3">
-                <div className="flex gap-1">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-crimson text-crimson" />
-                  ))}
-                </div>
-                <p className="text-xs text-gray-300 font-sans italic leading-relaxed">{"\""}{t.review}{"\""}</p>
-              </div>
+          <div className="space-y-4 text-sm text-[#909090] font-sans leading-relaxed">
+            <p className="text-[#F7F7F7] font-medium text-base">
+              DGEN Z was built around one simple idea: Businesses shouldn&#39;t need disconnected providers for design, technology, marketing and AI.
+            </p>
+            <p>
+              We&#39;re building one ecosystem where all of them work together. Based at our headquarters in Kolkata, West Bengal, we engineer digital systems that elevate perceived brand status and capture qualified business inquiries.
+            </p>
+          </div>
 
-              <div className="flex items-center gap-3 border-t border-white/5 pt-4">
-                <div className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-crimson border border-white/5 font-mono text-xs font-bold uppercase">
-                  {t.n.charAt(0)}
-                </div>
-                <div>
-                  <h4 className="text-white font-sans font-bold text-xs uppercase">{t.n}</h4>
-                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block">{t.c}</span>
-                </div>
-              </div>
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+            <div>
+              <span className="text-sm font-sans font-bold text-[#F7F7F7] uppercase block">Sobhit Jaiswal</span>
+              <span className="text-[10px] font-mono text-neutral-500 uppercase">Founder & Chief Brand Architect — DGEN Z</span>
             </div>
-          ))}
-        </div>
-      </section>
 
-
-      {/* ----------------- 9. WHATSAPP CHANNEL BLOCK ----------------- */}
-      <section className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/20 glass relative overflow-hidden select-none">
-        {/* Glow behind column */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-neon-green/5 rounded-full blur-[80px] pointer-events-none" />
-
-        <div className="max-w-2xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-neon-green/10 border border-neon-green/30 text-neon-green text-[10px] font-mono uppercase tracking-widest leading-none">
-            <Compass className="w-3.5 h-3.5" /> Direct Industry Intelligence
-          </div>
-          <h2 className="text-3xl md:text-4xl font-sans font-black text-white uppercase tracking-tight leading-tight">
-            JOIN THE EXCLUSIVE DGEN Z WHATSAPP HUB
-          </h2>
-          <p className="text-gray-400 font-sans text-xs md:text-sm leading-relaxed max-w-lg mx-auto text-balance">
-            Never miss high-ticket marketing blueprints, graphic design guidelines, local SEO hacks, and custom automation guides published directly by our director **Sobhit Jaiswal**.
-          </p>
-
-          <div className="pt-2">
             <a
-              href="https://whatsapp.com/channel/0029VbBUVsdEwEk5YBNyaZ2k"
-              target="_blank"
-              rel="no-referrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-neon-green hover:bg-neon-green/90 text-black font-sans font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-neon-green/20 transition-all active:scale-95 outline-none"
+              href="tel:+919681168381"
+              className="text-xs font-mono text-[#39ff14] hover:underline uppercase font-bold"
             >
-              Secure Free Entrance Now <ArrowRight className="w-4.5 h-4.5" />
+              +91 96811 68381
             </a>
           </div>
         </div>
       </section>
 
 
-      {/* ----------------- 10. FAQ SECTION ACCORDION ----------------- */}
-      <section className="space-y-10 select-none" id="faq">
-        <div className="text-left space-y-3">
-          <div className="text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-            09 / SECTOR INTELLIGENCE SCHEMAS
+      {/* ==================================================
+          SCENE 13 — FINAL WORLD & PROPOSAL CONVERSION
+         ================================================== */}
+      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="proposal">
+        <div className="space-y-4 text-center max-w-3xl mx-auto">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SCENE 13 / FINAL CONVERSION
           </div>
-          <h2 className="text-3xl md:text-5xl font-sans font-black uppercase text-white leading-none">
-            FREQUENTLY ENQUIRED SCHEMAS (20 FAQS)
+          <h2 className="text-4xl sm:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            YOUR NEXT DIGITAL CHAPTER<br />
+            <span className="text-[#D90429]">STARTS HERE.</span>
           </h2>
-          <p className="max-w-2xl text-gray-400 font-sans text-xs md:text-sm leading-relaxed">
-            Unlock absolute transparency. Read deep structural answers to critical client inquiries regarding our graphic designs, Next.js web application structures, custom local SEO methodologies, and Direct WhatsApp business automations.
+          <p className="text-xs sm:text-sm font-mono text-[#909090] uppercase tracking-wider">
+            Configure your project scope or speak directly with founder Sobhit Jaiswal.
           </p>
+
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20start%20a%20project%20with%20DGEN%20Z."
+              target="_blank"
+              rel="no-referrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 transition-all outline-none"
+            >
+              START A PROJECT →
+            </a>
+
+            <button
+              onClick={handleOpenVeer}
+              className="inline-flex items-center gap-2 px-7 py-4 bg-[#080808] border border-white/20 hover:border-white/40 text-[#F7F7F7] font-sans font-medium text-xs uppercase tracking-widest rounded-sm transition-all outline-none cursor-pointer"
+            >
+              TALK TO VEER.1 <Bot className="w-4 h-4 text-[#D90429]" />
+            </button>
+          </div>
         </div>
 
-        <div className="max-w-3xl space-y-3.5">
+        {/* Lead Proposal Wizard */}
+        <LeadWizard />
+      </section>
+
+
+      {/* ==================================================
+          20 OPTIMIZED SECTOR INTELLIGENCE FAQS
+         ================================================== */}
+      <section className="space-y-10 select-none pt-12" id="faq">
+        <div className="space-y-3">
+          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
+            SECTOR INTELLIGENCE
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+            FREQUENTLY ASKED QUESTIONS
+          </h2>
+        </div>
+
+        <div className="max-w-3xl space-y-3">
           {faqs.map((faq, idx) => {
             const isOpen = activeFaq === idx;
             return (
               <div
                 key={idx}
-                className="rounded-xl border border-white/[0.08] bg-black/20 glass overflow-hidden transition-all"
+                className="rounded-sm border border-white/10 bg-[#080808] overflow-hidden transition-all"
               >
                 <button
                   onClick={() => setActiveFaq(isOpen ? null : idx)}
-                  className="w-full px-6 py-4.5 flex items-center justify-between text-left hover:bg-zinc-900/40 outline-none"
+                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/5 outline-none cursor-pointer"
                 >
-                  <span className="text-white font-sans font-extrabold text-sm uppercase tracking-wide pr-4">
+                  <span className="text-[#F7F7F7] font-sans font-bold text-xs md:text-sm uppercase tracking-wide pr-4">
                     {faq.q}
                   </span>
-                  <ChevronDown className={`w-4 h-4 text-gray-400 flex-shrink-0 transition-transform ${isOpen ? "rotate-180 text-crimson" : ""}`} />
+                  <ChevronDown className={`w-4 h-4 text-[#909090] shrink-0 transition-transform ${isOpen ? "rotate-180 text-[#D90429]" : ""}`} />
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 font-sans text-xs md:text-sm text-gray-300 leading-relaxed border-t border-white/5 pt-3.5">
+                  <div className="px-6 pb-5 font-sans text-xs md:text-sm text-[#909090] leading-relaxed border-t border-white/5 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -611,72 +972,6 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* ----------------- 11. LEAD GENERATION CONTACT SECTION ----------------- */}
-      <section className="p-8 md:p-12 rounded-2xl border border-white/[0.08] bg-black/10 glass relative overflow-hidden select-none" id="contact">
-        {/* Subtle decorative glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-crimson/5 rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Info Columns */}
-          <div className="space-y-6">
-            <div className="inline-block text-crimson font-mono text-xs uppercase tracking-widest font-bold">
-              10 / SECURE DIRECT CONVERSIONS
-            </div>
-            <h2 className="text-3xl md:text-5xl font-sans font-black text-white leading-tight uppercase">
-              LET&#39;S ACCELERATE YOUR DIGITAL REVENUE
-            </h2>
-            <p className="text-gray-300 text-xs md:text-sm leading-relaxed font-sans">
-              Ready to claim your market territory and rank for branded searches or local services in Kolkata? Schedule your completely free 1-on-1 visual brand positioning audit conducted personally by <strong className="text-white">Sobhit Jaiswal</strong>. Lock your project coordinates and fuel your strategic sales pipelines now.
-            </p>
-
-            <div className="space-y-4 pt-4 border-t border-white/5">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded bg-black/40 text-crimson border border-white/5">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[9px] font-mono text-gray-500 uppercase tracking-widest leading-none">Direct WhatsApp Phone Call</div>
-                  <a href="tel:+919681168381" className="text-white font-sans font-black text-sm block mt-1 hover:underline">+91 96811 68381</a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded bg-black/40 text-neon-green border border-white/5">
-                  <Send className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[9px] font-mono text-gray-500 uppercase tracking-widest leading-none">Electronic Inbox Address</div>
-                  <a href="mailto:creativedgenz32@gmail.com" className="text-white font-sans font-black text-sm block mt-1 hover:underline">creativedgenz32@gmail.com</a>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[10px] font-mono text-gray-600 uppercase">
-              * OFFICE HUB: 5/1 Hari Paul Lane, Kolkata – 700006, India.
-            </p>
-          </div>
-
-          {/* Quick contact trigger link */}
-          <div className="p-6 md:p-8 rounded-xl border border-white/5 bg-black/20 glass flex flex-col justify-center text-center space-y-6 shadow-inner shadow-black/80">
-            <h4 className="text-white font-sans font-black uppercase text-xl tracking-tight leading-tight">
-              LAUNCH ESTIMATE ENGINE
-            </h4>
-            <p className="text-gray-400 font-sans text-xs leading-relaxed max-w-md mx-auto">
-              Computing direct pricing points has never been simpler. Use our interactive custom proposal builder widget to build, configure, and submit your custom project proposal instantly.
-            </p>
-
-            <div className="pt-2">
-              <a
-                href="#ai-blueprint"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-sans font-extrabold text-xs uppercase tracking-wider shadow shadow-crimson/20 transition-all scale-102 hover:-translate-y-0.5"
-              >
-                Go To Digital Proposal Builder <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

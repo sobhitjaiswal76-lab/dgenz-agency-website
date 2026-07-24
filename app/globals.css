@@ -1,39 +1,78 @@
 @import "tailwindcss";
 
 @theme {
-  --color-crimson: #dc143c;
+  --color-brand-red: #D90429;
+  --color-deep-crimson: #8A0018;
+  --color-crimson: #D90429;
   --color-neon-green: #39ff14;
-  --color-bg-dark: #050505;
+  --color-bg-near-black: #050505;
+  --color-bg-secondary: #0A0A0A;
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A7A7A7;
 }
 
 @utility glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+@utility glass-red {
+  background: rgba(217, 4, 41, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(217, 4, 41, 0.2);
+}
+
+@utility anodized-metal {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(8, 8, 8, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+@utility smoked-glass {
+  background: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 @utility neon-glow-green {
-  text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+  text-shadow: 0 0 12px rgba(57, 255, 20, 0.4);
 }
 
 @utility neon-glow-crimson {
-  text-shadow: 0 0 10px rgba(220, 20, 60, 0.4);
+  text-shadow: 0 0 12px rgba(217, 4, 41, 0.5);
 }
 
-@utility bg-sophisticated-radial {
-  background-color: #050505;
-  background-image: 
-    radial-gradient(circle at 80% 20%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(57, 255, 20, 0.05) 0%, transparent 40%);
-  background-attachment: fixed;
+@utility red-edge-light {
+  box-shadow: 0 0 25px rgba(217, 4, 41, 0.15), inset 0 0 1px rgba(217, 4, 41, 0.4);
 }
 
 body {
   background-color: #050505;
   background-image: 
-    radial-gradient(circle at 80% 20%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(57, 255, 20, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 80% 10%, rgba(217, 4, 41, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 15% 75%, rgba(138, 0, 24, 0.08) 0%, transparent 50%);
   background-attachment: fixed;
-  color: #ffffff;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #F5F5F5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
 }
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D90429;
+}
+

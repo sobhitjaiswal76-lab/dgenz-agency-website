@@ -16,12 +16,23 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
 
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    // Phase loadings to complete inside 2 seconds
-    const phase1 = setTimeout(() => setLoadingLog("CALIBRATING CORE HYPERFIELDS..."), 500);
-    const phase2 = setTimeout(() => setLoadingLog("FORGING GLASS VISUALS..."), 1100);
-    const phase3 = setTimeout(() => setLoadingLog("ESTABLISHING HIGH-PERFORMANCE CHASSIS OK."), 1600);
-    const stopLoading = setTimeout(() => setIsLoading(false), 2000);
+    // Smooth progress bar increment from 0 to 100% over ~1.2s
+    const startTime = Date.now();
+    const duration = 1200;
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+      setProgress(pct);
+
+      if (pct >= 100) {
+        clearInterval(interval);
+        setTimeout(() => setIsLoading(false), 200);
+      }
+    }, 16);
 
     // Desktop Custom Cursor Trackers
     const handleMouseMove = (e: MouseEvent) => {
@@ -52,10 +63,7 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
     window.addEventListener("mouseover", handleHoverStart);
 
     return () => {
-      clearTimeout(phase1);
-      clearTimeout(phase2);
-      clearTimeout(phase3);
-      clearTimeout(stopLoading);
+      clearInterval(interval);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mousedown", handleMouseDown);
@@ -93,36 +101,41 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
 
       <AnimatePresence mode="wait">
         {isLoading ? (
-          /* 2. SOUNDLESS LOADING SCREEN (Max 2 seconds transition) */
+          /* SCENE 00 — PRELOADER */
           <motion.div
             key="preloader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.45, ease: "easeInOut" } }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#040406] select-none"
+            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)", transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] select-none text-white px-4"
           >
-            {/* Pulsing Cyber Rings */}
-            <div className="absolute w-[200px] h-[200px] md:w-[320px] md:h-[320px] rounded-full border border-red-500/10 animate-pulse" />
-            <div className="absolute w-[280px] h-[280px] md:w-[450px] md:h-[450px] rounded-full border border-red-500/5 animate-ping" />
-
-            <div className="relative text-center space-y-6 flex flex-col items-center justify-center">
-              {/* Pulsing Glowing Logo */}
+            <div className="flex flex-col items-center justify-center space-y-6 max-w-sm w-full">
+              {/* Small Centered Wordmark */}
               <motion.div
-                initial={{ scale: 0.94 }}
-                animate={{ scale: [0.94, 1.02, 0.94] }}
-                transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
               >
-                <Logo size="xl" showSubtitle={true} glow={true} className="items-center" />
+                <span className="text-3xl md:text-4xl font-black tracking-widest uppercase italic bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent font-sans">
+                  DGEN <span className="text-[#D90429]">Z</span>
+                </span>
+                <p className="text-[10px] md:text-xs font-mono tracking-[0.3em] text-[#A7A7A7] uppercase mt-2">
+                  DESIGN × TECHNOLOGY × GROWTH
+                </p>
               </motion.div>
 
-              {/* Glowing Ambient light source below logo */}
-              <div className="w-24 h-1.5 bg-crimson mx-auto rounded-full blur-[6px] animate-pulse" />
-
-              {/* Loading Status line for high tech agency perception */}
-              <div className="pt-8">
-                <div className="flex items-center justify-center gap-1.5 font-mono text-[9px] md:text-[10px] text-gray-400 tracking-widest uppercase">
-                  <Terminal className="w-3.5 h-3.5 text-red-500 animate-spin" /> {loadingLog}
-                </div>
+              {/* Thin Red Progress Line */}
+              <div className="w-full max-w-[200px] h-[2px] bg-neutral-900 rounded-full overflow-hidden relative">
+                <motion.div
+                  className="h-full bg-[#D90429] shadow-[0_0_8px_#D90429]"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
+
+              {/* Percentage Indicator */}
+              <span className="text-[10px] font-mono text-neutral-500 tracking-widest">
+                {progress}%
+              </span>
             </div>
           </motion.div>
         ) : (
