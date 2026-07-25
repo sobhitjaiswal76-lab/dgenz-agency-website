@@ -35,6 +35,7 @@ import {
 import LeadWizard from "../components/LeadWizard";
 import PortfolioShowcase from "../components/PortfolioShowcase";
 import BackgroundVideo from "../components/BackgroundVideo";
+import HeroSection from "../components/HeroSection";
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -292,110 +293,9 @@ export default function Home() {
 
 
       {/* ==================================================
-          SCENE 01 — ENTER THE DGEN Z UNIVERSE
+          SCENE 01 — CINEMATIC 3D CGI HERO INTRODUCTION
          ================================================== */}
-      <section className="min-h-[92vh] flex flex-col justify-between pt-8 pb-12 relative overflow-hidden select-none" id="scene-01">
-        
-        {/* Background Atmospheric Video Container */}
-        <div className="absolute inset-0 -z-10 overflow-hidden opacity-30 pointer-events-none">
-          <BackgroundVideo
-            src="/videos/hero-dgenz.webm"
-            poster="https://picsum.photos/seed/dgenz-hero/1920/1080"
-            className="w-full h-full filter brightness-50 contrast-125"
-            overlayClassName="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303]"
-          />
-        </div>
-
-        <div className="space-y-8 max-w-5xl text-left relative z-10 my-auto">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-[#A7A7A7] text-[11px] font-mono uppercase tracking-[0.25em]"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D90429] animate-pulse" />
-            3D CINEMATIC EXPERIENCE — DGEN Z UNIVERSE
-          </motion.div>
-
-          {/* Monumental Hero Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="space-y-3"
-          >
-            <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tight text-[#F7F7F7] leading-[0.92] uppercase font-sans">
-              DGEN <span className="text-[#D90429]">Z</span>
-            </h1>
-
-            <p className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400 uppercase font-sans leading-none">
-              DIGITAL WITHOUT LIMITS.
-            </p>
-          </motion.div>
-
-          {/* Subtitle Matrix */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-4 max-w-2xl"
-          >
-            <p className="text-base sm:text-lg font-mono text-[#909090] tracking-widest uppercase">
-              DESIGN × TECHNOLOGY × MARKETING × AI
-            </p>
-
-            <p className="text-xs md:text-sm text-neutral-400 font-sans leading-relaxed">
-              Custom Next.js web application development, Google Business Profile optimization, performance marketing, and smart AI growth systems engineered in Kolkata, India.
-            </p>
-          </motion.div>
-
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap items-center gap-4 pt-4"
-          >
-            <a
-              href="#scene-02"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 hover:-translate-y-0.5 transition-all outline-none"
-            >
-              ENTER THE EXPERIENCE ↓
-            </a>
-
-            <a
-              href="#proposal"
-              className="inline-flex items-center gap-2 px-7 py-4 bg-[#080808] border border-white/10 hover:border-white/30 text-[#F7F7F7] font-sans font-medium text-xs uppercase tracking-widest rounded-sm transition-all outline-none"
-            >
-              START A PROJECT ↗
-            </a>
-
-            <a
-              href="https://wa.me/919681168381"
-              target="_blank"
-              rel="no-referrer"
-              className="inline-flex items-center gap-2 px-6 py-4 text-xs font-mono font-bold text-[#39ff14] hover:text-[#39ff14]/80 uppercase tracking-widest hover:underline outline-none transition-all"
-            >
-              <Phone className="w-3.5 h-3.5" /> Founder Direct
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Spatial Coordinates Footer Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="pt-12 flex items-center justify-between border-t border-white/10 text-[10px] font-mono text-[#909090] uppercase tracking-[0.25em]"
-        >
-          <span>FOUNDER: SOBHIT JAISWAL</span>
-          <span className="flex items-center gap-2">
-            SCROLL TO TRAVEL <ArrowDown className="w-3 h-3 text-[#D90429] animate-bounce" />
-          </span>
-          <span>KOLKATA, INDIA</span>
-        </motion.div>
-      </section>
+      <HeroSection />
 
 
       {/* ==================================================
