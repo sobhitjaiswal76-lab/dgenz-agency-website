@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Plus, Eye, ExternalLink, X, UploadCloud } from "lucide-react";
+import Image from "next/image";
+import { Plus, Eye, ExternalLink, X, UploadCloud, Maximize2, Sparkles } from "lucide-react";
+import LightboxModal, { LightboxItem } from "./LightboxModal";
 
-interface PortfolioItem {
+interface PortfolioItem extends LightboxItem {
   id: string;
   title: string;
   category: string;
@@ -13,10 +15,23 @@ interface PortfolioItem {
   tags: string[];
   visualColor: string; // Gradient color schema for futuristic card
   imageSeed?: string;
+  imageUrl?: string;
+  liveUrl?: string;
 }
 
 // Preloaded premium design items by DGEN Z
 const defaultItems: PortfolioItem[] = [
+  {
+    id: "p0",
+    title: "Digital Menu & Food Ordering Platform",
+    category: "Website Projects",
+    client: "THE CHOW CART",
+    description: "Ultra-fast Next.js single-page digital menu platform with direct WhatsApp food order triggers, high-contrast typography, and Google local SEO optimization.",
+    tags: ["Next.js 15", "Digital Menu", "WhatsApp Ordering", "Google Maps SEO"],
+    visualColor: "from-crimson via-black to-neutral-900",
+    imageSeed: "chowcart",
+    liveUrl: "https://thechowcart.vercel.app"
+  },
   {
     id: "p1",
     title: "Neon Café Ordering Hub",
@@ -49,23 +64,23 @@ const defaultItems: PortfolioItem[] = [
   },
   {
     id: "p4",
-    title: "Series A Pitch Presentation",
-    category: "Business Presentations",
-    client: "Vektor AgriTech Startup",
-    description: "High ticket PowerPoint template crafted strictly with editorial typeface styling, responsive SVG infographics, and dynamic statistics charts aimed at raising $2M seed round.",
-    tags: ["Professional Deck", "Infographic PDF", "PowerPoint"],
+    title: "Brand Identity & Business Gap Strategy",
+    category: "Branding",
+    client: "Behind The Cake",
+    description: "In-depth business gap analysis and strategic consultation paired with enhanced brand identity collateral and luxury business card design for artisanal confectioneries.",
+    tags: ["Business Gap Analysis", "Consultation", "Brand Identity", "Business Card Design"],
     visualColor: "from-crimson/40 to-black",
-    imageSeed: "deck"
+    imageSeed: "cake1"
   },
   {
     id: "p5",
-    title: "Glassmorphic E-Commerce Box",
-    category: "Packaging",
-    client: "Soma Luxury Oils",
-    description: "Geometric structural design, custom matte gold logo hot stamp layout, and 3D textured packaging box assets mapped with dynamic local Indian artisan themes.",
-    tags: ["Hot Stamp Foil", "Creative Box", "Illustrator Grid"],
+    title: "Product Photoshoot & Social Profile Optimization",
+    category: "Social Media Designs",
+    client: "Behind The Cake",
+    description: "Professional product photoshoot for custom delicacies paired with Instagram & Facebook business profile optimization and high-conversion post grid designs.",
+    tags: ["Product Photoshoot", "Instagram Profile", "Facebook Profile", "Social Media"],
     visualColor: "from-crimson/40 to-[#1c1917]",
-    imageSeed: "gold"
+    imageSeed: "cake2"
   },
   {
     id: "p6",
@@ -81,8 +96,11 @@ const defaultItems: PortfolioItem[] = [
 
 export default function PortfolioShowcase() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const [items, setItems] = useState<PortfolioItem[]>([]);
+  
+  // Lightbox Modal state
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   
   // Dynamic add state
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -204,135 +222,125 @@ export default function PortfolioShowcase() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="group relative rounded-xl border border-white/[0.08] bg-black/20 glass hover:border-crimson/25 shadow-lg cursor-pointer overflow-hidden p-6 aspect-video flex flex-col justify-between"
-              onClick={() => setSelectedItem(item)}
-            >
-              {/* Card glowing visual color base */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.visualColor} opacity-[0.05] group-hover:opacity-[0.14] transition-opacity`} />
-              <div className="absolute inset-0 border border-white/5 group-hover:border-crimson/15 rounded-xl pointer-events-none transition-colors" />
+          {filteredItems.map((item, idx) => {
+            const imgSrc = item.imageUrl || `https://picsum.photos/seed/${item.imageSeed || item.id}/800/500`;
 
-              {/* Glowing Ambient Spotlight */}
-              <div className="absolute -top-12 -right-12 w-28 h-28 rounded-full bg-crimson blur-[35px] opacity-10 group-hover:opacity-30 transition-all pointer-events-none" />
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                className="group relative rounded-xl border border-white/[0.08] bg-black/40 glass hover:border-crimson/30 shadow-lg overflow-hidden flex flex-col justify-between transition-all duration-300"
+              >
+                {/* Image Thumbnail Container with Hover Zoom & Click to Lightbox */}
+                <div
+                  className="relative h-48 w-full overflow-hidden bg-black/60 cursor-pointer"
+                  onClick={() => {
+                    setLightboxIndex(idx);
+                    setIsLightboxOpen(true);
+                  }}
+                >
+                  <Image
+                    src={imgSrc}
+                    alt={item.title}
+                    fill
+                    unoptimized
+                    referrerPolicy="no-referrer"
+                    className="object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                  />
 
-              <div className="relative flex justify-between items-start">
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded border border-white/5">
-                  {item.category}
-                </span>
-                <div className="p-1.5 rounded-full bg-black/60 text-gray-400 group-hover:text-crimson group-hover:bg-crimson/10 transition-all">
-                  <Eye className="w-4 h-4" />
+                  {/* Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${item.visualColor} opacity-40 group-hover:opacity-20 transition-opacity`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+
+                  {/* Top Category Badge & Maximize Button */}
+                  <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                    <span className="text-[10px] font-mono text-white/90 uppercase tracking-widest bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-white/10 font-bold">
+                      {item.category}
+                    </span>
+                    
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLightboxIndex(idx);
+                        setIsLightboxOpen(true);
+                      }}
+                      className="p-2 rounded-full bg-black/80 text-white hover:bg-crimson hover:text-white transition-all shadow-lg border border-white/20"
+                      title="View Fullscreen Lightbox"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Click to Zoom Overlay Indicator */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 backdrop-blur-[2px]">
+                    <span className="px-3 py-1.5 rounded-full bg-crimson text-white text-[10px] font-mono font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5">
+                      <Eye className="w-3.5 h-3.5" /> Fullscreen Lightbox
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="relative mt-8 space-y-2">
-                <span className="text-[10px] font-mono text-crimson uppercase tracking-widest block font-bold">{item.client}</span>
-                <h4 className="text-white font-sans font-black text-lg group-hover:text-crimson transition-colors uppercase leading-tight tracking-wide">
-                  {item.title}
-                </h4>
-                <p className="text-gray-400 text-xs line-clamp-2 leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
+                {/* Card Content Details */}
+                <div
+                  className="p-5 flex-1 flex flex-col justify-between space-y-4 cursor-pointer"
+                  onClick={() => {
+                    setLightboxIndex(idx);
+                    setIsLightboxOpen(true);
+                  }}
+                >
+                  <div className="space-y-1.5">
+                    <span className="text-[10px] font-mono text-crimson uppercase tracking-widest block font-bold">
+                      {item.client}
+                    </span>
+                    <h4 className="text-white font-sans font-black text-lg group-hover:text-crimson transition-colors uppercase leading-snug tracking-wide">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-400 text-xs line-clamp-2 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
 
-              <div className="relative flex flex-wrap gap-1.5 pt-4 border-t border-white/5 z-10">
-                {item.tags.slice(0, 3).map((tag, i) => (
-                  <span key={i} className="px-2 py-0.5 rounded-full bg-black/60 border border-white/5 text-[9px] font-sans text-gray-300">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  {/* Footer & Live Website Trigger */}
+                  <div className="pt-3 border-t border-white/5 space-y-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.tags.slice(0, 3).map((tag, i) => (
+                        <span key={i} className="px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[9px] font-mono text-neutral-300">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Live Website Link if available */}
+                    {item.liveUrl && (
+                      <div className="pt-1">
+                        <a
+                          href={item.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-mono text-[11px] font-bold uppercase tracking-widest transition-all shadow-md shadow-crimson/20"
+                        >
+                          <Sparkles className="w-3 h-3" /> VISIT LIVE DIGITAL MENU <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       )}
 
-      {/* Lightbox Modal (Details full view) */}
-      <AnimatePresence>
-        {selectedItem && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.94 }}
-              className="w-full max-w-2xl bg-black/80 backdrop-blur-2xl border border-white/10 rounded-2xl relative overflow-hidden glass"
-            >
-              {/* Outer top highlight border */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-crimson via-crimson/70 to-neon-green" />
-              
-              {/* Centered Glowing backdrop preview element */}
-              <div className={`absolute top-0 inset-x-0 h-[220px] bg-gradient-to-b ${selectedItem.visualColor} opacity-[0.14] filter blur-xl`} />
-
-              <div className="p-6 md:p-8 relative">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <span className="text-xs font-mono text-crimson uppercase tracking-widest block font-bold">
-                      {selectedItem.client}
-                    </span>
-                    <h5 className="text-2xl font-sans font-black text-white uppercase tracking-tight leading-tight mt-1">
-                      {selectedItem.title}
-                    </h5>
-                  </div>
-                  <button
-                    onClick={() => setSelectedItem(null)}
-                    className="p-1.5 rounded-full bg-black border border-white/10 text-gray-400 hover:text-white transition-all outline-none"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 border-t border-white/5">
-                  <div className="col-span-1 md:col-span-2 space-y-4">
-                    <p className="text-gray-300 text-sm md:text-base leading-relaxed font-sans">
-                      {selectedItem.description}
-                    </p>
-
-                    <div>
-                      <span className="text-[10px] font-mono text-gray-500 uppercase block mb-1.5">Tech Matrix Stack</span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {selectedItem.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 rounded-full bg-black border border-white/10 text-xs text-crimson">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Visual card metrics */}
-                  <div className="p-4 rounded-xl border border-white/5 bg-black/40 space-y-4 self-start">
-                    <div>
-                      <span className="text-[10px] font-mono text-gray-500 uppercase block leading-none">Category slot</span>
-                      <span className="text-white text-xs font-sans font-bold uppercase mt-1 block">{selectedItem.category}</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono text-gray-500 uppercase block leading-none">Turnaround timeline</span>
-                      <span className="text-neon-green text-xs font-sans font-bold uppercase mt-1 block neon-glow-green">3 TO 5 BUSINESS DAYS</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono text-gray-500 uppercase block leading-none">Visual Identity Vibe</span>
-                      <span className="text-crimson text-xs font-mono font-bold uppercase mt-1 block">MATTE PRO OUTLINE</span>
-                    </div>
-
-                    <a
-                      href={`https://wa.me/919681168381?text=Hello%20DGEN%20Z%2C%20I%20saw%20your%20design%20creation%20%22${encodeURIComponent(selectedItem.title)}%22%20on%20your%20Showcase%20and%20want%20to%20know%20more!`}
-                      target="_blank"
-                      rel="no-referrer"
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm bg-crimson hover:bg-crimson/90 text-white font-sans text-xs uppercase tracking-wider font-extrabold transition-all shadow-lg shadow-crimson/20"
-                    >
-                      Enquire on WhatsApp <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* Full-screen Lightbox Modal */}
+      <LightboxModal
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        items={filteredItems}
+        currentIndex={lightboxIndex}
+        onNavigate={(newIndex) => setLightboxIndex(newIndex)}
+      />
 
       {/* Upload Project Dialog overlay */}
       <AnimatePresence>

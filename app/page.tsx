@@ -32,15 +32,21 @@ import {
   ExternalLink,
   Maximize2
 } from "lucide-react";
+import Image from "next/image";
 import LeadWizard from "../components/LeadWizard";
 import PortfolioShowcase from "../components/PortfolioShowcase";
 import BackgroundVideo from "../components/BackgroundVideo";
 import HeroSection from "../components/HeroSection";
+import LightboxModal from "../components/LightboxModal";
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeScene, setActiveScene] = useState(1);
   const [activeCapability, setActiveCapability] = useState(0);
+
+  // Home Lightbox Modal State
+  const [homeLightboxOpen, setHomeLightboxOpen] = useState(false);
+  const [homeLightboxIndex, setHomeLightboxIndex] = useState(0);
 
   // Track active scene based on scroll depth (1 to 13)
   useEffect(() => {
@@ -141,6 +147,9 @@ export default function Home() {
       client: "THE CHOW CART",
       industry: "Culinary & Dining",
       services: "Brand Identity • Digital Experience • Menu Design",
+      title: "Digital Menu & Food Ordering Platform",
+      liveUrl: "https://thechowcart.vercel.app",
+      imageSeed: "chowcart",
       challenge: "A popular culinary brand was struggling with inconsistent visual branding and an unoptimized digital menu causing high visitor bounce rates.",
       thinking: "DGEN Z designed an ultra-fast, single-page digital menu platform with clear typography, high-contrast visual hierarchy, and instant WhatsApp ordering triggers.",
       system: "Next.js single-page framework, direct WhatsApp click-to-chat ordering funnel, and local Google Maps schema.",
@@ -149,36 +158,16 @@ export default function Home() {
     },
     {
       num: "02",
-      client: "SOMA ORGANICS",
-      industry: "Luxury Wellness & Skincare",
-      services: "E-Commerce Platform • Brand Identity • Packaging",
-      challenge: "Slow WordPress site with unoptimized product pages failing to convey luxury product value.",
-      thinking: "Elevate perceived brand value through dark glassmorphic UI, custom vector typography, and lightning-fast Next.js checkout routes.",
-      system: "Custom e-commerce product catalog with interactive hot-stamp foil packaging renders and structured product schema.",
-      execution: "Created luxury packaging box layouts, vector logo guides, and a fast React frontend.",
-      outcome: "Established elite market positioning, elevated average order value, and improved Google search ranking."
-    },
-    {
-      num: "03",
-      client: "ROY JEWELLERS",
-      industry: "Fine Jewelry & Retail",
-      services: "Luxury Brand Identity • Local SEO & Maps • Digital Catalog",
-      challenge: "Limited local Google Maps presence and non-existent digital catalog for high-ticket jewelry buyers.",
-      thinking: "Build a dominant Google Business Profile local SEO setup alongside a sleek digital collection showcase.",
-      system: "Geotagged image submission network, review acquisition engine, and high-speed catalog web app.",
-      execution: "Optimized local citations, engineered custom digital showroom layout, and established direct WhatsApp consultation pathways.",
-      outcome: "Achieved top Google Maps local rankings in target Kolkata search areas and increased direct store appointments."
-    },
-    {
-      num: "04",
-      client: "VEKTOR LOGISTICS",
-      industry: "Enterprise Supply Chain",
-      services: "Corporate Presentation • Next.js Showcase • Lead Funnel",
-      challenge: "Outdated company pitch decks and corporate website that failed to close enterprise logistics contracts.",
-      thinking: "Redesign the corporate deck with editorial precision and build an enterprise Next.js landing page with interactive quote calculators.",
-      system: "Next.js App Router, custom proposal builder widget, and high-contrast presentation deck formatting.",
-      execution: "Designed 25+ high-ticket PowerPoint slides, PDF books, and a responsive web portal.",
-      outcome: "Helped client secure a major enterprise contract within one week of launch."
+      client: "BEHIND THE CAKE",
+      industry: "Luxury Bakery & Confectionery",
+      services: "Business Consultation • Brand Identity • Product Photography • Social Media",
+      title: "Luxury Brand Identity & Strategic Consultation",
+      imageSeed: "cake1",
+      challenge: "Behind The Cake required end-to-end strategic consultation and visual elevation to optimize business operations and convert social media visitors into high-ticket clients.",
+      thinking: "DGEN Z performed a comprehensive business gap analysis, executed a high-end studio product photoshoot for artisanal cakes, enhanced the brand identity system, and overhauled their Instagram & Facebook business profiles.",
+      system: "Business consultation framework, studio product photography setup, Meta business suite optimization, and print-ready luxury business card design.",
+      execution: "Delivered 7 core solutions: Business Analysis & Consultation, Business Gap Analysis, Professional Product Photoshoot, Instagram Profile Optimization, Facebook Profile Optimization, Brand Identity Enhancement, and Custom Business Card Design.",
+      outcome: "Transformed digital presence with pristine visual branding, maximized organic customer inquiry conversion on social media, and established an elite market positioning."
     }
   ];
 
@@ -609,7 +598,7 @@ export default function Home() {
 
         {/* Real Client Case Studies */}
         <div className="space-y-12">
-          {selectedProjects.map((proj) => (
+          {selectedProjects.map((proj, pIdx) => (
             <div
               key={proj.num}
               className="p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] space-y-8 relative overflow-hidden hover:border-[#D90429]/40 transition-all duration-300"
@@ -630,6 +619,40 @@ export default function Home() {
                   </span>
                   <span className="text-xs font-mono text-[#909090] block mt-1 uppercase">
                     {proj.services}
+                  </span>
+                </div>
+              </div>
+
+              {/* Interactive Image Showcase Preview Card (Lightbox Trigger) */}
+              <div
+                className="relative h-64 md:h-80 w-full rounded-md overflow-hidden bg-black/60 border border-white/10 group cursor-pointer"
+                onClick={() => {
+                  setHomeLightboxIndex(pIdx);
+                  setHomeLightboxOpen(true);
+                }}
+              >
+                <Image
+                  src={`https://picsum.photos/seed/${proj.imageSeed}/1200/800`}
+                  alt={proj.client}
+                  fill
+                  unoptimized
+                  referrerPolicy="no-referrer"
+                  className="object-cover opacity-65 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono text-[#D90429] font-bold uppercase tracking-widest">
+                      Visual Spec Specimen
+                    </span>
+                    <h4 className="text-white font-sans font-black text-lg md:text-xl uppercase">
+                      {proj.title}
+                    </h4>
+                  </div>
+
+                  <span className="px-4 py-2 rounded-sm bg-[#D90429] text-white text-xs font-mono font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5 shrink-0">
+                    <Maximize2 className="w-3.5 h-3.5" /> View Fullscreen Lightbox
                   </span>
                 </div>
               </div>
@@ -682,7 +705,19 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="pt-2 flex justify-end">
+              {/* Action bar with live URL button if available */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                {proj.liveUrl ? (
+                  <a
+                    href={proj.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-[#D90429] hover:bg-[#D90429]/90 text-white font-mono text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-[#D90429]/20"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" /> VISIT LIVE DIGITAL MENU <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                ) : <div />}
+
                 <a
                   href={`https://wa.me/919681168381?text=Hello%20DGEN%20Z%2C%20I%20want%20to%20discuss%20a%20similar%20project%20like%20${encodeURIComponent(proj.client)}`}
                   target="_blank"
@@ -871,6 +906,24 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      {/* Lightbox Modal for Selected Reality Case Studies */}
+      <LightboxModal
+        isOpen={homeLightboxOpen}
+        onClose={() => setHomeLightboxOpen(false)}
+        items={selectedProjects.map((p) => ({
+          id: p.num,
+          title: p.title || p.client,
+          client: p.client,
+          category: p.industry,
+          description: p.outcome,
+          imageSeed: p.imageSeed,
+          liveUrl: p.liveUrl,
+          tags: p.services.split("•").map((s) => s.trim())
+        }))}
+        currentIndex={homeLightboxIndex}
+        onNavigate={(newIndex) => setHomeLightboxIndex(newIndex)}
+      />
 
     </div>
   );
