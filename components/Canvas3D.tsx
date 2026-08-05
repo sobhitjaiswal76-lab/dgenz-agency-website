@@ -100,8 +100,10 @@ export default function Canvas3D({ currentScene = 0 }: Canvas3DProps) {
       const p = scrollRef.current.current; // 0.0 to 1.0
       rotAngle += 0.008;
 
-      // Dark metallic void background with slight crimson trail
-      ctx.fillStyle = "rgba(3, 3, 3, 0.22)";
+      const isLightMode = document.documentElement.classList.contains("light");
+
+      // Background clearing with trail effect
+      ctx.fillStyle = isLightMode ? "rgba(248, 249, 250, 0.3)" : "rgba(3, 3, 3, 0.22)";
       ctx.fillRect(0, 0, width, height);
 
       // Camera Z Position travels deeply based on scroll progress
@@ -118,7 +120,7 @@ export default function Canvas3D({ currentScene = 0 }: Canvas3DProps) {
         if (proj && proj.x >= 0 && proj.x <= width && proj.y >= 0 && proj.y <= height) {
           ctx.beginPath();
           ctx.arc(proj.x, proj.y, pt.size * proj.scale, 0, Math.PI * 2);
-          ctx.fillStyle = pt.color;
+          ctx.fillStyle = isLightMode && pt.color.includes("245") ? "rgba(15, 15, 18, 0.25)" : pt.color;
           ctx.fill();
         }
       });

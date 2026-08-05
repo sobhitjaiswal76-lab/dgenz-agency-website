@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import { Terminal, ShieldAlert, Sparkles, PhoneCall } from "lucide-react";
 import Logo from "./Logo";
 import VeerChatbot from "./VeerChatbot";
+import { ThemeProvider } from "./ThemeContext";
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,7 +77,8 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
   const floatingWhatsAppLink = `https://wa.me/919681168381?text=${encodeURIComponent(defaultWhatsAppText)}`;
 
   return (
-    <div className="min-h-screen bg-[#040406] text-white selection:bg-rose-600 selection:text-white flex flex-col relative antialiased overflow-x-hidden">
+    <ThemeProvider>
+      <div className="min-h-screen bg-[#040406] text-white selection:bg-rose-600 selection:text-white flex flex-col relative antialiased overflow-x-hidden">
       
       {/* 1. Custom LUXURY LIQUID TRAILING CURSOR (Desktop only) */}
       <div className="hidden md:block pointer-events-none fixed inset-0 z-50">
@@ -182,5 +184,6 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
         )}
       </AnimatePresence>
     </div>
+    </ThemeProvider>
   );
 }
