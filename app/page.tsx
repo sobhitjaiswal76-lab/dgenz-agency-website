@@ -1,16 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight,
+  ArrowUpRight,
   ArrowDown,
-  Bot,
-  Zap,
-  CheckCircle2,
-  ChevronDown,
-  Phone,
   Sparkles,
   Layers,
   Award,
@@ -20,7 +15,6 @@ import {
   Globe,
   Star,
   Users,
-  Compass,
   Code,
   Layout,
   Palette,
@@ -28,40 +22,35 @@ import {
   MessageSquare,
   Video,
   ChevronRight,
+  ChevronLeft,
+  ChevronDown,
   Send,
   ExternalLink,
-  Maximize2
+  Maximize2,
+  Camera,
+  Film,
+  Bot,
+  Briefcase,
+  CheckCircle2,
+  Phone,
+  Mail,
+  MapPin,
+  Play
 } from "lucide-react";
 import Image from "next/image";
+import HeroSection from "../components/HeroSection";
 import LeadWizard from "../components/LeadWizard";
 import PortfolioShowcase from "../components/PortfolioShowcase";
-import BackgroundVideo from "../components/BackgroundVideo";
-import HeroSection from "../components/HeroSection";
-import LightboxModal from "../components/LightboxModal";
+import LightboxModal, { LightboxItem } from "../components/LightboxModal";
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [activeScene, setActiveScene] = useState(1);
-  const [activeCapability, setActiveCapability] = useState(0);
+  const [activeWorkFilter, setActiveWorkFilter] = useState("all");
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
-  // Home Lightbox Modal State
-  const [homeLightboxOpen, setHomeLightboxOpen] = useState(false);
-  const [homeLightboxIndex, setHomeLightboxIndex] = useState(0);
-
-  // Track active scene based on scroll depth (1 to 13)
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight <= 0) return;
-      const scrollRatio = window.scrollY / totalHeight;
-      const sceneIndex = Math.min(13, Math.max(1, Math.floor(scrollRatio * 13) + 1));
-      setActiveScene(sceneIndex);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Lightbox Modal state for featured case studies
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Trigger VEER.1 MindPal Chatbot Modal
   const handleOpenVeer = () => {
@@ -71,860 +60,916 @@ export default function Home() {
     }
   };
 
-  // Scene Names for Spatial HUD
-  const sceneTitles = [
-    "THE DGEN Z UNIVERSE",
-    "THE DIGITAL VOID",
-    "THE DGEN Z SYSTEM",
-    "WEBSITE DEVELOPMENT WORLD",
-    "MARKETING WORLD",
-    "BRAND WORLD",
-    "THE AI PORTAL",
-    "MEET VEER.1",
-    "CLIENT WORK UNIVERSE",
-    "CREATIVE EXPERIMENTS",
-    "THE PROCESS TUNNEL",
-    "FOUNDER NARRATIVE",
-    "FINAL WORLD"
+  // Client trust list matching brand history
+  const brandClients = [
+    { name: "Behind The Cake", tag: "LUXURY BAKERY", font: "font-serif italic" },
+    { name: "CIC Café", tag: "CAFÉ & DINING", font: "font-sans font-black tracking-tighter" },
+    { name: "Pathak Brothers", tag: "HERITAGE SWEETS", font: "font-serif font-bold tracking-wide" },
+    { name: "RAAD – The Sky Lounge", tag: "ROOFTOP LOUNGE", font: "font-sans font-extrabold tracking-widest" },
+    { name: "Kadi Kitchen", tag: "CLOUD KITCHEN", font: "font-sans font-bold" },
+    { name: "Chocolust", tag: "CONFECTIONERY", font: "font-serif italic font-semibold" },
+    { name: "Let's Bakez", tag: "ARTISANAL BAKEHOUSE", font: "font-sans font-bold tracking-tight" },
   ];
 
-  // Capabilities Data
-  const capabilities = [
+  // 6 Core Services matching the design reference image
+  const services = [
     {
       id: "01",
-      title: "DIGITAL EXPERIENCES",
-      tagline: "High-performance web architecture & conversion systems",
-      items: ["Website Design", "Custom Next.js Development", "Landing Pages", "E-Commerce Platforms", "Conversion Systems"],
-      visualDesc: "Architecting high-speed, desktop-first Next.js web applications with instant load times and technical SEO foundations.",
-      badge: "ENGINEERING"
+      title: "Strategy & Consulting",
+      category: "GROWTH ARCHITECTURE",
+      desc: "Data-backed market positioning, competitive analysis, and strategic growth roadmaps engineered to capture market share.",
+      icon: Briefcase,
+      image: "https://picsum.photos/seed/dgenz-strategy/800/600",
+      capabilities: [
+        "Brand Positioning & Identity Strategy",
+        "Business Gap Analysis & Market Audits",
+        "Digital Growth & Go-To-Market Plans",
+        "Revenue Funnel Engineering"
+      ]
     },
     {
       id: "02",
-      title: "BRAND SYSTEMS",
-      tagline: "Vector identity, luxury packaging & strategic design",
-      items: ["Brand Identity", "Vector Logo Concepts", "Packaging Box Design", "Campaign Design", "Presentation Decks"],
-      visualDesc: "Crafting matte-black visual identities and brand guidelines that elevate perceived market value and command enterprise pricing.",
-      badge: "CREATIVE"
+      title: "Social Media Management",
+      category: "ORGANIC & PAID ATTENTION",
+      desc: "High-impact visual grids, data-driven content calendars, and active audience engagement systems that turn followers into revenue.",
+      icon: TrendingUp,
+      image: "https://picsum.photos/seed/dgenz-social/800/600",
+      capabilities: [
+        "Instagram & Meta Ecosystem Growth",
+        "Conversion-Optimized Content Grids",
+        "Daily Story & Reel Funnels",
+        "Paid Social Campaign Management"
+      ]
     },
     {
       id: "03",
-      title: "GROWTH MARKETING",
-      tagline: "Direct-response campaigns & organic search dominance",
-      items: ["Social Media Strategy", "Local Marketing", "Content Strategy", "Lead Generation Funnels", "WhatsApp Automations"],
-      visualDesc: "Deploying targeted digital marketing systems that convert cold attention into qualified inquiry pipelines.",
-      badge: "MARKETING"
+      title: "Content Creation & Photography",
+      category: "VISUAL ASSETS",
+      desc: "Studio product photography and editorial visual assets directed with luxury aesthetic standards and high conversion intent.",
+      icon: Camera,
+      image: "https://picsum.photos/seed/dgenz-photo/800/600",
+      capabilities: [
+        "Studio Product Photoshoots",
+        "Commercial Brand Photography",
+        "Art Direction & Set Styling",
+        "Social-Ready Image Asset Banks"
+      ]
     },
     {
       id: "04",
-      title: "SEARCH & DISCOVERY",
-      tagline: "Google Business Profile & technical search dominance",
-      items: ["Technical SEO", "Google Business Profile Ranking", "Local Visibility Maps", "Search Strategy", "Schema Injection"],
-      visualDesc: "Ranking businesses #1 on Google Maps in Kolkata with geotagged media, review engines, and local citation networks.",
-      badge: "SEO"
+      title: "Video Editing & Reels",
+      category: "HIGH RETENTION MOTION",
+      desc: "Fast-paced, hook-driven short-form reels and commercial video assets engineered to stop the scroll and maximize watch time.",
+      icon: Film,
+      image: "https://picsum.photos/seed/dgenz-video/800/600",
+      capabilities: [
+        "High-Retention Instagram Reels & TikToks",
+        "Commercial Brand & Product Videos",
+        "Motion Graphics & Dynamic Typography",
+        "Sound Design & Color Grading"
+      ]
     },
     {
       id: "05",
-      title: "AI & AUTOMATION",
-      tagline: "Intelligent sales agents & workflow automation",
-      items: ["AI Sales Agents", "AI Chatbot Systems", "Workflow Automation", "Lead Qualification", "VEER.1 Growth Consultant"],
-      visualDesc: "Building custom 24/7 AI response agents and Instagram/WhatsApp triggers that capture and qualify leads automatically.",
-      badge: "AI LAB"
+      title: "AI Cinematic Videos & Automation",
+      category: "NEXT-GEN CREATIVE",
+      desc: "CGI neural rendering, AI-powered promotional videos, and autonomous customer response workflows that operate around the clock.",
+      icon: Cpu,
+      image: "https://picsum.photos/seed/dgenz-ai/800/600",
+      capabilities: [
+        "AI Cinematic Visual Commercials",
+        "Autonomous WhatsApp Lead Funnels",
+        "VEER.1 AI Sales & Growth Agents",
+        "Automated Meta DM & Comment Routing"
+      ]
     },
     {
       id: "06",
-      title: "CONTENT & PRODUCTION",
-      tagline: "High-contrast visual assets & campaign media",
-      items: ["Photography Direction", "Video Reels", "Campaign Creatives", "Ad Assets", "Visual Design Systems"],
-      visualDesc: "Producing art-directed visual assets and social content designed specifically for high audience retention.",
-      badge: "MEDIA"
+      title: "Graphic Design & Branding",
+      category: "IDENTITY & PACKAGING",
+      desc: "Scalable vector identity systems, luxury packaging boxes, corporate presentation decks, and tactile print collateral.",
+      icon: Palette,
+      image: "https://picsum.photos/seed/dgenz-brand/800/600",
+      capabilities: [
+        "Vector Logo & Visual Guidelines",
+        "Luxury Packaging & Bag Design",
+        "Investor Decks & Corporate PPTs",
+        "Stationery & Print Materials"
+      ]
     }
   ];
 
-  // Real Client Case Studies
-  const selectedProjects = [
+  // 6 Featured Editorial Case Studies matching reference image
+  const featuredCases: LightboxItem[] = [
     {
-      num: "01",
-      client: "THE CHOW CART",
-      industry: "Culinary & Dining",
-      services: "Brand Identity • Digital Experience • Menu Design",
-      title: "Digital Menu & Food Ordering Platform",
-      liveUrl: "https://thechowcart.vercel.app",
-      imageSeed: "chowcart",
-      challenge: "A popular culinary brand was struggling with inconsistent visual branding and an unoptimized digital menu causing high visitor bounce rates.",
-      thinking: "DGEN Z designed an ultra-fast, single-page digital menu platform with clear typography, high-contrast visual hierarchy, and instant WhatsApp ordering triggers.",
-      system: "Next.js single-page framework, direct WhatsApp click-to-chat ordering funnel, and local Google Maps schema.",
-      execution: "Scalable vector branding, custom matte packaging templates, and an ultra-lightweight web experience in 5 business days.",
-      outcome: "Eliminated drop-off rates, streamlined online food order inquiries, and boosted local search visibility in South Kolkata."
+      id: "case-01",
+      title: "Behind The Cake — Luxury Confectionery",
+      category: "Branding & Packaging",
+      client: "BEHIND THE CAKE",
+      description: "Complete visual rebranding including custom luxury paper shopping bags, business gap analysis, studio product photography, and social profile optimization.",
+      imageUrl: "https://picsum.photos/seed/dgenz-cake-pkg/1000/700",
+      tags: ["Luxury Packaging", "Product Photography", "Brand Strategy", "Social Media"]
     },
     {
-      num: "02",
-      client: "BEHIND THE CAKE",
-      industry: "Luxury Bakery & Confectionery",
-      services: "Business Consultation • Brand Identity • Product Photography • Social Media",
-      title: "Luxury Brand Identity & Strategic Consultation",
-      imageSeed: "cake1",
-      challenge: "Behind The Cake required end-to-end strategic consultation and visual elevation to optimize business operations and convert social media visitors into high-ticket clients.",
-      thinking: "DGEN Z performed a comprehensive business gap analysis, executed a high-end studio product photoshoot for artisanal cakes, enhanced the brand identity system, and overhauled their Instagram & Facebook business profiles.",
-      system: "Business consultation framework, studio product photography setup, Meta business suite optimization, and print-ready luxury business card design.",
-      execution: "Delivered 7 core solutions: Business Analysis & Consultation, Business Gap Analysis, Professional Product Photoshoot, Instagram Profile Optimization, Facebook Profile Optimization, Brand Identity Enhancement, and Custom Business Card Design.",
-      outcome: "Transformed digital presence with pristine visual branding, maximized organic customer inquiry conversion on social media, and established an elite market positioning."
+      id: "case-02",
+      title: "CIC Café — Matte Black Coffee Identity",
+      category: "Branding",
+      client: "CIC CAFÉ",
+      description: "Artisanal café branding consisting of matte black disposable cups, typography systems, social media grid design, and Google local SEO optimization.",
+      imageUrl: "https://picsum.photos/seed/dgenz-coffee-cup/1000/700",
+      tags: ["Café Branding", "Packaging", "Social Grid", "Local SEO"]
+    },
+    {
+      id: "case-03",
+      title: "Pathak Brothers — Heritage Royal Sweets",
+      category: "Branding",
+      client: "PATHAK BROTHERS",
+      description: "Heritage luxury confectionery packaging boxes with royal emerald green & gold foil textures, scalable vector identity, and festive campaign materials.",
+      imageUrl: "https://picsum.photos/seed/dgenz-sweet-box/1000/700",
+      tags: ["Heritage Identity", "Gold Foil Packaging", "Festive Campaigns"]
+    },
+    {
+      id: "case-04",
+      title: "RAAD – The Sky Lounge Hospitality Platform",
+      category: "Websites",
+      client: "RAAD SKY LOUNGE",
+      description: "Dark-themed luxury rooftop lounge website and digital menu ordering platform with instant table booking triggers and smooth parallax animations.",
+      imageUrl: "https://picsum.photos/seed/dgenz-sky-lounge/1000/700",
+      tags: ["Next.js Website", "Interactive Menu", "Table Booking", "SEO Engine"]
+    },
+    {
+      id: "case-05",
+      title: "Digital Menu & Interactive Dining Hub",
+      category: "Websites",
+      client: "THE CHOW CART",
+      description: "High-speed single page digital menu with direct WhatsApp food ordering triggers, high-contrast typography, and Google local SEO optimization.",
+      imageUrl: "https://picsum.photos/seed/dgenz-menu-tab/1000/700",
+      tags: ["Next.js 15", "Digital Menu", "WhatsApp Ordering", "Google Maps"]
+    },
+    {
+      id: "case-06",
+      title: "Fresh Ideas Printed Bold — Print & Packaging",
+      category: "Print",
+      client: "CORPORATE COLLATERAL",
+      description: "High-contrast promotional posters, matte business cards, and luxury brand guidelines designed for high tactile impact and enterprise presentation.",
+      imageUrl: "https://picsum.photos/seed/dgenz-print-posters/1000/700",
+      tags: ["Poster Series", "Matte Business Cards", "Stationery", "Print Media"]
     }
   ];
 
-  // 20 Optimized FAQs for SEO & Search Intent
+  // Filtered case studies
+  const filteredCases = activeWorkFilter === "all"
+    ? featuredCases
+    : featuredCases.filter(c => {
+        const cat = (c.category || "").toLowerCase();
+        if (activeWorkFilter === "branding") return cat.includes("brand");
+        if (activeWorkFilter === "social") return cat.includes("social") || c.tags?.some(t => t.toLowerCase().includes("social"));
+        if (activeWorkFilter === "websites") return cat.includes("website");
+        if (activeWorkFilter === "print") return cat.includes("print") || cat.includes("pack");
+        return true;
+      });
+
+  // 6 Core FAQs
   const faqs = [
     {
-      q: "What services does DGEN Z offer?",
-      a: "DGEN Z offers premium digital services including custom website development, digital marketing, graphic design, social media marketing, Google Business Profile (GBP) optimization, local SEO, corporate branding, and smart AI automation workflows."
+      q: "What makes DGEN Z different from a traditional marketing agency?",
+      a: "DGEN Z is an AI Marketing Studio. We combine strategic business consulting, high-fashion art direction, custom web engineering, and autonomous AI systems under one roof to deliver measurable, sustainable growth without the usual agency overhead."
     },
     {
-      q: "Does DGEN Z build custom business websites?",
-      a: "Yes, DGEN Z specializes in custom, high-speed business websites, landing pages, and e-commerce storefronts built on modern tech stacks like Next.js and React with perfect Core Web Vitals performance."
+      q: "How does DGEN Z integrate AI into marketing and websites?",
+      a: "We deploy VEER.1 AI growth consultants, automated WhatsApp and Instagram direct message funnels, predictive campaign analytics, and AI-assisted cinematic video production that reduce manual friction and scale conversions 24/7."
     },
     {
-      q: "Does DGEN Z provide social media marketing services in Kolkata?",
-      a: "Yes, DGEN Z provides elite social media marketing and brand identity design services, building visual grid frameworks, custom captions, and daily content strategies targeting audiences in Kolkata and globally."
+      q: "What is your turnaround time for a custom project?",
+      a: "A standard custom web application or brand identity sprint is completed within 3 to 7 business days, including complete SEO schema markup and responsive testing."
     },
     {
-      q: "Who is the founder of DGEN Z Marketing Agency?",
-      a: "DGEN Z was founded by Sobhit Jaiswal, a senior digital marketing consultant, professional website developer, and brand architect based in Kolkata, India."
+      q: "Do you work with local businesses or international brands?",
+      a: "Both. While we are headquartered in Kolkata, India, we partner with growing businesses, hospitality venues, creators, and corporate brands worldwide."
     },
     {
-      q: "Where is DGEN Z Digital Agency located?",
-      a: "DGEN Z is headquartered at 5/1 Hari Paul Lane, Kolkata, West Bengal 700006, India, providing local SEO and digital marketing services to businesses nationwide and internationally."
+      q: "Can DGEN Z handle my business's end-to-end social media?",
+      a: "Yes. We manage strategy, visual grid creation, high-retention reels, copywriting, publishing schedules, and community engagement funnels to consistently turn attention into qualified inquiries."
     },
     {
-      q: "How does DGEN Z help with Google Business Profile optimization?",
-      a: "We optimize Google Business Profile (GBP) listings to rank #1 on Google Maps in Kolkata. Our local SEO services include reviews setup, geo-tagged media submissions, map citations, and local authority building."
-    },
-    {
-      q: "Does DGEN Z build high-performance e-commerce websites?",
-      a: "Aesthetic and secure. We engineer fast, responsive e-commerce storefronts with seamless user experiences, conversion-optimized checkout grids, and integrated payment pathways."
-    },
-    {
-      q: "What is AI website development, and does DGEN Z provide it?",
-      a: "AI website development involves building websites embedded with smart AI capabilities such as VEER.1 AI sales consultants, server-side Gemini models, and automated customer qualification funnels. DGEN Z leads this domain."
-    },
-    {
-      q: "How can DGEN Z help grow my local business in Kolkata?",
-      a: "Through targeted local SEO services, Google Maps optimization, premium branding, high-conversion web development, and local social media campaigns, we drive high-intent phone calls and store visits to your business."
-    },
-    {
-      q: "What is your website development process?",
-      a: "Our website development process follows seven strategic sprints: Discover, Research, Strategize, Design, Build, Launch, and Grow, complete with schema integrations and speed audits."
-    },
-    {
-      q: "Does DGEN Z design custom company logos and branding kits?",
-      a: "Yes, DGEN Z is a professional graphic design company. We design scalable vector logos, brand identity guides, packaging box templates, and custom presentation slides."
-    },
-    {
-      q: "What technologies does DGEN Z Website Design Company use?",
-      a: "We develop fast and secure platforms using Next.js, React, Tailwind CSS, TypeScript, and Canvas/Three.js for interactive elements to ensure maximum Core Web Vitals scores."
-    },
-    {
-      q: "How does DGEN Z integrate marketing automations?",
-      a: "We construct smart automated systems including automated Instagram comment responses, Facebook direct message triggers, WhatsApp lead funnels, and custom AI chat assistants."
-    },
-    {
-      q: "Why is professional graphic design important for business growth?",
-      a: "Professional graphic design raises the perceived value of your business, commands premium pricing, builds customer trust, and converts traffic into buyers far more effectively than generic templates."
-    },
-    {
-      q: "How long does it take DGEN Z to develop a custom website?",
-      a: "A standard custom-designed, high-performance landing page or business website is developed, fully optimized for SEO, and deployed in 3 to 7 business days."
-    },
-    {
-      q: "Is DGEN Z's digital marketing suitable for international clients?",
-      a: "Yes, while we are a leading digital marketing agency in Kolkata, West Bengal, we build high-ticket campaigns and code digital assets for international startups and global companies."
-    },
-    {
-      q: "How can I contact Sobhit Jaiswal at DGEN Z?",
-      a: "You can contact our founder Sobhit Jaiswal directly via instant WhatsApp or phone call at +91 96811 68381, or by sending an email to creativedgenz32@gmail.com."
-    },
-    {
-      q: "Do you provide professional PPT and presentation pitch deck design?",
-      a: "Yes, DGEN Z designs high-ticket corporate PowerPoint slides, professional PDF presentations, Google Forms formatting, and investor pitch books that raise capital and close enterprise deals."
-    },
-    {
-      q: "What SEO services does DGEN Z offer for higher Google rankings?",
-      a: "We offer complete technical and on-page SEO services, including rich schema markup injection, logical HTML heading hierarchies, mobile-first responsiveness, and canonical URL setups."
-    },
-    {
-      q: "Can DGEN Z help automate customer lead generation on WhatsApp?",
-      a: "Yes, we build direct click-to-chat WhatsApp communication setups, pre-filled lead capture fields, and automatic greeting funnels to convert cold traffic into hot sales calls immediately."
+      q: "How can I start a project with founder Sobhit Jaiswal?",
+      a: "You can click 'Let's Talk' to fill out our interactive project wizard, WhatsApp us directly at +91 96811 68381, or email creativedgenz32@gmail.com for an instant proposal and quote."
     }
   ];
 
   return (
-    <div className="relative space-y-36 sm:space-y-48 py-4 selection:bg-[#D90429] selection:text-white">
-
-      {/* ==================================================
-          SPATIAL HUD OVERLAY (PERSISTENT SCENE COUNTER)
-         ================================================== */}
-      <div className="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/80 backdrop-blur-md text-[10px] font-mono tracking-widest text-[#A7A7A7] uppercase select-none">
-        <span className="w-2 h-2 rounded-full bg-[#D90429] animate-pulse" />
-        <span className="text-white font-bold">{String(activeScene).padStart(2, "0")} / 13</span>
-        <span className="text-neutral-600">—</span>
-        <span>{sceneTitles[activeScene - 1]}</span>
-      </div>
-
-      {/* Vertical Scroll Depth Meter on Right */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-1 pointer-events-none select-none">
-        {Array.from({ length: 13 }).map((_, i) => (
-          <div
-            key={i}
-            className={`w-1 transition-all duration-300 rounded-full ${
-              activeScene === i + 1 ? "h-6 bg-[#D90429] shadow-[0_0_8px_#D90429]" : "h-1.5 bg-white/10"
-            }`}
-          />
-        ))}
-      </div>
-
-
-      {/* ==================================================
-          SCENE 01 — CINEMATIC 3D CGI HERO INTRODUCTION
-         ================================================== */}
+    <main className="relative min-h-screen bg-[#040406] text-white selection:bg-[#D90429] selection:text-white">
+      
+      {/* 1. HERO SECTION */}
       <HeroSection />
 
-
-      {/* ==================================================
-          SCENE 02 — THE DIGITAL VOID
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center py-16 relative select-none" id="scene-02">
-        <div className="max-w-4xl space-y-12">
+      {/* 2. BRANDS WE'VE WORKED WITH (CLIENT TRUST STRIP) */}
+      <section className="w-full py-12 md:py-16 border-y border-white/[0.08] bg-black/40 relative overflow-hidden select-none">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
           
-          <div className="inline-block text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 02 / THE DIGITAL VOID
+          <div className="text-center mb-8">
+            <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.35em] text-neutral-400 font-semibold block">
+              BRANDS WE&apos;VE WORKED WITH
+            </span>
           </div>
 
-          <div className="space-y-6">
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#909090] uppercase leading-none font-sans">
-              YOUR BUSINESS<br />
-              DOESN&#39;T NEED<br />
-              <span className="text-[#F7F7F7]">MORE NOISE.</span>
-            </h2>
-
-            <p className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#D90429] uppercase leading-none font-sans">
-              IT NEEDS A<br />
-              DIGITAL SYSTEM.
-            </p>
-          </div>
-
-          {/* Floating Spatial UI Objects at different depths */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
-            {[
-              { title: "WEBSITE UI", code: "NEXT.JS 15", color: "border-red-500/20" },
-              { title: "INSTAGRAM POSTS", code: "HIGH RETENTION", color: "border-white/10" },
-              { title: "GOOGLE SEARCH", code: "GBP RANK #1", color: "border-green-500/20" },
-              { title: "MOBILE SCREENS", code: "RESPONSIVE", color: "border-white/10" },
-              { title: "AD CAMPAIGNS", code: "DIRECT RESPONSE", color: "border-red-500/20" },
-              { title: "AI INTERFACES", code: "VEER.1 CORE", color: "border-green-500/20" },
-              { title: "ANALYTICS", code: "CONVERSION METRICS", color: "border-white/10" },
-              { title: "PACKAGING", code: "LUXURY VECTOR", color: "border-red-500/20" }
-            ].map((obj, i) => (
+          {/* Client Logos Strip */}
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14 lg:gap-16 opacity-80 hover:opacity-100 transition-opacity">
+            {brandClients.map((client, idx) => (
               <div
-                key={i}
-                className={`p-4 rounded-sm bg-[#080808] border ${obj.color} space-y-1 hover:border-[#D90429] transition-all`}
+                key={idx}
+                className="group flex flex-col items-center cursor-default transition-all duration-300 hover:scale-105"
               >
-                <span className="text-[9px] font-mono text-neutral-500 uppercase block">{obj.code}</span>
-                <span className="text-xs font-mono font-bold text-[#F7F7F7] uppercase block">{obj.title}</span>
+                <span className={`text-base sm:text-lg md:text-xl text-neutral-300 group-hover:text-white transition-colors ${client.font}`}>
+                  {client.name}
+                </span>
+                <span className="text-[8px] font-mono tracking-widest text-neutral-500 group-hover:text-[#D90429] transition-colors mt-0.5">
+                  {client.tag}
+                </span>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-
-      {/* ==================================================
-          SCENE 03 — THE DGEN Z SYSTEM
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-03">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 03 / THE DGEN Z SYSTEM
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            WE DON&#39;T BUILD DISCONNECTED SERVICES.<br />
-            <span className="text-[#D90429]">WE BUILD CONNECTED GROWTH SYSTEMS.</span>
-          </h2>
-        </div>
-
-        {/* Connected Ecosystem Installation Grid */}
-        <div className="p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden">
-          <div className="max-w-3xl mx-auto text-center space-y-12">
-            
-            <div className="inline-block p-6 rounded-sm bg-[#D90429] text-white font-black text-lg md:text-xl uppercase tracking-widest shadow-xl shadow-[#D90429]/20">
-              YOUR BUSINESS
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[
-                { name: "BRAND SYSTEM", role: "Perceived Value & Status" },
-                { name: "WEB ARCHITECTURE", role: "High-Speed Conversion" },
-                { name: "GOOGLE MAPS SEO", role: "Local Search Dominance" },
-                { name: "GROWTH MARKETING", role: "Customer Acquisition" },
-                { name: "AI AUTOMATIONS", role: "24/7 Lead Qualification" },
-                { name: "CONTENT MEDIA", role: "Audience Retention" }
-              ].map((node, i) => (
-                <div key={i} className="p-5 rounded-sm bg-[#030303] border border-white/10 hover:border-[#D90429] transition-all space-y-1">
-                  <span className="text-xs font-mono font-bold text-[#F7F7F7] uppercase block">
-                    {node.name}
-                  </span>
-                  <span className="text-[10px] font-mono text-[#909090] uppercase block">
-                    {node.role}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 04 — WEBSITE DEVELOPMENT WORLD
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-04">
+      {/* 3. OUR SERVICES SECTION */}
+      <section id="services" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
         
-        {/* Background Video Layer */}
-        <div className="absolute right-0 w-full md:w-1/2 h-[400px] -z-10 overflow-hidden opacity-20 pointer-events-none">
-          <BackgroundVideo
-            src="/videos/web-world.webm"
-            poster="https://picsum.photos/seed/web-world/1280/720"
-            className="w-full h-full"
-          />
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 04 / WEBSITE DEVELOPMENT WORLD
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            WEBSITES PEOPLE<br />
-            <span className="text-[#D90429]">REMEMBER.</span>
-          </h2>
-          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
-            Fast. Responsive. Search-ready. Built to convert.
-          </p>
-        </div>
-
-        {/* Service Matrix List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { title: "Website Design", desc: "Custom UI layout systems tailored for high-ticket service brands." },
-            { title: "Next.js Development", desc: "Server-side React architecture with 100/100 Core Web Vitals performance." },
-            { title: "Landing Pages", desc: "Direct-response campaign pages optimized for maximum lead conversions." },
-            { title: "Business Portals", desc: "Scalable enterprise web applications with custom API integrations." },
-            { title: "Mobile Experiences", desc: "Touch-optimized responsive interfaces designed for smartphone buyers." },
-            { title: "SEO Foundations", desc: "Rich schema injection, semantic HTML, and lightning-fast indexing." }
-          ].map((item, i) => (
-            <div key={i} className="p-6 rounded-sm bg-[#080808] border border-white/5 space-y-2 hover:border-[#D90429]/40 transition-all">
-              <span className="text-[10px] font-mono text-[#D90429] font-bold block">0{i + 1} / WEB SPEC</span>
-              <h3 className="text-base font-mono font-bold text-[#F7F7F7] uppercase">{item.title}</h3>
-              <p className="text-xs text-[#909090] font-sans leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 05 — MARKETING WORLD
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-05">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 05 / MARKETING WORLD
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            ATTENTION IS EASY.<br />
-            RELEVANCE IS HARD.<br />
-            <span className="text-[#D90429]">WE CREATE BOTH.</span>
-          </h2>
-        </div>
-
-        {/* Infinite Media Wall Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {[
-            { tag: "REELS & SHORTS", label: "High Audience Retention" },
-            { tag: "AD CAMPAIGNS", label: "Targeted Customer Acquisition" },
-            { tag: "LOCAL MARKETING", label: "Google Business Ranking #1" },
-            { tag: "BRAND CONTENT", label: "Editorial Grid Strategy" },
-            { tag: "CONVERSION POSTERS", label: "High Contrast Design" },
-            { tag: "FUNNEL CREATIVES", label: "Direct Response Strategy" },
-            { tag: "WHATSAPP FUNNELS", label: "Click-To-Chat Automations" },
-            { tag: "ORGANIC SEARCH", label: "Local Authority Building" }
-          ].map((m, i) => (
-            <div key={i} className="p-5 rounded-sm bg-[#080808] border border-white/10 hover:border-[#D90429] transition-all space-y-2">
-              <span className="text-[9px] font-mono text-[#D90429] uppercase font-bold block">{m.tag}</span>
-              <p className="text-xs font-mono font-bold text-[#F7F7F7] uppercase">{m.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 06 — BRAND WORLD
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="scene-06">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 06 / BRAND WORLD
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            BRANDS AREN&#39;T DECORATED.<br />
-            <span className="text-[#D90429]">THEY&#39;RE ENGINEERED.</span>
-          </h2>
-        </div>
-
-        {/* Brand System Components */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              title: "VECTOR IDENTITY",
-              desc: "Scalable corporate logos, brand marks, and geometric typography guidelines engineered in Illustrator."
-            },
-            {
-              title: "LUXURY PACKAGING",
-              desc: "Custom box templates, hot-stamp foil vector guides, and tactile material specifications for physical products."
-            },
-            {
-              title: "PRESENTATION DECKS",
-              desc: "High-ticket corporate PowerPoint slides, PDF books, and investor pitch decks designed to close deals."
-            }
-          ].map((b, i) => (
-            <div key={i} className="p-8 rounded-sm bg-[#080808] border border-white/10 space-y-4 hover:border-[#D90429] transition-all">
-              <span className="text-xs font-mono text-[#D90429] font-bold">0{i + 1} / BRAND CORE</span>
-              <h3 className="text-xl font-mono font-bold text-[#F7F7F7] uppercase">{b.title}</h3>
-              <p className="text-xs text-[#909090] font-sans leading-relaxed">{b.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 07 — THE AI PORTAL
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden select-none space-y-12" id="scene-07">
-        
-        {/* Subtle AI Ambient Aura */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#D90429]/10 rounded-full blur-[150px] pointer-events-none" />
-
-        <div className="space-y-4 relative z-10">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 07 / DGEN Z AI LAB
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight font-sans">
-            BUSINESS MEETS<br />
-            <span className="text-[#D90429]">INTELLIGENCE.</span>
-          </h2>
-        </div>
-
-        {/* Orbiting Capabilities */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
-          {[
-            "AI CHATBOTS",
-            "AI SALES AGENTS",
-            "LEAD QUALIFICATION",
-            "WORKFLOW AUTOMATION",
-            "CUSTOMER SUPPORT",
-            "AI CONTENT SYSTEMS",
-            "SMART BUSINESS TOOLS",
-            "24/7 AUTOMATED INBOX"
-          ].map((cap, i) => (
-            <div key={i} className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1 hover:border-[#D90429]/40 transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#39ff14] inline-block mb-1" />
-              <h3 className="text-xs font-mono font-bold text-[#F7F7F7] uppercase tracking-wider">{cap}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 08 — MEET VEER.1
-         ================================================== */}
-      <section className="min-h-[75vh] flex flex-col justify-center select-none" id="scene-08">
-        <div className="p-8 md:p-12 rounded-sm border border-[#D90429]/40 bg-[#080808] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#D90429]/10 border border-[#D90429]/30 text-[#D90429] text-[10px] font-mono uppercase tracking-widest font-bold">
-              <Bot className="w-3.5 h-3.5" /> FEATURED AI GROWTH CONSULTANT
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-[#F7F7F7] uppercase font-sans tracking-tight">
-              MEET VEER.1
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 border-b border-white/10 pb-8">
+          <div className="space-y-3 max-w-2xl">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
+              OUR SERVICES
+            </span>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+              EVERYTHING YOUR BUSINESS NEEDS.{" "}
+              <span className="text-[#D90429]">UNDER ONE STUDIO.</span>
             </h2>
-            <p className="text-xs md:text-sm text-[#909090] font-sans leading-relaxed">
-              VEER.1 is DGEN Z&#39;s AI Business Growth Consultant. Designed to help website visitors understand our services, explore potential growth opportunities, calculate scope lines, and connect with founder Sobhit Jaiswal instantly.
+            <p className="text-sm sm:text-base text-neutral-400 font-sans leading-relaxed pt-1">
+              From branding to automation, we help you build, market and grow with the power of AI.
             </p>
+          </div>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["BUSINESS ANALYSIS", "DIGITAL STRATEGY", "LEAD QUALIFICATION", "24/7 CONVERSATION"].map((tag, i) => (
-                <span key={i} className="px-2.5 py-1 rounded bg-[#030303] border border-white/10 text-[10px] font-mono text-neutral-300 uppercase">
-                  {tag}
-                </span>
-              ))}
+          {/* Carousel Counter & Controls */}
+          <div className="flex items-center gap-4">
+            <span className="text-xs font-mono text-neutral-400 tracking-widest">
+              [ 01 — 06 ]
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setActiveServiceIndex((prev) => (prev > 0 ? prev - 1 : services.length - 1))}
+                className="p-2.5 rounded-full border border-white/15 bg-black hover:border-[#D90429] text-white transition-colors cursor-pointer outline-none"
+                aria-label="Previous Service"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setActiveServiceIndex((prev) => (prev < services.length - 1 ? prev + 1 : 0))}
+                className="p-2.5 rounded-full border border-white/15 bg-black hover:border-[#D90429] text-white transition-colors cursor-pointer outline-none"
+                aria-label="Next Service"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
-
-          <div className="shrink-0">
-            <button
-              onClick={handleOpenVeer}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 transition-all outline-none cursor-pointer"
-            >
-              TALK TO VEER.1 <Bot className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 09 — CLIENT WORK UNIVERSE (SELECTED REALITY)
-         ================================================== */}
-      <section className="min-h-[90vh] flex flex-col justify-center space-y-16 select-none" id="selected-work">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 09 / SELECTED REALITY
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            SELECTED REALITY
-          </h2>
-          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
-            Real clients. Real business problems. Purpose-built digital solutions.
-          </p>
         </div>
 
-        {/* Real Client Case Studies */}
-        <div className="space-y-12">
-          {selectedProjects.map((proj, pIdx) => (
-            <div
-              key={proj.num}
-              className="p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] space-y-8 relative overflow-hidden hover:border-[#D90429]/40 transition-all duration-300"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-                <div>
-                  <span className="text-xs font-mono text-[#D90429] font-bold tracking-widest block uppercase">
-                    PROJECT {proj.num}
+        {/* 6 Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((svc, idx) => {
+            const Icon = svc.icon;
+            const isHighlight = idx === activeServiceIndex;
+
+            return (
+              <motion.div
+                key={svc.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                onClick={() => setActiveServiceIndex(idx)}
+                className={`group relative rounded-2xl p-6 md:p-8 border transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer ${
+                  isHighlight
+                    ? "bg-gradient-to-b from-[#141418] to-[#08080a] border-[#D90429]/40 shadow-2xl shadow-[#D90429]/10 ring-1 ring-[#D90429]/20"
+                    : "bg-[#09090b]/80 border-white/[0.08] hover:border-white/20 hover:bg-[#0f0f13]"
+                }`}
+              >
+                {/* Top Row: Service Number & Icon */}
+                <div className="flex items-start justify-between">
+                  <span className="text-xs font-mono text-neutral-500 font-bold tracking-widest group-hover:text-[#D90429] transition-colors">
+                    {svc.id}
                   </span>
-                  <h3 className="text-3xl md:text-5xl font-black text-[#F7F7F7] uppercase tracking-tight font-sans mt-1">
-                    {proj.client}
-                  </h3>
+                  <div className={`p-3 rounded-xl border transition-colors ${
+                    isHighlight
+                      ? "bg-[#D90429]/10 border-[#D90429]/30 text-[#D90429]"
+                      : "bg-white/[0.04] border-white/10 text-neutral-400 group-hover:text-white"
+                  }`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
                 </div>
 
-                <div className="text-left md:text-right">
-                  <span className="text-xs font-mono text-neutral-400 block uppercase">
-                    {proj.industry}
+                {/* Service Details */}
+                <div className="space-y-3 my-6">
+                  <span className="text-[10px] font-mono text-[#D90429] uppercase tracking-[0.25em] font-semibold block">
+                    {svc.category}
                   </span>
-                  <span className="text-xs font-mono text-[#909090] block mt-1 uppercase">
-                    {proj.services}
+                  <h3 className="text-xl sm:text-2xl font-bold font-sans uppercase text-white group-hover:text-[#D90429] transition-colors leading-snug">
+                    {svc.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
+                    {svc.desc}
+                  </p>
+                </div>
+
+                {/* Sub-capabilities Checklist */}
+                <div className="pt-4 border-t border-white/[0.08] space-y-2">
+                  {svc.capabilities.map((cap, cIdx) => (
+                    <div key={cIdx} className="flex items-center gap-2 text-xs text-neutral-300 font-sans">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D90429]" />
+                      <span>{cap}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Action */}
+                <div className="pt-6 mt-auto flex items-center justify-between">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white group-hover:text-[#D90429] uppercase tracking-wider transition-colors"
+                  >
+                    Consult On This <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+
+                {/* Subtle Hover Glow Corner */}
+                <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-[#D90429]/10 rounded-full blur-xl group-hover:bg-[#D90429]/20 transition-all pointer-events-none" />
+              </motion.div>
+            );
+          })}
+        </div>
+
+      </section>
+
+      {/* 4. ABOUT DGEN Z STUDIO SECTION */}
+      <section id="about" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+          
+          {/* Left Column: Atmospheric Studio Visual with Backlit Typographic Wall */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden border border-white/15 bg-neutral-950 shadow-2xl shadow-black group">
+              
+              {/* Image Base */}
+              <Image
+                src="https://picsum.photos/seed/dgenz-agency-studio/1000/750"
+                alt="DGEN Z Studio"
+                fill
+                unoptimized
+                className="object-cover grayscale contrast-125 opacity-75 group-hover:scale-105 transition-transform duration-700"
+              />
+
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+              {/* Illuminated Wall Typographic Sign */}
+              <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                    KOLKATA HQ
                   </span>
+                  <span className="text-xs font-mono font-bold text-[#D90429]">
+                    EST. 2026
+                  </span>
+                </div>
+
+                {/* Illuminated Typographic Statement */}
+                <div className="p-6 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 space-y-2">
+                  <span className="text-[10px] font-mono text-[#D90429] uppercase tracking-widest font-bold">
+                    CORE PHILOSOPHY
+                  </span>
+                  <h4 className="text-2xl sm:text-3xl font-black font-sans uppercase text-white tracking-tight leading-tight">
+                    &ldquo;GOOD BRANDS GROW PEOPLE.&rdquo;
+                  </h4>
+                  <p className="text-xs text-neutral-400 font-sans">
+                    Founded by Sobhit Jaiswal to bridge modern AI technology with high-ticket brand engineering.
+                  </p>
                 </div>
               </div>
 
-              {/* Interactive Image Showcase Preview Card (Lightbox Trigger) */}
+            </div>
+          </div>
+
+          {/* Right Column: Narrative & Metrics */}
+          <div className="lg:col-span-6 space-y-8">
+            
+            <div className="space-y-3">
+              <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
+                ABOUT DGEN Z
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+                A NEW GENERATION{" "}
+                <span className="text-[#D90429]">AI MARKETING STUDIO.</span>
+              </h2>
+              <p className="text-base text-neutral-300 font-sans leading-relaxed pt-2">
+                We blend strategy, design, content and AI to create real growth for businesses. We&apos;re not just a service provider — we&apos;re your creative growth partner.
+              </p>
+            </div>
+
+            {/* 4 Key Pillar Metric Badges */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 rounded-xl border border-white/10 bg-neutral-950/60 space-y-1">
+                <span className="text-3xl sm:text-4xl font-black font-sans text-white block">
+                  50<span className="text-[#D90429]">+</span>
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                  Brands Scaled
+                </span>
+                <span className="text-[11px] text-neutral-500 block">
+                  From startups to enterprise
+                </span>
+              </div>
+
+              <div className="p-5 rounded-xl border border-white/10 bg-neutral-950/60 space-y-1">
+                <span className="text-3xl sm:text-4xl font-black font-sans text-white block">
+                  120<span className="text-[#D90429]">+</span>
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                  Projects Delivered
+                </span>
+                <span className="text-[11px] text-neutral-500 block">
+                  Websites, branding & AI funnels
+                </span>
+              </div>
+
+              <div className="p-5 rounded-xl border border-white/10 bg-neutral-950/60 space-y-1">
+                <span className="text-3xl sm:text-4xl font-black font-sans text-white block">
+                  99<span className="text-[#D90429]">%</span>
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                  Client Satisfaction
+                </span>
+                <span className="text-[11px] text-neutral-500 block">
+                  Sustainable repeat growth
+                </span>
+              </div>
+
+              <div className="p-5 rounded-xl border border-white/10 bg-neutral-950/60 space-y-1">
+                <span className="text-3xl sm:text-4xl font-black font-sans text-white block">
+                  24<span className="text-[#D90429]">/7</span>
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                  Autonomous AI
+                </span>
+                <span className="text-[11px] text-neutral-500 block">
+                  VEER.1 Growth Consultant
+                </span>
+              </div>
+            </div>
+
+            {/* Narrative Action CTA */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#D90429] hover:bg-[#b50322] text-white font-sans font-bold text-sm tracking-wide shadow-lg shadow-[#D90429]/25 hover:-translate-y-0.5 transition-all cursor-pointer"
+              >
+                Know More About Us <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <button
+                onClick={handleOpenVeer}
+                className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/15 bg-black/40 hover:bg-black/80 text-white font-sans text-sm font-semibold transition-all cursor-pointer"
+              >
+                <Bot className="w-4 h-4 text-[#D90429]" /> Chat with VEER.1
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FEATURED WORK / REAL RESULTS SHOWCASE */}
+      <section id="work" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        
+        {/* Section Header with Category Tabs */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-white/10 pb-8">
+          <div className="space-y-2 max-w-xl">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
+              FEATURED WORK
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+              REAL BRANDS. <span className="text-[#D90429]">REAL RESULTS.</span>
+            </h2>
+          </div>
+
+          {/* Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { id: "all", label: "All" },
+              { id: "branding", label: "Branding" },
+              { id: "social", label: "Social Media" },
+              { id: "websites", label: "Websites" },
+              { id: "print", label: "Print & Packaging" },
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveWorkFilter(filter.id)}
+                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all cursor-pointer outline-none ${
+                  activeWorkFilter === filter.id
+                    ? "bg-[#D90429] text-white font-bold shadow-md shadow-[#D90429]/25"
+                    : "bg-white/[0.04] text-neutral-400 hover:text-white border border-white/10 hover:border-white/20"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 6 Case Study Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCases.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+              className="group relative rounded-2xl bg-neutral-950/80 border border-white/10 hover:border-[#D90429]/40 overflow-hidden shadow-xl flex flex-col justify-between transition-all duration-300"
+            >
+              {/* Image Container with Zoom & Lightbox Trigger */}
               <div
-                className="relative h-64 md:h-80 w-full rounded-md overflow-hidden bg-black/60 border border-white/10 group cursor-pointer"
+                className="relative h-60 w-full overflow-hidden bg-black cursor-pointer"
                 onClick={() => {
-                  setHomeLightboxIndex(pIdx);
-                  setHomeLightboxOpen(true);
+                  setLightboxIndex(idx);
+                  setIsLightboxOpen(true);
                 }}
               >
                 <Image
-                  src={`https://picsum.photos/seed/${proj.imageSeed}/1200/800`}
-                  alt={proj.client}
+                  src={item.imageUrl || `https://picsum.photos/seed/${idx}/800/600`}
+                  alt={item.title}
                   fill
                   unoptimized
-                  referrerPolicy="no-referrer"
-                  className="object-cover opacity-65 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                  className="object-cover grayscale contrast-115 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono text-[#D90429] font-bold uppercase tracking-widest">
-                      Visual Spec Specimen
+                {/* Top Category Badge & Zoom Button */}
+                <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                  <span className="text-[10px] font-mono text-white bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 font-bold uppercase tracking-wider">
+                    {item.category}
+                  </span>
+                  
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIndex(idx);
+                      setIsLightboxOpen(true);
+                    }}
+                    className="p-2 rounded-full bg-black/80 hover:bg-[#D90429] text-white transition-colors border border-white/15"
+                    title="Fullscreen Lightbox"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Subtle Gradient Shade */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+              </div>
+
+              {/* Case Details */}
+              <div
+                className="p-6 space-y-3 flex-1 flex flex-col justify-between cursor-pointer"
+                onClick={() => {
+                  setLightboxIndex(idx);
+                  setIsLightboxOpen(true);
+                }}
+              >
+                <div className="space-y-2">
+                  <span className="text-[10px] font-mono text-[#D90429] uppercase tracking-widest block font-bold">
+                    {item.client}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold font-sans uppercase text-white group-hover:text-[#D90429] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-neutral-400 font-sans leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Tag Pills */}
+                <div className="pt-4 border-t border-white/[0.08] flex flex-wrap gap-1.5">
+                  {item.tags?.slice(0, 3).map((t, tIdx) => (
+                    <span key={tIdx} className="px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[9px] font-mono text-neutral-400 uppercase">
+                      {t}
                     </span>
-                    <h4 className="text-white font-sans font-black text-lg md:text-xl uppercase">
-                      {proj.title}
-                    </h4>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </section>
+
+      {/* 6. AI & VEER.1 CONSULTANT SECTION */}
+      <section id="ai-lab" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        <div className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-white/15 bg-gradient-to-br from-[#0c0c10] via-black to-[#08080a] shadow-2xl overflow-hidden">
+          
+          {/* Background Ambient Glow */}
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#D90429]/15 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Column: AI Intro */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D90429] animate-ping" />
+                AUTONOMOUS GROWTH INTELLIGENCE
+              </span>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+                MEET VEER.1 — YOUR AI <span className="text-[#D90429]">GROWTH STRATEGIST.</span>
+              </h2>
+              <p className="text-sm sm:text-base text-neutral-300 font-sans leading-relaxed">
+                Trained on DGEN Z&apos;s proven marketing frameworks, VEER.1 diagnoses your digital presence, audits your brand gaps, and builds custom conversion funnels in seconds.
+              </p>
+
+              {/* Sample Quick Prompts */}
+              <div className="space-y-2 pt-2">
+                <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-semibold">
+                  ASK VEER.1 ANYTHING:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "How can DGEN Z help my café scale?",
+                    "Audit my Instagram visual grid",
+                    "Calculate custom website timeline",
+                    "What are the best local SEO tactics for Kolkata?"
+                  ].map((prompt, pIdx) => (
+                    <button
+                      key={pIdx}
+                      onClick={handleOpenVeer}
+                      className="px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.03] hover:border-[#D90429] hover:bg-[#D90429]/10 text-xs font-sans text-neutral-300 hover:text-white transition-all text-left cursor-pointer"
+                    >
+                      &ldquo;{prompt}&rdquo; →
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Launch Chatbot CTA Button */}
+              <div className="pt-4 flex items-center gap-4">
+                <button
+                  onClick={handleOpenVeer}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#D90429] hover:bg-[#b50322] text-white font-sans font-bold text-sm tracking-wide shadow-xl shadow-[#D90429]/30 hover:-translate-y-0.5 transition-all cursor-pointer"
+                >
+                  <Bot className="w-4 h-4" /> Launch VEER.1 Chatbot <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: AI Terminal Mockup */}
+            <div className="lg:col-span-5 relative">
+              <div className="p-6 rounded-2xl bg-black/80 border border-white/15 shadow-2xl backdrop-blur-xl space-y-4 font-mono text-xs">
+                
+                {/* Terminal Header */}
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#D90429]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
+                    <span className="text-[10px] text-neutral-400 font-bold ml-1">VEER.1 AI KERNEL</span>
+                  </div>
+                  <span className="text-[9px] text-[#39ff14] bg-[#39ff14]/10 px-2 py-0.5 rounded border border-[#39ff14]/20">
+                    ONLINE
+                  </span>
+                </div>
+
+                {/* AI Dialogue Simulation */}
+                <div className="space-y-3 pt-2 text-[11px] leading-relaxed">
+                  <div className="p-3 rounded-lg bg-neutral-900 border border-white/5 space-y-1">
+                    <span className="text-[9px] text-[#D90429] font-bold block">YOU:</span>
+                    <p className="text-neutral-300 font-sans">
+                      &ldquo;How does DGEN Z increase customer orders on WhatsApp?&rdquo;
+                    </p>
                   </div>
 
-                  <span className="px-4 py-2 rounded-sm bg-[#D90429] text-white text-xs font-mono font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5 shrink-0">
-                    <Maximize2 className="w-3.5 h-3.5" /> View Fullscreen Lightbox
-                  </span>
-                </div>
-              </div>
-
-              {/* Case Breakdown */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
-                  <span className="text-[10px] font-mono text-[#D90429] uppercase tracking-widest block font-bold">
-                    CHALLENGE
-                  </span>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                    {proj.challenge}
-                  </p>
+                  <div className="p-3 rounded-lg bg-[#D90429]/10 border border-[#D90429]/20 space-y-1">
+                    <span className="text-[9px] text-emerald-400 font-bold block">VEER.1 STRATEGIST:</span>
+                    <p className="text-white font-sans">
+                      &ldquo;We engineer zero-latency Next.js digital menus paired with click-to-chat WhatsApp funnel triggers and Google Maps local SEO. Average inquiry-to-order conversion rate is 84%.&rdquo;
+                    </p>
+                  </div>
                 </div>
 
-                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
-                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
-                    THINKING
-                  </span>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                    {proj.thinking}
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
-                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
-                    SYSTEM
-                  </span>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                    {proj.system}
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-sm bg-[#030303] border border-white/5 space-y-1.5">
-                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block font-bold">
-                    EXECUTION
-                  </span>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                    {proj.execution}
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-sm bg-[#030303] border border-[#39ff14]/30 space-y-1.5">
-                  <span className="text-[10px] font-mono text-[#39ff14] uppercase tracking-widest block font-bold">
-                    OUTCOME
-                  </span>
-                  <p className="text-xs text-[#F7F7F7] font-sans leading-relaxed font-medium">
-                    {proj.outcome}
-                  </p>
-                </div>
-              </div>
-
-              {/* Action bar with live URL button if available */}
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                {proj.liveUrl ? (
-                  <a
-                    href={proj.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-[#D90429] hover:bg-[#D90429]/90 text-white font-mono text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-[#D90429]/20"
+                <div className="pt-2 text-center">
+                  <button
+                    onClick={handleOpenVeer}
+                    className="w-full py-2.5 rounded-lg bg-white/10 hover:bg-[#D90429] text-white text-xs font-bold uppercase tracking-wider transition-colors"
                   >
-                    <Sparkles className="w-3.5 h-3.5" /> VISIT LIVE DIGITAL MENU <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                ) : <div />}
+                    Open Live Interaction →
+                  </button>
+                </div>
 
-                <a
-                  href={`https://wa.me/919681168381?text=Hello%20DGEN%20Z%2C%20I%20want%20to%20discuss%20a%20similar%20project%20like%20${encodeURIComponent(proj.client)}`}
-                  target="_blank"
-                  rel="no-referrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#D90429] hover:text-[#D90429]/80 uppercase tracking-widest hover:underline"
-                >
-                  DISCUSS SIMILAR PROJECT <ArrowRight className="w-3.5 h-3.5" />
-                </a>
               </div>
             </div>
-          ))}
+
+          </div>
         </div>
       </section>
 
-
-      {/* ==================================================
-          SCENE 10 — CREATIVE EXPERIMENTS (DGEN Z LAB)
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-10 select-none" id="lab">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 10 / DGEN Z LAB
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            CREATIVE EXPERIMENTS
+      {/* 7. THE 5-STAGE STRATEGIC METHODOLOGY */}
+      <section className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
+            HOW WE SCALE BRANDS
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+            OUR 5-STAGE <span className="text-[#D90429]">GROWTH BLUEPRINT.</span>
           </h2>
-          <p className="text-sm font-mono text-[#909090] uppercase tracking-wider">
-            Where strategic design meets emerging technology.
+          <p className="text-sm sm:text-base text-neutral-400 font-sans">
+            A precise, predictable methodology engineered for market disruption.
           </p>
         </div>
 
-        <PortfolioShowcase />
-      </section>
-
-
-      {/* ==================================================
-          SCENE 11 — THE PROCESS TUNNEL
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="process">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 11 / THE PROCESS TUNNEL
-          </div>
-          <h2 className="text-4xl md:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            FROM IDEA TO IMPACT.
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
+        {/* 5 Stages Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {[
-            { step: "01", t: "DISCOVER", d: "Understand business goals & constraints." },
-            { step: "02", t: "THINK", d: "Analyze market & customer intent." },
-            { step: "03", t: "STRATEGIZE", d: "Formulate digital roadmap & architecture." },
-            { step: "04", t: "DESIGN", d: "Craft high-contrast visual assets." },
-            { step: "05", t: "BUILD", d: "Develop responsive, high-speed code." },
-            { step: "06", t: "LAUNCH", d: "Deploy, audit Core Web Vitals & index." },
-            { step: "07", t: "GROW", d: "Measure, optimize & scale performance." }
-          ].map((s, i) => (
-            <div key={i} className="p-5 rounded-sm border border-white/5 bg-[#080808] space-y-3 hover:border-[#D90429]/40 transition-all">
-              <span className="font-mono text-2xl font-bold text-[#D90429] block">{s.step}</span>
-              <h3 className="text-xs font-mono font-bold text-[#F7F7F7] uppercase tracking-wider">{s.t}</h3>
-              <p className="text-[11px] text-neutral-400 font-sans leading-relaxed">{s.d}</p>
+            { num: "01", name: "UNDERSTAND", desc: "Business gap analysis, competitor audit & audience mapping." },
+            { num: "02", name: "DESIGN", desc: "High-ticket visual identity, typography & custom web UI." },
+            { num: "03", name: "AMPLIFY", desc: "High-retention reels, organic search & Meta ad campaigns." },
+            { num: "04", name: "AUTOMATE", desc: "VEER.1 AI agents, WhatsApp funnels & instant lead capture." },
+            { num: "05", name: "GROW", desc: "Iterative testing, revenue scaling & long-term brand equity." },
+          ].map((stage, sIdx) => (
+            <div
+              key={sIdx}
+              className="p-6 rounded-2xl bg-neutral-950 border border-white/10 hover:border-[#D90429]/50 transition-all space-y-4 group"
+            >
+              <span className="text-2xl font-black font-mono text-[#D90429] block">
+                {stage.num}
+              </span>
+              <h3 className="text-lg font-bold font-sans uppercase text-white group-hover:text-[#D90429] transition-colors">
+                {stage.name}
+              </h3>
+              <p className="text-xs text-neutral-400 font-sans leading-relaxed">
+                {stage.desc}
+              </p>
             </div>
           ))}
         </div>
+
       </section>
 
-
-      {/* ==================================================
-          SCENE 12 — FOUNDER / HUMAN ELEMENT
-         ================================================== */}
-      <section className="min-h-[75vh] flex flex-col justify-center p-8 md:p-12 rounded-sm border border-white/10 bg-[#080808] relative overflow-hidden select-none" id="founder">
-        <div className="max-w-3xl space-y-6">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 12 / HUMAN ELEMENT
-          </div>
-
-          <h2 className="text-3xl md:text-6xl font-black uppercase text-[#F7F7F7] tracking-tight leading-tight font-sans">
-            BEHIND THE SYSTEM.
+      {/* 8. INTERACTIVE LEAD WIZARD & PROJECT PROPOSAL */}
+      <section id="proposal" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
+            INSTANT ESTIMATION
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+            CONFIGURE YOUR <span className="text-[#D90429]">PROJECT SCOPE.</span>
           </h2>
-
-          <div className="space-y-4 text-sm text-[#909090] font-sans leading-relaxed">
-            <p className="text-[#F7F7F7] font-medium text-base">
-              DGEN Z was built around one simple idea: Businesses shouldn&#39;t need disconnected providers for design, technology, marketing and AI.
-            </p>
-            <p>
-              We&#39;re building one ecosystem where all of them work together. Based at our headquarters in Kolkata, West Bengal, we engineer digital systems that elevate perceived brand status and capture qualified business inquiries.
-            </p>
-          </div>
-
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <span className="text-sm font-sans font-bold text-[#F7F7F7] uppercase block">Sobhit Jaiswal</span>
-              <span className="text-[10px] font-mono text-neutral-500 uppercase">Founder & Chief Brand Architect — DGEN Z</span>
-            </div>
-
-            <a
-              href="tel:+919681168381"
-              className="text-xs font-mono text-[#39ff14] hover:underline uppercase font-bold"
-            >
-              +91 96811 68381
-            </a>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ==================================================
-          SCENE 13 — FINAL WORLD & PROPOSAL CONVERSION
-         ================================================== */}
-      <section className="min-h-[85vh] flex flex-col justify-center space-y-12 select-none" id="proposal">
-        <div className="space-y-4 text-center max-w-3xl mx-auto">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SCENE 13 / FINAL CONVERSION
-          </div>
-          <h2 className="text-4xl sm:text-7xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
-            YOUR NEXT DIGITAL CHAPTER<br />
-            <span className="text-[#D90429]">STARTS HERE.</span>
-          </h2>
-          <p className="text-xs sm:text-sm font-mono text-[#909090] uppercase tracking-wider">
-            Configure your project scope or speak directly with founder Sobhit Jaiswal.
+          <p className="text-sm sm:text-base text-neutral-400 font-sans">
+            Select your requirements to calculate an instant quote and timeline estimation directly from our founder.
           </p>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20start%20a%20project%20with%20DGEN%20Z."
-              target="_blank"
-              rel="no-referrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D90429] hover:bg-[#D90429]/90 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-sm shadow-lg shadow-[#D90429]/25 transition-all outline-none"
-            >
-              START A PROJECT →
-            </a>
-
-            <button
-              onClick={handleOpenVeer}
-              className="inline-flex items-center gap-2 px-7 py-4 bg-[#080808] border border-white/20 hover:border-white/40 text-[#F7F7F7] font-sans font-medium text-xs uppercase tracking-widest rounded-sm transition-all outline-none cursor-pointer"
-            >
-              TALK TO VEER.1 <Bot className="w-4 h-4 text-[#D90429]" />
-            </button>
-          </div>
         </div>
 
-        {/* Lead Proposal Wizard */}
         <LeadWizard />
+
       </section>
 
-
-      {/* ==================================================
-          20 OPTIMIZED SECTOR INTELLIGENCE FAQS
-         ================================================== */}
-      <section className="space-y-10 select-none pt-12" id="faq">
-        <div className="space-y-3">
-          <div className="text-[#D90429] font-mono text-xs uppercase tracking-[0.3em] font-bold">
-            SECTOR INTELLIGENCE
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#F7F7F7] tracking-tight leading-none font-sans">
+      {/* 9. FREQUENTLY ASKED QUESTIONS (FAQ) */}
+      <section className="w-full py-24 md:py-32 px-6 md:px-10 max-w-5xl mx-auto relative select-none">
+        
+        <div className="text-center space-y-3 mb-16">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D90429] font-bold block">
             FREQUENTLY ASKED QUESTIONS
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight">
+            EVERYTHING YOU NEED <span className="text-[#D90429]">TO KNOW.</span>
           </h2>
         </div>
 
-        <div className="max-w-3xl space-y-3">
-          {faqs.map((faq, idx) => {
-            const isOpen = activeFaq === idx;
+        <div className="space-y-4">
+          {faqs.map((faq, fIdx) => {
+            const isOpen = activeFaq === fIdx;
+
             return (
               <div
-                key={idx}
-                className="rounded-sm border border-white/10 bg-[#080808] overflow-hidden transition-all"
+                key={fIdx}
+                className="rounded-xl border border-white/10 bg-neutral-950/80 overflow-hidden transition-all"
               >
                 <button
-                  onClick={() => setActiveFaq(isOpen ? null : idx)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/5 outline-none cursor-pointer"
+                  onClick={() => setActiveFaq(isOpen ? null : fIdx)}
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer outline-none hover:text-[#D90429] transition-colors"
                 >
-                  <span className="text-[#F7F7F7] font-sans font-bold text-xs md:text-sm uppercase tracking-wide pr-4">
+                  <span className="text-base sm:text-lg font-bold font-sans uppercase text-white">
                     {faq.q}
                   </span>
-                  <ChevronDown className={`w-4 h-4 text-[#909090] shrink-0 transition-transform ${isOpen ? "rotate-180 text-[#D90429]" : ""}`} />
+                  <ChevronDown className={`w-5 h-5 text-neutral-400 transition-transform duration-300 flex-shrink-0 ${
+                    isOpen ? "rotate-180 text-[#D90429]" : ""
+                  }`} />
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-5 font-sans text-xs md:text-sm text-[#909090] leading-relaxed border-t border-white/5 pt-3">
-                    {faq.a}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="px-6 pb-6 pt-1 text-sm text-neutral-300 font-sans leading-relaxed border-t border-white/5"
+                    >
+                      {faq.a}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}
         </div>
+
       </section>
 
-      {/* Lightbox Modal for Selected Reality Case Studies */}
+      {/* 10. FINAL CONVERSION CTA & CONTACT */}
+      <section id="contact" className="w-full py-28 md:py-36 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
+        
+        <div className="relative rounded-3xl p-8 sm:p-14 md:p-20 border border-white/20 bg-gradient-to-b from-[#141418] via-black to-[#09090c] shadow-2xl overflow-hidden text-center space-y-8">
+          
+          {/* Ambient Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D90429]/15 rounded-full blur-[160px] pointer-events-none" />
+
+          <div className="relative z-10 max-w-3xl mx-auto space-y-4">
+            <span className="text-xs font-mono uppercase tracking-[0.35em] text-[#D90429] font-bold block">
+              START YOUR PROJECT TODAY
+            </span>
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black font-sans uppercase tracking-tight text-white leading-[0.95]">
+              LET&apos;S CREATE SOMETHING{" "}
+              <span className="text-[#D90429] drop-shadow-[0_0_35px_rgba(217,4,41,0.5)]">
+                INCREDIBLE TOGETHER.
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-neutral-300 font-sans max-w-xl mx-auto leading-relaxed pt-2">
+              Have a project in mind? Let&apos;s turn your vision into an iconic, conversion-generating digital asset.
+            </p>
+          </div>
+
+          {/* Primary Action Buttons */}
+          <div className="relative z-10 flex flex-wrap items-center justify-center gap-4 pt-4">
+            <a
+              href="https://wa.me/919681168381?text=Hello%20Sobhit%2C%20I%20want%20to%20start%20a%20project%20with%20DGEN%20Z."
+              target="_blank"
+              rel="no-referrer"
+              className="inline-flex items-center gap-2.5 px-9 py-4.5 rounded-full bg-[#D90429] hover:bg-[#b50322] text-white font-sans font-bold text-base tracking-wide shadow-2xl shadow-[#D90429]/40 hover:-translate-y-0.5 transition-all cursor-pointer"
+            >
+              Let&apos;s Talk <ArrowRight className="w-5 h-5" />
+            </a>
+
+            <a
+              href="tel:+919681168381"
+              className="inline-flex items-center gap-2.5 px-8 py-4.5 rounded-full border border-white/20 bg-black/60 hover:bg-black/90 text-white font-sans font-semibold text-base transition-all backdrop-blur-md cursor-pointer"
+            >
+              <Phone className="w-4 h-4 text-[#D90429]" /> Call Founder Directly
+            </a>
+          </div>
+
+          {/* Contact Direct Coordinates */}
+          <div className="relative z-10 pt-10 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest block">PHONE & WHATSAPP</span>
+              <a href="tel:+919681168381" className="text-sm font-sans font-bold text-white hover:text-[#D90429] transition-colors block">
+                +91 96811 68381
+              </a>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest block">EMAIL DISPATCH</span>
+              <a href="mailto:creativedgenz32@gmail.com" className="text-sm font-sans font-bold text-white hover:text-[#D90429] transition-colors block">
+                creativedgenz32@gmail.com
+              </a>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest block">HEADQUARTERS</span>
+              <span className="text-sm font-sans text-neutral-300 block leading-tight">
+                5/1 Hari Paul Lane, Kolkata 700006, India
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* LIGHTBOX MODAL FOR FEATURED CASE STUDIES */}
       <LightboxModal
-        isOpen={homeLightboxOpen}
-        onClose={() => setHomeLightboxOpen(false)}
-        items={selectedProjects.map((p) => ({
-          id: p.num,
-          title: p.title || p.client,
-          client: p.client,
-          category: p.industry,
-          description: p.outcome,
-          imageSeed: p.imageSeed,
-          liveUrl: p.liveUrl,
-          tags: p.services.split("•").map((s) => s.trim())
-        }))}
-        currentIndex={homeLightboxIndex}
-        onNavigate={(newIndex) => setHomeLightboxIndex(newIndex)}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        items={featuredCases}
+        currentIndex={lightboxIndex}
+        onNavigate={(newIdx) => setLightboxIndex(newIdx)}
       />
 
-    </div>
+    </main>
   );
 }

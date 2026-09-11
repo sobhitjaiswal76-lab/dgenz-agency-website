@@ -15,50 +15,60 @@ export default function Logo({
   className = "",
   glow = true,
 }: LogoProps) {
-  // Determine sizing classes
+  // Sizing definitions
   const fontSizes = {
-    sm: "text-sm",
-    md: "text-lg md:text-xl",
-    lg: "text-2xl md:text-3xl",
-    xl: "text-4xl md:text-6xl",
+    sm: "text-base",
+    md: "text-xl md:text-2xl",
+    lg: "text-3xl md:text-4xl",
+    xl: "text-5xl md:text-7xl",
   };
 
   const subtitleSizes = {
-    sm: "text-[6px] tracking-[0.2em] -mt-0.5",
-    md: "text-[7.5px] md:text-[8px] tracking-[0.3em] -mt-0.5",
-    lg: "text-[10px] tracking-[0.35em] mt-0.5",
+    sm: "text-[7px] tracking-[0.28em] mt-0.5",
+    md: "text-[8px] md:text-[9px] tracking-[0.32em] mt-0.5",
+    lg: "text-[11px] tracking-[0.35em] mt-1",
     xl: "text-xs md:text-sm tracking-[0.4em] mt-2",
+  };
+
+  const tmSizes = {
+    sm: "text-[8px] -top-1",
+    md: "text-[10px] -top-1.5",
+    lg: "text-xs -top-2",
+    xl: "text-sm -top-3",
   };
 
   return (
     <div className={`flex flex-col select-none ${className}`}>
-      {/* Brand typographic container with slanted italic lines */}
-      <div className="inline-flex items-center gap-0.5 leading-none">
+      {/* Brand typographic container */}
+      <div className="inline-flex items-baseline leading-none">
         <span 
-          className={`font-black uppercase italic tracking-tight skew-x-[-10deg] inline-block bg-gradient-to-b from-slate-100 via-zinc-300 to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_2px_3px_rgba(0,0,0,0.95)] ${fontSizes[size]}`}
-          style={{ WebkitTextStroke: "0.5px rgba(255,255,255,0.1)" }}
+          className={`font-black uppercase tracking-tight inline-block text-white ${fontSizes[size]}`}
+          style={{ letterSpacing: "-0.04em" }}
         >
           DGEN
         </span>
         <span 
-          className={`font-black uppercase italic skew-x-[-10deg] inline-block bg-gradient-to-b from-[#ff3355] via-crimson to-[#660018] bg-clip-text text-transparent drop-shadow-[0_2px_5px_rgba(220,20,60,0.65)] relative ${fontSizes[size]}`}
-          style={{ WebkitTextStroke: "0.5px rgba(220,20,60,0.2)" }}
+          className={`font-black uppercase inline-block text-[#D90429] relative ml-0.5 ${fontSizes[size]}`}
+          style={{ letterSpacing: "-0.04em" }}
         >
           Z
-          {/* Subtle logo glow spot */}
+          {/* TM Superscript */}
+          <span className={`absolute -right-3 font-mono font-bold text-[#D90429] ${tmSizes[size]}`}>
+            ™
+          </span>
+          {/* Subtle logo glow spot in dark mode */}
           {glow && (
-            <span className="absolute inset-0 bg-crimson/15 blur-[8px] rounded-full -z-10 animate-pulse" />
+            <span className="absolute inset-0 bg-[#D90429]/20 blur-md rounded-full -z-10 pointer-events-none" />
           )}
         </span>
       </div>
 
-      {/* Sublabel: DIGITAL MARKETING STUDIO */}
+      {/* Sublabel: AI MARKETING STUDIO */}
       {showSubtitle && (
         <span 
-          className={`font-sans font-extrabold uppercase text-zinc-400 block tracking-widest ${subtitleSizes[size]}`}
-          style={{ textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}
+          className={`font-mono font-semibold uppercase text-neutral-400 block ${subtitleSizes[size]}`}
         >
-          DIGITAL MARKETING STUDIO
+          AI MARKETING STUDIO
         </span>
       )}
     </div>
