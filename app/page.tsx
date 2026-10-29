@@ -60,15 +60,14 @@ export default function Home() {
     }
   };
 
-  // Client trust list matching brand history
+  // Verified client showcase list (exactly 6 authentic clients)
   const brandClients = [
-    { name: "Behind The Cake", tag: "LUXURY BAKERY", font: "font-serif italic" },
-    { name: "CIC Café", tag: "CAFÉ & DINING", font: "font-sans font-black tracking-tighter" },
-    { name: "Pathak Brothers", tag: "HERITAGE SWEETS", font: "font-serif font-bold tracking-wide" },
-    { name: "RAAD – The Sky Lounge", tag: "ROOFTOP LOUNGE", font: "font-sans font-extrabold tracking-widest" },
-    { name: "Kadi Kitchen", tag: "CLOUD KITCHEN", font: "font-sans font-bold" },
-    { name: "Chocolust", tag: "CONFECTIONERY", font: "font-serif italic font-semibold" },
-    { name: "Let's Bakez", tag: "ARTISANAL BAKEHOUSE", font: "font-sans font-bold tracking-tight" },
+    { name: "Behind The Cake", font: "font-serif italic font-medium" },
+    { name: "Pathak Brothers", font: "font-serif font-semibold tracking-wide" },
+    { name: "SS EV Solution", font: "font-sans font-bold tracking-tight uppercase" },
+    { name: "Fashion Fever Zone", font: "font-sans font-semibold tracking-wider uppercase" },
+    { name: "Mob Parlour", font: "font-sans font-bold tracking-tight" },
+    { name: "Singh International", font: "font-sans font-semibold tracking-wide uppercase" },
   ];
 
   // 6 Core Services matching the design reference image
@@ -263,29 +262,29 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <HeroSection />
 
-      {/* 2. BRANDS WE'VE WORKED WITH (CLIENT TRUST STRIP) */}
-      <section className="w-full py-12 md:py-16 border-y border-white/[0.08] bg-black/40 relative overflow-hidden select-none">
+      {/* 2. BRANDS WE'VE WORKED WITH (CLIENT SHOWCASE) */}
+      <section className="w-full py-14 md:py-20 border-y border-white/[0.08] bg-[#040406] relative overflow-hidden select-none">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           
-          <div className="text-center mb-8">
+          <div className="text-center mb-10 md:mb-12">
             <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.35em] text-neutral-400 font-semibold block">
               BRANDS WE&apos;VE WORKED WITH
             </span>
           </div>
 
-          {/* Client Logos Strip */}
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14 lg:gap-16 opacity-80 hover:opacity-100 transition-opacity">
+          {/* Responsive Layout: Desktop 1 row (6 cols), Tablet 2 rows (3 cols), Mobile 3 rows (2 cols) */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-4 xl:gap-5 items-stretch">
             {brandClients.map((client, idx) => (
               <div
                 key={idx}
-                className="group flex flex-col items-center cursor-default transition-all duration-300 hover:scale-105"
+                className="group relative flex flex-col items-center justify-center p-5 sm:p-6 rounded-xl border border-white/[0.06] bg-black/40 hover:bg-white/[0.03] hover:border-white/20 transition-all duration-300 cursor-default hover:brightness-110"
               >
-                <span className={`text-base sm:text-lg md:text-xl text-neutral-300 group-hover:text-white transition-colors ${client.font}`}>
+                <span
+                  className={`text-sm sm:text-base lg:text-[13px] xl:text-sm 2xl:text-base text-neutral-300 group-hover:text-white transition-colors duration-300 text-center leading-snug ${client.font}`}
+                >
                   {client.name}
                 </span>
-                <span className="text-[8px] font-mono tracking-widest text-neutral-500 group-hover:text-[#D90429] transition-colors mt-0.5">
-                  {client.tag}
-                </span>
+                <span className="mt-2 h-[1px] w-0 group-hover:w-6 bg-[#D90429] transition-all duration-300 rounded-full" />
               </div>
             ))}
           </div>
