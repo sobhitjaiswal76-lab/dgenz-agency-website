@@ -103,52 +103,48 @@ export default function DiwaliOfferDetailsModal({
 
               {/* Package Comparison Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                {/* Package 1: The Spotlight */}
-                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-white/[0.08] flex flex-col justify-between space-y-6">
+                {/* PACKAGE 01 — THE SPOTLIGHT */}
+                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-white/[0.12] flex flex-col justify-between space-y-6">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono tracking-widest uppercase text-[#A3A3A3]">
+                      <span className="text-[11px] font-mono tracking-widest uppercase text-[#A3A3A3] font-semibold">
                         PACKAGE 01
                       </span>
-                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-[#A3A3A3]">
-                        10–15 SECONDS
+                      <span className="px-2 py-0.5 rounded-[4px] bg-white/5 border border-white/10 text-[10px] font-mono text-[#A1A1AA] uppercase">
+                        Video Festive Rate
                       </span>
                     </div>
 
                     <div>
-                      <h4 className="text-xl font-bold uppercase tracking-tight text-white font-sans">
+                      <h4 className="text-xl font-bold uppercase tracking-tight text-[#FFFFFF] font-sans">
                         THE SPOTLIGHT
                       </h4>
                       <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-white font-sans">₹2,000</span>
-                        <span className="text-xs font-mono text-[#A3A3A3]">/ video festive rate</span>
+                        <span className="text-3xl font-bold text-[#FFFFFF] font-sans">₹2,000</span>
+                        <span className="text-xs font-mono text-[#A1A1AA]">/ Video Festive Rate</span>
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                      Perfect for emerging direct-to-consumer brands, bakeries, cafes, and boutiques wanting high-retention video reels quickly.
+                    <p className="text-xs text-[#A1A1AA] leading-relaxed font-sans">
+                      Perfect for emerging brands and businesses looking to showcase their products through cinematic promotional content.
                     </p>
 
-                    <div className="space-y-2.5 pt-3 border-t border-white/[0.08] text-xs text-[#A3A3A3]">
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span className="text-white">1 High-Impact AI Cinematic Video Reel</span>
+                    <div className="space-y-3 pt-3 border-t border-white/[0.08] text-xs">
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white">2 AI cinematic product/promotional reels (10–18 seconds each)</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>3D Camera Pan & Dynamic Lighting</span>
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white">2 Instagram posts</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>Trending commercial audio track</span>
+                      <div className="flex items-start gap-2.5 text-[#A1A1AA]/60">
+                        <X className="w-4 h-4 text-[#A1A1AA]/50 shrink-0 mt-0.5" />
+                        <span>Captions and hashtag research NOT included</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>Formatted for 9:16 Instagram Reels & Shorts</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>1 Complimentary Revision</span>
+                      <div className="flex items-start gap-2.5 text-[#A1A1AA]/60">
+                        <X className="w-4 h-4 text-[#A1A1AA]/50 shrink-0 mt-0.5" />
+                        <span>Instagram Collab Reel NOT included</span>
                       </div>
                     </div>
                   </div>
@@ -157,59 +153,60 @@ export default function DiwaliOfferDetailsModal({
                     href={buildWhatsAppLink(WA_MESSAGES.videoSpotlight)}
                     target="_blank"
                     rel="no-referrer"
-                    className="w-full py-3 px-4 rounded-[8px] bg-white/10 hover:bg-white/20 text-white font-sans text-xs font-semibold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-4 rounded-[8px] bg-white/10 hover:bg-white/20 text-[#FFFFFF] font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#E31837] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
                   >
-                    <span>Book The Spotlight (₹2,000)</span>
+                    <span>BOOK THE SPOTLIGHT (₹2,000)</span>
                     <Send className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
-                {/* Package 2: The Brand */}
-                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-[#E31837]/40 flex flex-col justify-between space-y-6">
+                {/* PACKAGE 02 — THE BRAND */}
+                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-[#E31837]/40 flex flex-col justify-between space-y-6 relative">
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono tracking-widest uppercase text-[#E31837] font-semibold">
-                        PACKAGE 02 · RECOMMENDED
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono tracking-widest uppercase text-[#A3A3A3] font-semibold">
+                        PACKAGE 02
                       </span>
-                      <span className="px-2 py-0.5 rounded bg-[#E31837]/10 text-[#E31837] border border-[#E31837]/20 text-[10px] font-mono font-bold">
-                        15–30 SECONDS
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-[#E31837] bg-[#E31837]/10 border border-[#E31837]/30 px-2 py-0.5 rounded-[4px] font-bold">
+                        RECOMMENDED PACKAGE
                       </span>
                     </div>
 
                     <div>
-                      <h4 className="text-xl font-bold uppercase tracking-tight text-white font-sans">
-                        THE BRAND
-                      </h4>
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xl font-bold uppercase tracking-tight text-[#FFFFFF] font-sans">
+                          THE BRAND
+                        </h4>
+                        <span className="px-2 py-0.5 rounded-[4px] bg-white/5 border border-white/10 text-[10px] font-mono text-[#A1A1AA] uppercase">
+                          Video Festive Rate
+                        </span>
+                      </div>
                       <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-white font-sans">₹2,399</span>
-                        <span className="text-xs font-mono text-[#A3A3A3]">/ video festive rate</span>
+                        <span className="text-3xl font-bold text-[#FFFFFF] font-sans">₹2,399</span>
+                        <span className="text-xs font-mono text-[#A1A1AA]">/ Video Festive Rate</span>
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                      Engineered for high-ticket products, restaurants, luxury jewellery, and apparel looking to drive immediate customer orders.
+                    <p className="text-xs text-[#A1A1AA] leading-relaxed font-sans">
+                      For brands that need more content to showcase their products and promote their business.
                     </p>
 
-                    <div className="space-y-2.5 pt-3 border-t border-white/[0.08] text-xs text-[#A3A3A3]">
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span className="text-white font-medium">Multi-Angle Cinematic Camera Movements</span>
+                    <div className="space-y-3 pt-3 border-t border-white/[0.08] text-xs">
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white font-medium">3 AI cinematic product/promotional reels (10–20 seconds each)</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span className="text-white">Studio Grade AI Voiceover narration</span>
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white">3 Instagram creative posts</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>Dynamic captions & kinetic text overlays</span>
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white">Captions and relevant hashtags for all 6 content pieces</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>Mastered in 4K 60FPS for Meta Ads</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0" />
-                        <span>2 Full Revisions included</span>
+                      <div className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
+                        <span className="text-white">1 Instagram Reel collaboration</span>
                       </div>
                     </div>
                   </div>
@@ -218,9 +215,9 @@ export default function DiwaliOfferDetailsModal({
                     href={buildWhatsAppLink(WA_MESSAGES.videoBrand)}
                     target="_blank"
                     rel="no-referrer"
-                    className="w-full py-3 px-4 rounded-[8px] bg-[#E31837] hover:bg-[#c4122d] text-white font-sans text-xs font-semibold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-4 rounded-[8px] bg-[#E31837] hover:bg-[#c4122d] text-[#FFFFFF] font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#FFFFFF] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
                   >
-                    <span>Book The Brand (₹2,399)</span>
+                    <span>BOOK THE BRAND (₹2,399)</span>
                     <Send className="w-3.5 h-3.5" />
                   </a>
                 </div>

@@ -61,9 +61,9 @@ export const WA_MESSAGES = {
   videoOffer:
     "Hi DGEN Z! I'm interested in your Diwali AI Cinematic Video Ads offer. Please share the details and next steps. I would like to know more about The Spotlight and The Brand packages.",
   videoSpotlight:
-    "Hi DGEN Z! I would like to book 'The Spotlight' Diwali Video Package (₹2,000). Please guide me on the photos needed and next steps.",
+    "Hi DGEN Z! I would like to book THE SPOTLIGHT video package (₹2,000 - Video Festive Rate). Please share the onboarding details and next steps.",
   videoBrand:
-    "Hi DGEN Z! I would like to book 'The Brand' Diwali Video Package (₹2,399 - Recommended). Please share the project onboarding details.",
+    "Hi DGEN Z! I would like to book THE BRAND video package (₹2,399 - Video Festive Rate - Recommended Package). Please share the onboarding details and next steps.",
   websiteOffer:
     "Hi DGEN Z! I'm interested in your Diwali Website Development Offer for ₹10,999. Please explain the website package, included benefits, hosting details, and next steps.",
 };
