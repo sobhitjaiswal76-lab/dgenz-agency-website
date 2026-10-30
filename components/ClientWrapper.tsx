@@ -188,12 +188,12 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
             {/* 6. FLOATING FESTIVE SPECIALS QUICK CHIP (Bottom Left, Non-Obtrusive) */}
             <a
               href="#diwali-specials"
-              className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0E0E14]/90 hover:bg-[#14141E] border border-amber-500/40 text-[#D4AF65] text-xs font-mono tracking-wider uppercase shadow-xl shadow-black/60 backdrop-blur-md transition-all hover:scale-105 active:scale-95 group"
+              className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#111111]/90 hover:bg-[#1a1a1a] border border-white/10 text-white text-xs font-mono tracking-wider uppercase shadow-xl shadow-black/60 backdrop-blur-md transition-all hover:scale-105 active:scale-95 group"
               title="Jump to Diwali 2026 Specials"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
               <span>Diwali Specials</span>
-              <span className="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.2 rounded font-bold">SAVE 63%</span>
+              <span className="text-[10px] bg-white/10 text-[#E31837] px-1.5 py-0.5 rounded font-bold">SAVE 63%</span>
             </a>
           </motion.div>
         )}

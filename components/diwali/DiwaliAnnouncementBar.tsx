@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useSyncExternalStore } from "react";
-import { Sparkles, ArrowRight, X, Clock } from "lucide-react";
-import { getCampaignTimeRemaining, CampaignTimeRemaining } from "./diwali-utils";
+import React, { useSyncExternalStore } from "react";
+import { ArrowRight, X } from "lucide-react";
+import { getCampaignTimeRemaining } from "./diwali-utils";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
@@ -19,17 +19,8 @@ function getServerSnapshot(): boolean {
 }
 
 export default function DiwaliAnnouncementBar() {
-  const [timeLeft, setTimeLeft] = useState<CampaignTimeRemaining>(getCampaignTimeRemaining);
   const isDismissed = useSyncExternalStore(subscribe, getDismissedSnapshot, getServerSnapshot);
-
-  useEffect(() => {
-    // Tick countdown every minute
-    const interval = setInterval(() => {
-      setTimeLeft(getCampaignTimeRemaining());
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const campaignTime = getCampaignTimeRemaining();
 
   const handleDismiss = () => {
     sessionStorage.setItem("dgenz_diwali_bar_dismissed", "true");
@@ -44,49 +35,40 @@ export default function DiwaliAnnouncementBar() {
     }
   };
 
-  if (isDismissed || timeLeft.isExpired) return null;
+  if (isDismissed || campaignTime.isExpired) return null;
 
   return (
-    <div className="relative z-50 bg-[#0B0B0F] border-b border-amber-500/30 text-white px-4 py-2 text-xs select-none">
-      {/* Background Gold Ambient Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-rose-600/10 to-amber-500/10 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 relative z-10">
-        {/* Left: Badge & Core Message */}
+    <div className="relative z-50 bg-[#080808] border-b border-white/[0.12] text-white px-4 py-2 text-xs select-none">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+        {/* Left: Eyebrow Tag & Campaign Highlight */}
         <div className="flex items-center gap-2.5 overflow-hidden">
-          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-[10px] font-mono text-[#D4AF65] tracking-wider uppercase shrink-0">
-            <Sparkles className="w-2.5 h-2.5 text-amber-400 animate-pulse" />
-            DIWALI SPECIALS
+          <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#111111] border border-white/[0.12] text-[10px] font-mono text-[#A3A3A3] tracking-widest uppercase shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
+            FESTIVE COLLECTION 2026
           </span>
 
-          <p className="truncate text-[11px] sm:text-xs text-neutral-200">
-            <strong className="text-white font-semibold">Festive Campaign:</strong>{" "}
-            AI Cinematic Video Ads from <span className="text-amber-300 font-bold">₹2,000</span> & Custom Business Websites at <span className="text-amber-300 font-bold">₹10,999</span>.
+          <p className="truncate text-[11px] sm:text-xs text-[#A3A3A3]">
+            <span className="text-white font-medium">Diwali Offers:</span>{" "}
+            AI Cinematic Video Ads from <span className="text-white font-semibold">₹2,000</span> & Business Websites at{" "}
+            <span className="text-[#E31837] font-semibold">₹10,999 (Save 63%)</span>.
           </p>
         </div>
 
-        {/* Right: Countdown & CTA & Close */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {timeLeft.isActive && (
-            <div className="hidden md:flex items-center gap-1.5 text-[10px] font-mono text-amber-400 bg-black/40 px-2 py-0.5 rounded border border-white/5">
-              <Clock className="w-3 h-3" />
-              <span>{timeLeft.days}d {timeLeft.hours}h left</span>
-            </div>
-          )}
-
+        {/* Right: CTA & Dismiss */}
+        <div className="flex items-center gap-3 shrink-0">
           <a
             href="#diwali-specials"
             onClick={handleScrollToCampaign}
-            className="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-gradient-to-r from-amber-500 to-[#D90429] hover:opacity-90 text-white font-mono text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-opacity outline-none"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[6px] bg-[#E31837] hover:bg-[#c4122d] text-white font-sans text-xs font-semibold tracking-wide transition-colors outline-none"
           >
             <span>Explore Offers</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
           <button
             onClick={handleDismiss}
-            aria-label="Dismiss Diwali announcement bar"
-            className="p-1 rounded text-neutral-400 hover:text-white transition-colors"
+            aria-label="Dismiss festive announcement bar"
+            className="p-1 rounded text-[#A3A3A3] hover:text-white transition-colors"
           >
             <X className="w-3.5 h-3.5" />
           </button>

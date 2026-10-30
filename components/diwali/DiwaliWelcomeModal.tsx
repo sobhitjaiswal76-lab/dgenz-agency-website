@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Sparkles, ArrowRight, Video, Globe, CheckCircle2 } from "lucide-react";
+import { X, ArrowRight } from "lucide-react";
 import { getCampaignTimeRemaining } from "./diwali-utils";
 
 export default function DiwaliWelcomeModal() {
@@ -13,12 +13,11 @@ export default function DiwaliWelcomeModal() {
     const seen = sessionStorage.getItem("dgenz_diwali_welcome_seen");
     const campaignTime = getCampaignTimeRemaining();
 
-    // Only display if campaign is not expired and user hasn't seen it yet
+    // Trigger once per session if not dismissed and campaign is active
     if (!seen && !campaignTime.isExpired) {
-      // Small delay of 800ms for graceful entrance after initial page load
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 800);
+      }, 700);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -60,136 +59,70 @@ export default function DiwaliWelcomeModal() {
         aria-labelledby="diwali-modal-title"
         className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
       >
-        {/* Backdrop */}
+        {/* Dark Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleDismiss}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 bg-black/85 backdrop-blur-md"
         />
 
-        {/* Modal Card */}
+        {/* Modal Card with subtle gold border */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 15 }}
+          initial={{ opacity: 0, scale: 0.95, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 15 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-xl bg-[#09090D] border border-amber-500/35 rounded-2xl shadow-2xl z-10 text-white p-6 sm:p-8 overflow-hidden select-none"
+          exit={{ opacity: 0, scale: 0.95, y: 16 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-lg bg-[#111111] border border-[#D4AF65]/35 rounded-[14px] shadow-2xl z-10 text-white p-7 sm:p-9 overflow-hidden select-none"
         >
-          {/* Subtle Festive Ambient Lighting */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
-
           {/* Close Button */}
           <button
             onClick={handleDismiss}
             aria-label="Close Diwali announcement"
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/5 border border-white/10 text-neutral-400 hover:text-white hover:border-amber-400/50 transition-colors z-20 outline-none"
+            className="absolute top-5 right-5 p-2 rounded-[6px] bg-white/5 border border-white/10 text-[#A3A3A3] hover:text-white transition-colors z-20 outline-none"
           >
             <X className="w-4 h-4" />
           </button>
 
-          {/* Top Brand Header & Animated Diya Flame */}
-          <div className="flex items-center gap-3 mb-5">
-            {/* Animated Diya Lamp Icon */}
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-neutral-900 border border-amber-400/40 flex items-center justify-center shadow-lg shadow-amber-500/10">
-              <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current text-[#D4AF65]">
-                {/* Diya Bowl */}
-                <path
-                  d="M4 14c0 4.418 3.582 8 8 8s8-3.582 8-8H4z"
-                  fill="url(#diwali-gold-gradient)"
-                  stroke="#D4AF65"
-                  strokeWidth="1.2"
-                />
-                {/* Diya Flame */}
-                <path
-                  d="M12 2c-1.5 2.5-3 5-3 7.5a3 3 0 0 0 6 0C15 7 13.5 4.5 12 2z"
-                  fill="#FFAE00"
-                  className="animate-pulse origin-bottom"
-                />
-                <defs>
-                  <linearGradient id="diwali-gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#D4AF65" stopOpacity="0.4" />
-                    <stop offset="100%" stopColor="#C0392B" stopOpacity="0.6" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <div>
-              <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase block">
-                DGEN Z FESTIVE CAMPAIGN 2026
-              </span>
-              <span className="text-xs font-bold text-white font-sans tracking-wide">
-                LIMITED-TIME FESTIVE SPECIALS
-              </span>
-            </div>
+          {/* Eyebrow / Brand label */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF65]" />
+            <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#D4AF65] font-medium">
+              DGEN Z / FESTIVE COLLECTION 2026
+            </span>
           </div>
 
-          {/* Headline & Supporting Copy */}
-          <div className="space-y-2 mb-6">
+          {/* Festive Headline */}
+          <div className="space-y-3 mb-6">
             <h2
               id="diwali-modal-title"
-              className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-sans leading-snug"
+              className="text-2xl sm:text-3xl font-bold tracking-tight text-[#FFFFFF] font-sans leading-tight pr-6"
             >
-              THIS DIWALI, GIVE YOUR BUSINESS A{" "}
-              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-[#D90429] bg-clip-text text-transparent">
-                BIGGER DIGITAL PRESENCE
-              </span>
-              .
+              Make This <span className="text-[#E31837]">Diwali</span> Count for Your Business.
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed">
-              Discover exclusive festive offers on cinematic promotional videos and professional business websites.
+            <p className="text-sm text-[#A3A3A3] font-sans leading-relaxed">
+              Two exclusive festive offers designed to help businesses create attention-grabbing content and build a stronger digital presence.
             </p>
           </div>
 
-          {/* Two Offer Preview Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-            {/* Offer 1 Card */}
-            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1.5 hover:border-amber-400/40 transition-colors">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-amber-400 uppercase font-semibold flex items-center gap-1">
-                  <Video className="w-3 h-3" />
-                  OFFER 01
-                </span>
-                <span className="text-[10px] font-mono bg-white/10 px-1.5 py-0.5 rounded text-white">
-                  FROM ₹2,000
-                </span>
-              </div>
-              <h4 className="text-xs font-bold text-white uppercase font-sans">
-                AI Cinematic Video Ads
-              </h4>
-              <p className="text-[11px] text-neutral-400 leading-tight">
-                Turn plain product photos into 4K scroll-stopping cinematic reels in 24–48h.
-              </p>
+          {/* Mini Inclusions Snapshot */}
+          <div className="space-y-2 mb-8 border-y border-white/[0.08] py-4 text-xs font-mono">
+            <div className="flex items-center justify-between text-[#FFFFFF]">
+              <span className="text-[#A3A3A3]">01 / AI CINEMATIC VIDEO ADS</span>
+              <span className="font-semibold">STARTS ₹2,000</span>
             </div>
-
-            {/* Offer 2 Card */}
-            <div className="p-3.5 rounded-xl bg-white/5 border border-rose-500/20 space-y-1.5 hover:border-rose-500/50 transition-colors">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-rose-400 uppercase font-semibold flex items-center gap-1">
-                  <Globe className="w-3 h-3" />
-                  OFFER 02
-                </span>
-                <span className="text-[10px] font-mono bg-amber-400/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">
-                  ₹10,999 ONLY
-                </span>
-              </div>
-              <h4 className="text-xs font-bold text-white uppercase font-sans">
-                Diwali Website Development
-              </h4>
-              <p className="text-[11px] text-neutral-400 leading-tight">
-                5 Pages + 1 Yr Cloud Host + SEO Indexing + Free AI Reel (Save 63%).
-              </p>
+            <div className="flex items-center justify-between text-[#FFFFFF]">
+              <span className="text-[#A3A3A3]">02 / BUSINESS WEBSITE</span>
+              <span className="text-[#E31837] font-semibold">₹10,999 (SAVE 63%)</span>
             </div>
           </div>
 
-          {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+          {/* Two Primary Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={handleExploreOffers}
-              className="w-full sm:flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-amber-500 via-[#D90429] to-rose-700 hover:opacity-90 text-white font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg shadow-rose-900/20 transition-all outline-none"
+              className="flex-1 py-3 px-5 rounded-[8px] bg-[#E31837] hover:bg-[#c4122d] text-white font-sans text-sm font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer outline-none"
             >
               <span>Explore Diwali Offers</span>
               <ArrowRight className="w-4 h-4" />
@@ -197,16 +130,18 @@ export default function DiwaliWelcomeModal() {
 
             <button
               onClick={handleDismiss}
-              className="w-full sm:w-auto py-3 px-5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white font-mono text-xs tracking-wider uppercase transition-colors outline-none"
+              className="py-3 px-5 rounded-[8px] border border-white/[0.15] hover:border-white/30 text-[#A3A3A3] hover:text-white font-sans text-sm font-medium transition-colors cursor-pointer outline-none"
             >
               Explore Website
             </button>
           </div>
 
-          {/* Bottom subtle note */}
-          <p className="text-[10px] font-mono text-neutral-500 text-center mt-4">
-            Campaign active Oct 30 – Nov 8, 2026 · Limited client slots available
-          </p>
+          {/* Subtle Availability Footer */}
+          <div className="mt-4 text-center">
+            <span className="text-[10px] font-mono text-[#A3A3A3]/70 uppercase tracking-widest">
+              OFFER PERIOD · 30 OCT – 8 NOV 2026
+            </span>
+          </div>
         </motion.div>
       </div>
     </AnimatePresence>

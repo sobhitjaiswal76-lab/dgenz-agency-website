@@ -293,9 +293,7 @@ export default function Home() {
       </section>
 
       {/* 2.5. DIWALI CAMPAIGN 2026 SPECIALS SECTION */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <DiwaliCampaignSection />
-      </div>
+      <DiwaliCampaignSection />
 
       {/* 3. OUR SERVICES SECTION */}
       <section id="services" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
