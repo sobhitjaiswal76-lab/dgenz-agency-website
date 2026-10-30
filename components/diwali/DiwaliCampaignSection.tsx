@@ -301,7 +301,7 @@ export default function DiwaliCampaignSection() {
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <DiwaliPosterArt type={lightboxPosterType} className="shadow-2xl" />
+                <DiwaliPosterArt type={lightboxPosterType} isLightbox className="shadow-2xl" />
               </motion.div>
             </div>
           )}
