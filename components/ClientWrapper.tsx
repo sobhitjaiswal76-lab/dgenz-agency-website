@@ -9,6 +9,7 @@ import { Terminal, ShieldAlert, Sparkles, PhoneCall } from "lucide-react";
 import Logo from "./Logo";
 import VeerChatbot from "./VeerChatbot";
 import { ThemeProvider } from "./ThemeContext";
+import DiwaliWelcomeModal from "./diwali/DiwaliWelcomeModal";
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -158,6 +159,9 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
 
             <Navbar />
             
+            {/* Seasonal Festive Welcome Modal (Session-Aware) */}
+            <DiwaliWelcomeModal />
+
             <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pb-16 relative z-10 flex flex-col gap-24">
               {children}
             </main>
@@ -179,6 +183,17 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
               <span className="absolute right-16 scale-0 group-hover:scale-100 bg-black/90 text-white text-[10px] font-mono tracking-wider px-3 py-1.5 rounded-lg border border-white/5 uppercase whitespace-nowrap transition-all duration-150">
                 WHATSAPP CHAT
               </span>
+            </a>
+
+            {/* 6. FLOATING FESTIVE SPECIALS QUICK CHIP (Bottom Left, Non-Obtrusive) */}
+            <a
+              href="#diwali-specials"
+              className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0E0E14]/90 hover:bg-[#14141E] border border-amber-500/40 text-[#D4AF65] text-xs font-mono tracking-wider uppercase shadow-xl shadow-black/60 backdrop-blur-md transition-all hover:scale-105 active:scale-95 group"
+              title="Jump to Diwali 2026 Specials"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <span>Diwali Specials</span>
+              <span className="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.2 rounded font-bold">SAVE 63%</span>
             </a>
           </motion.div>
         )}

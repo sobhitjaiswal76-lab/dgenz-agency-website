@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, ArrowUpRight, ArrowRight, Sun, Moon } from "lucide-react";
+import { Menu, X, ArrowUpRight, ArrowRight, Sun, Moon, Sparkles } from "lucide-react";
 import Logo from "./Logo";
 import { useTheme } from "./ThemeContext";
+import DiwaliAnnouncementBar from "./diwali/DiwaliAnnouncementBar";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -23,9 +24,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Navigation matching reference image & requirements
+  // Navigation matching reference image & requirements + festive specials
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "Diwali Specials", href: "/#diwali-specials", isFestive: true },
     { name: "Services", href: "/#services" },
     { name: "Work", href: "/#work" },
     { name: "About", href: "/#about" },
@@ -40,12 +42,15 @@ export default function Navbar() {
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 select-none ${
           scrolled
             ? isLight
-              ? "bg-[#F8F9FA]/90 backdrop-blur-xl border-b border-black/10 py-3.5 shadow-sm text-neutral-900"
-              : "bg-[#040406]/85 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-2xl text-white"
-            : "bg-transparent py-6 border-b border-transparent"
+              ? "bg-[#F8F9FA]/90 backdrop-blur-xl border-b border-black/10 py-2.5 shadow-sm text-neutral-900"
+              : "bg-[#040406]/90 backdrop-blur-xl border-b border-white/10 py-2.5 shadow-2xl text-white"
+            : "bg-transparent py-3 border-b border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
+        {/* Diwali 2026 Announcement Bar */}
+        <DiwaliAnnouncementBar />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-10 mt-2 flex items-center justify-between">
           
           {/* Brand Logo (Left) */}
           <Link href="/" className="inline-flex items-center group outline-none">
@@ -53,22 +58,26 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links (Center/Right) */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+          <nav className="hidden md:flex items-center gap-7 lg:gap-9">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
+              const isFestive = link.isFestive;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-sm font-sans tracking-wide transition-colors relative outline-none py-1 font-medium ${
-                    isActive
+                  className={`text-sm font-sans tracking-wide transition-colors relative outline-none py-1 font-medium flex items-center gap-1.5 ${
+                    isFestive
+                      ? "text-amber-400 font-semibold hover:text-amber-300"
+                      : isActive
                       ? "text-[#D90429] font-semibold"
                       : isLight
                       ? "text-neutral-700 hover:text-[#D90429]"
                       : "text-neutral-300 hover:text-white hover:text-[#D90429]"
                   }`}
                 >
-                  {link.name}
+                  {isFestive && <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />}
+                  <span>{link.name}</span>
                   {isActive && (
                     <motion.span
                       layoutId="activeNavIndicator"
@@ -154,13 +163,24 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={`py-3 text-2xl font-sans font-bold tracking-tight uppercase border-b flex items-center justify-between transition-colors ${
-                      isLight
+                      link.isFestive
+                        ? "text-amber-400 hover:text-amber-300 border-amber-500/20"
+                        : isLight
                         ? "text-neutral-900 hover:text-[#D90429] border-black/10"
                         : "text-white hover:text-[#D90429] border-white/5"
                     }`}
                   >
-                    <span>{link.name}</span>
-                    <ArrowUpRight className="w-5 h-5 text-neutral-500" />
+                    <span className="flex items-center gap-2">
+                      {link.isFestive && <Sparkles className="w-5 h-5 text-amber-400 animate-pulse" />}
+                      <span>{link.name}</span>
+                    </span>
+                    {link.isFestive ? (
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 uppercase">
+                        63% OFF
+                      </span>
+                    ) : (
+                      <ArrowUpRight className="w-5 h-5 text-neutral-500" />
+                    )}
                   </Link>
                 ))}
                 <Link

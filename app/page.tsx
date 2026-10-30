@@ -42,6 +42,7 @@ import HeroSection from "../components/HeroSection";
 import LeadWizard from "../components/LeadWizard";
 import PortfolioShowcase from "../components/PortfolioShowcase";
 import LightboxModal, { LightboxItem } from "../components/LightboxModal";
+import DiwaliCampaignSection from "../components/diwali/DiwaliCampaignSection";
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -288,9 +289,13 @@ export default function Home() {
               </div>
             ))}
           </div>
-
         </div>
       </section>
+
+      {/* 2.5. DIWALI CAMPAIGN 2026 SPECIALS SECTION */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <DiwaliCampaignSection />
+      </div>
 
       {/* 3. OUR SERVICES SECTION */}
       <section id="services" className="w-full py-24 md:py-32 px-6 md:px-10 max-w-7xl mx-auto relative select-none">
