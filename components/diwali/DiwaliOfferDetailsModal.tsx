@@ -9,17 +9,24 @@ import {
   ArrowRight,
   ExternalLink,
   ShieldCheck,
-  Clock,
+  Sparkles,
   Layers,
-  Sparkles
+  Clock,
+  Instagram
 } from "lucide-react";
-import { buildWhatsAppLink, WA_MESSAGES } from "./diwali-utils";
+import {
+  buildWhatsAppLink,
+  DIWALI_CAMPAIGN_OFFERS,
+  DiwaliOfferItem,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL
+} from "./diwali-utils";
 import DiwaliPosterArt from "./DiwaliPosterArt";
 
 interface DiwaliOfferDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  offerType: "video" | "website" | null;
+  offerType: "website" | "catalogue" | "design" | null;
 }
 
 export default function DiwaliOfferDetailsModal({
@@ -52,6 +59,12 @@ export default function DiwaliOfferDetailsModal({
 
   if (!isOpen || !offerType) return null;
 
+  const offer: DiwaliOfferItem | undefined = DIWALI_CAMPAIGN_OFFERS.find(
+    (o) => o.id === offerType
+  );
+
+  if (!offer) return null;
+
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -71,283 +84,156 @@ export default function DiwaliOfferDetailsModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 16 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#111111] border border-white/[0.12] rounded-[14px] shadow-2xl z-10 text-white p-6 sm:p-10 select-text"
+          className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0C0C0C] border border-[#242424] rounded-[12px] shadow-2xl z-10 text-white p-6 sm:p-8 select-text"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="absolute top-5 right-5 p-2 rounded-[6px] bg-white/5 border border-white/10 text-[#A3A3A3] hover:text-white transition-colors z-20 outline-none"
+            className="absolute top-5 right-5 p-2 rounded-[6px] bg-white/5 border border-white/10 text-[#A3A3A3] hover:text-white transition-colors z-20 outline-none cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
 
-          {/* Offer 01: Video Ads Modal Content */}
-          {offerType === "video" ? (
-            <div className="space-y-8">
-              {/* Header */}
-              <div className="space-y-3 pr-10">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
-                  <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#A3A3A3] font-semibold">
-                    01 / CONTENT CREATION · DIWALI 2026
-                  </span>
-                </div>
-                <h3 className="text-2xl sm:text-4xl font-bold font-sans tracking-tight text-white leading-tight">
-                  Turn Product Photos Into <span className="text-[#E31837]">Cinematic Video Ads</span>.
-                </h3>
-                <p className="text-sm sm:text-base text-[#A3A3A3] font-sans leading-relaxed">
-                  Transform your existing product photography into cinematic promotional videos designed to capture attention on Instagram and other digital platforms.
-                </p>
-              </div>
-
-              {/* Package Comparison Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                {/* PACKAGE 01 — THE SPOTLIGHT */}
-                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-white/[0.12] flex flex-col justify-between space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-mono tracking-widest uppercase text-[#A3A3A3] font-semibold">
-                        PACKAGE 01
-                      </span>
-                      <span className="px-2 py-0.5 rounded-[4px] bg-white/5 border border-white/10 text-[10px] font-mono text-[#A1A1AA] uppercase">
-                        Video Festive Rate
-                      </span>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xl font-bold uppercase tracking-tight text-[#FFFFFF] font-sans">
-                        THE SPOTLIGHT
-                      </h4>
-                      <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-[#FFFFFF] font-sans">₹2,000</span>
-                        <span className="text-xs font-mono text-[#A1A1AA]">/ Video Festive Rate</span>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-[#A1A1AA] leading-relaxed font-sans">
-                      Perfect for emerging brands and businesses looking to showcase their products through cinematic promotional content.
-                    </p>
-
-                    <div className="space-y-3 pt-3 border-t border-white/[0.08] text-xs">
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white">2 AI cinematic product/promotional reels (10–18 seconds each)</span>
-                      </div>
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white">2 Instagram posts</span>
-                      </div>
-                      <div className="flex items-start gap-2.5 text-[#A1A1AA]/60">
-                        <X className="w-4 h-4 text-[#A1A1AA]/50 shrink-0 mt-0.5" />
-                        <span>Captions and hashtag research NOT included</span>
-                      </div>
-                      <div className="flex items-start gap-2.5 text-[#A1A1AA]/60">
-                        <X className="w-4 h-4 text-[#A1A1AA]/50 shrink-0 mt-0.5" />
-                        <span>Instagram Collab Reel NOT included</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <a
-                    href={buildWhatsAppLink(WA_MESSAGES.videoSpotlight)}
-                    target="_blank"
-                    rel="no-referrer"
-                    className="w-full py-3.5 px-4 rounded-[8px] bg-white/10 hover:bg-white/20 text-[#FFFFFF] font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#E31837] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
-                  >
-                    <span>BOOK THE SPOTLIGHT (₹2,000)</span>
-                    <Send className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* PACKAGE 02 — THE BRAND */}
-                <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-[#E31837]/40 flex flex-col justify-between space-y-6 relative">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-mono tracking-widest uppercase text-[#A3A3A3] font-semibold">
-                        PACKAGE 02
-                      </span>
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-[#E31837] bg-[#E31837]/10 border border-[#E31837]/30 px-2 py-0.5 rounded-[4px] font-bold">
-                        RECOMMENDED PACKAGE
-                      </span>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xl font-bold uppercase tracking-tight text-[#FFFFFF] font-sans">
-                          THE BRAND
-                        </h4>
-                        <span className="px-2 py-0.5 rounded-[4px] bg-white/5 border border-white/10 text-[10px] font-mono text-[#A1A1AA] uppercase">
-                          Video Festive Rate
-                        </span>
-                      </div>
-                      <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-[#FFFFFF] font-sans">₹2,399</span>
-                        <span className="text-xs font-mono text-[#A1A1AA]">/ Video Festive Rate</span>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-[#A1A1AA] leading-relaxed font-sans">
-                      For brands that need more content to showcase their products and promote their business.
-                    </p>
-
-                    <div className="space-y-3 pt-3 border-t border-white/[0.08] text-xs">
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white font-medium">3 AI cinematic product/promotional reels (10–20 seconds each)</span>
-                      </div>
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white">3 Instagram creative posts</span>
-                      </div>
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white">Captions and relevant hashtags for all 6 content pieces</span>
-                      </div>
-                      <div className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                        <span className="text-white">1 Instagram Reel collaboration</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <a
-                    href={buildWhatsAppLink(WA_MESSAGES.videoBrand)}
-                    target="_blank"
-                    rel="no-referrer"
-                    className="w-full py-3.5 px-4 rounded-[8px] bg-[#E31837] hover:bg-[#c4122d] text-[#FFFFFF] font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#FFFFFF] focus:ring-offset-2 focus:ring-offset-[#0A0A0A]"
-                  >
-                    <span>BOOK THE BRAND (₹2,399)</span>
-                    <Send className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* What We Need From You */}
-              <div className="p-5 rounded-[10px] bg-[#0A0A0A] border border-white/[0.08] space-y-2">
-                <span className="text-[11px] font-mono text-[#E31837] uppercase tracking-wider font-semibold block">
-                  SIMPLE ONBOARDING PROCESS
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="space-y-2 pr-10">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24]" />
+                <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#A3A3A3] font-semibold">
+                  OFFER {offer.categoryNumber} / {offer.categoryLabel}
                 </span>
-                <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                  Send us 1 to 3 clear photos of your product, any key selling points or offers you want highlighted, and your brand logo. We handle the 3D depth extraction, motion animation, lighting, sound, and delivery in 24–48 hours.
-                </p>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#ED1C24]/10 border border-[#ED1C24]/30 text-[#ED1C24] font-bold">
+                  {offer.coreDiscount}
+                </span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white leading-tight">
+                {offer.title}
+              </h3>
+              <p className="text-sm text-[#A3A3A3] font-sans leading-relaxed">
+                {offer.overview}
+              </p>
+            </div>
+
+            {/* Poster Art Preview */}
+            <div className="rounded-[8px] overflow-hidden border border-[#242424]">
+              <DiwaliPosterArt type={offer.id} />
+            </div>
+
+            {/* Inclusions */}
+            <div className="space-y-3 pt-2 border-t border-[#242424]">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#A3A3A3]">
+                Package Deliverables & Scope
+              </h4>
+              <div className="space-y-2">
+                {offer.inclusions.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#D4D4D4]">
+                    <Check className="w-4 h-4 text-[#ED1C24] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          ) : (
-            /* Offer 02: Website Development Modal Content */
-            <div className="space-y-8">
-              {/* Header */}
-              <div className="space-y-3 pr-10">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
-                  <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#A3A3A3] font-semibold">
-                    02 / WEBSITE DEVELOPMENT · DIWALI 2026
-                  </span>
-                </div>
-                <h3 className="text-2xl sm:text-4xl font-bold font-sans tracking-tight text-white leading-tight">
-                  Your Business Deserves More Than <span className="text-[#E31837]">an Instagram Page</span>.
-                </h3>
-                <p className="text-sm sm:text-base text-[#A3A3A3] font-sans leading-relaxed">
-                  Build a professional online presence with a business website designed to showcase your services, establish trust, and help potential customers contact you.
-                </p>
+
+            {/* Complimentary Extras */}
+            <div className="p-4 rounded-[8px] bg-[#141414] border border-[#C6A15B]/30 space-y-2.5">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#C6A15B]" />
+                <span className="text-xs font-mono uppercase tracking-wider text-[#C6A15B] font-bold">
+                  Complimentary Extras Included Free
+                </span>
               </div>
-
-              {/* Pricing & Summary Card */}
-              <div className="p-6 rounded-[10px] bg-[#0A0A0A] border border-white/[0.12] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <span className="text-xs font-mono line-through text-[#A3A3A3] uppercase block">
-                    ORIGINAL PRICE ₹29,999
-                  </span>
-                  <div className="flex items-baseline gap-2 mt-1">
-                    <span className="text-4xl font-bold text-white font-sans">₹10,999</span>
-                    <span className="text-xs font-mono text-[#E31837] font-semibold uppercase">
-                      SAVE 63% (₹19,000 OFF)
-                    </span>
+              <div className="space-y-1.5 text-xs sm:text-sm text-white">
+                {offer.complimentaryExtras.map((extra, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B]" />
+                    <span>{extra}</span>
                   </div>
-                  <span className="text-[11px] text-[#A3A3A3] block mt-1">
-                    Complete all-inclusive package with zero hidden charges.
-                  </span>
-                </div>
-
-                <div className="text-right">
-                  <span className="text-[11px] font-mono text-[#A3A3A3] uppercase block">
-                    PROJECT TIMELINE
-                  </span>
-                  <span className="text-sm font-mono font-bold text-white">5–7 BUSINESS DAYS</span>
-                </div>
+                ))}
               </div>
+            </div>
 
-              {/* Complete Inclusions List */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-[#A3A3A3]">
-                  WHAT&apos;S INCLUDED IN THE ₹10,999 PACKAGE
-                </h4>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-[#A3A3A3]">
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-white/[0.08] flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">5 Custom High-End Pages</strong>
-                      <span>Home, About, Services/Products, Showcase/Portfolio, and Contact.</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-white/[0.08] flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">1 Year Cloud Hosting & SSL</strong>
-                      <span>Enterprise speed, 99.99% uptime, automated backups and SSL certificate.</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-white/[0.08] flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">Google SEO & Local Maps Indexing</strong>
-                      <span>Schema markup and Google Search indexing to get discovered by local buyers.</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-white/[0.08] flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">Click-to-WhatsApp Lead Triggers</strong>
-                      <span>Direct lead conversion triggers sending inquiries straight to your phone.</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-white/[0.08] flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">Mobile & Tablet Responsive</strong>
-                      <span>Flawless experience across iPhone, Android, tablets, and desktop displays.</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-[8px] bg-[#0A0A0A] border border-[#E31837]/30 flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#E31837] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-[#E31837] block font-medium">Diwali Bonus Included</strong>
-                      <span>1 Free AI Cinematic Video Reel + 2 Custom Instagram Creative Posts.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="pt-2">
+            {/* Conditional Discount Details */}
+            <div className="p-4 rounded-[8px] bg-[#0E0E0E] border border-[#242424] space-y-2.5 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="font-mono uppercase tracking-wider text-white font-semibold">
+                  {offer.conditionalDiscount.title}
+                </span>
                 <a
-                  href={buildWhatsAppLink(WA_MESSAGES.websiteOffer)}
+                  href={offer.conditionalDiscount.verifyUrl}
                   target="_blank"
                   rel="no-referrer"
-                  className="w-full py-4 px-6 rounded-[8px] bg-[#E31837] hover:bg-[#c4122d] text-white font-sans text-sm font-semibold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-2"
+                  className="text-[10px] font-mono text-[#ED1C24] hover:underline inline-flex items-center gap-1"
                 >
-                  <span>Claim Website Offer on WhatsApp (₹10,999)</span>
-                  <Send className="w-4 h-4" />
+                  <Instagram className="w-3 h-3" />
+                  <span>{INSTAGRAM_HANDLE}</span>
                 </a>
               </div>
+              <p className="text-[#A3A3A3]">{offer.conditionalDiscount.description}</p>
+              <ul className="list-disc list-inside space-y-1 text-[#D4D4D4]">
+                {offer.conditionalDiscount.steps.map((step, idx) => (
+                  <li key={idx}>{step}</li>
+                ))}
+              </ul>
             </div>
-          )}
+
+            {/* Ideal For if exists */}
+            {offer.idealFor && (
+              <div className="space-y-2 pt-2 border-t border-[#242424]">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-[#A3A3A3]">
+                  Ideal For These Business Types
+                </h4>
+                <div className="flex flex-wrap gap-1.5">
+                  {offer.idealFor.map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded bg-[#161616] border border-[#242424] text-[11px] text-[#A3A3A3] font-mono"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Eligible Services if exists */}
+            {offer.eligibleServices && (
+              <div className="space-y-2 pt-2 border-t border-[#242424]">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-[#A3A3A3]">
+                  Eligible Design Formats
+                </h4>
+                <div className="grid grid-cols-2 gap-2 text-xs text-[#D4D4D4]">
+                  {offer.eligibleServices.map((svc, idx) => (
+                    <div key={idx} className="flex items-center gap-2 p-2 rounded bg-[#141414] border border-[#242424]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24]" />
+                      <span>{svc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Modal Actions */}
+            <div className="pt-4 border-t border-[#242424] flex flex-col sm:flex-row gap-3">
+              <a
+                href={buildWhatsAppLink(offer.whatsappMessage)}
+                target="_blank"
+                rel="no-referrer"
+                className="flex-1 py-3.5 px-6 rounded-[8px] bg-[#ED1C24] hover:bg-[#c9141b] text-white font-sans text-sm font-semibold text-center transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#ED1C24]/15"
+              >
+                <span>{offer.ctaLabel}</span>
+                <Send className="w-4 h-4" />
+              </a>
+
+              <button
+                type="button"
+                onClick={onClose}
+                className="py-3.5 px-5 rounded-[8px] border border-[#242424] hover:border-white/20 text-[#A3A3A3] hover:text-white font-sans text-xs uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                Close Details
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
     </AnimatePresence>

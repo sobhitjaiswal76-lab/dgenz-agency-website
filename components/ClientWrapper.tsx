@@ -188,12 +188,12 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
             {/* 6. FLOATING FESTIVE SPECIALS QUICK CHIP (Bottom Left, Non-Obtrusive) */}
             <a
               href="#diwali-specials"
-              className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#111111]/90 hover:bg-[#1a1a1a] border border-white/10 text-white text-xs font-mono tracking-wider uppercase shadow-xl shadow-black/60 backdrop-blur-md transition-all hover:scale-105 active:scale-95 group"
+              className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#111111]/90 hover:bg-[#1a1a1a] border border-[#242424] text-white text-xs font-mono tracking-wider uppercase shadow-xl shadow-black/60 backdrop-blur-md transition-all hover:scale-105 active:scale-95 group"
               title="Jump to Diwali 2026 Specials"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24]" />
               <span>Diwali Specials</span>
-              <span className="text-[10px] bg-white/10 text-[#E31837] px-1.5 py-0.5 rounded font-bold">SAVE 63%</span>
+              <span className="text-[10px] bg-[#ED1C24]/10 text-[#ED1C24] border border-[#ED1C24]/30 px-1.5 py-0.5 rounded font-bold">30% OFF</span>
             </a>
           </motion.div>
         )}
